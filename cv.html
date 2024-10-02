@@ -6,22 +6,77 @@
     <title>CV | Victor Guerin</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #fff;
+            color: #000;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h2, h3 {
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        /* Layout for Year and Content */
+        .row {
+            display: block;
+            margin-bottom: 10px;
+            padding-left: 70px; /* Creates space for year column */
+            text-indent: -70px; /* Pulls year back to the left */
+        }
+
+        .year {
+            width: 70px;
+            display: inline-block;
+        }
+
+        .empty-year {
+            width: 70px; /* Same width as year column for alignment */
+            display: inline-block;
+            visibility: hidden; /* Keeps the space but hides the content */
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 40px;
+        }
+
+        /* Subtitle Styling */
+        .section-subtitle {
+            font-weight: 400;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: grey;
+        }
+    </style>
 </head>
 <body>
+
    <header>
-    <div class="logo">
-        <a href="index.html">VICTOR GUERIN</a>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="selected-works.html">Selected Works</a></li>
-            <li><a href="exhibitions.html">Exhibitions</a></li>
-            <li><a href="cv.html">CV</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">
+            <a href="index.html">VICTOR GUERIN</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="selected-works.html">Selected Works</a></li>
+                <li><a href="exhibitions.html">Exhibitions</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <section id="cv">
         <h2 class="section-title">CV</h2>
@@ -31,47 +86,107 @@
 
                 <br>
                 <h3 class="section-title">Education</h3>
-                <p>2024 — MA Sculpture, Royal College of Art (RCA)</p>
-                <p>2016 — MEng Mechanical and Industrial Engineering (Distinction), Arts & Métiers ParisTech</p>
-                <p>MSc Operational Research and Management Science, Lancaster University</p>
-                <p>2014 — BEng Mechanical and Industrial Engineering (Distinction), Arts & Métiers ParisTech</p>
+                <div class="row">
+                    <div class="year">2024</div>
+                    MA Sculpture, Royal College of Art (RCA)
+                </div>
+                <div class="row">
+                    <div class="year">2016</div>
+                    MEng Mechanical and Industrial Engineering (Distinction), Arts & Métiers ParisTech
+                </div>
+                <div class="row">
+                    <div class="empty-year"></div>
+                    MSc Operational Research and Management Science, Lancaster University
+                </div>
+                <div class="row">
+                    <div class="year">2014</div>
+                    BEng Mechanical and Industrial Engineering (Distinction), Arts & Métiers ParisTech
+                </div>
 
                 <br><br>
                 <h3 class="section-title">Selected Exhibitions</h3>
-                
+
                 <h4 class="section-subtitle">Upcoming</h4>
-                <p>2024 — Playground, Swanfall Art Gallery, London</p>
-                
+                <div class="row">
+                    <div class="year">2024</div>
+                    Playground, Swanfall Art Gallery, London
+                </div>
+
                 <h4 class="section-subtitle">Current</h4>
-                <p>2024 — Silk Road Artists Rendezvous, New Zealand Academy of Fine Arts, Wellington (New Zealand)</p>
+                <div class="row">
+                    <div class="year">2024</div>
+                    Silk Road Artists Rendezvous, New Zealand Academy of Fine Arts, Wellington (New Zealand)
+                </div>
 
                 <h4 class="section-subtitle">Past</h4>
-                <p>2024 — Now and Then, Dalkeith Palace, Dalkeith</p>
-                <p>Echoes of Extraction, Royal College of Art, London</p>
-                <p>198th RSA Annual Exhibition, Royal Scottish Academy, Edinburgh</p>
+                <div class="row">
+                    <div class="year">2024</div>
+                    Now and Then, Dalkeith Palace, Dalkeith
+                </div>
+                <div class="row">
+                    <div class="empty-year"></div>
+                    Echoes of Extraction, Royal College of Art, London
+                </div>
+                <div class="row">
+                    <div class="empty-year"></div>
+                    198th RSA Annual Exhibition, Royal Scottish Academy, Edinburgh
+                </div>
 
                 <br><br>
                 <h3 class="section-title">Residencies</h3>
-                <p>2024 — Festus, RCA X Sir John Soane's Museum, London</p>
-                <p>2023 — Silk Road Artist Rendezvous, Hangzhou Archaeological Site, Hangzhou (China)</p>
+                <div class="row">
+                    <div class="year">2024</div>
+                    Festus, RCA X Sir John Soane's Museum, London
+                </div>
+                <div class="row">
+                    <div class="year">2023</div>
+                    Silk Road Artist Rendezvous, Hangzhou Archaeological Site, Hangzhou (China)
+                </div>
 
                 <br><br>
                 <h3 class="section-title">Awards</h3>
-                <p>2024 — Batsford Prize (shortlist)</p>
-                <p>Hyundai Awards for Excellence in Sustainability and Creative Practice (shortlist)</p>
-                <p>VAO UK & International Emerging Artist Awards (shortlist)</p>
-                <p>2023 — Averil Picot Art Award</p>
+                <div class="row">
+                    <div class="year">2024</div>
+                    Batsford Prize (shortlist)
+                </div>
+                <div class="row">
+                    <div class="empty-year"></div>
+                    Hyundai Awards for Excellence in Sustainability and Creative Practice (shortlist)
+                </div>
+                <div class="row">
+                    <div class="empty-year"></div>
+                    VAO UK & International Emerging Artist Awards (shortlist)
+                </div>
+                <div class="row">
+                    <div class="year">2023</div>
+                    Averil Picot Art Award
+                </div>
 
                 <br><br>
                 <h3 class="section-title">Collections</h3>
-                <p>Public — Hangzhou Liangzhu Archaeological Site (China)</p>
-                <p>Private — UK and Channel Islands, Canada, China, France</p>
+                <div class="row">
+                    <div class="year">Public</div>
+                    Hangzhou Liangzhu Archaeological Site (China)
+                </div>
+                <div class="row">
+                    <div class="year">Private</div>
+                    UK and Channel Islands, Canada, China, France
+                </div>
 
                 <br><br>
                 <h3 class="section-title">Engineering Background</h3>
-                <p>Director of Production — Hervé Van der Straeten</p>
-                <p>Fine Jewellery Project Manager — Louis Vuitton</p>
-                <p>Business Analyst and Controller — Moët Hennessy</p>
+                <div class="row">
+                    <div class="year">Director</div>
+                    Production, Hervé Van der Straeten
+                </div>
+                <div class="row">
+                    <div class="year">Fine Jewellery</div>
+                    Project Manager, Louis Vuitton
+                </div>
+                <div class="row">
+                    <div class="year">Business Analyst</div>
+                    and Controller, Moët Hennessy
+                </div>
             </div>
         </div>
     </section>
