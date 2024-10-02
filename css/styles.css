@@ -12,7 +12,7 @@ body {
     color: #000;
     line-height: 1.6;
     padding: 20px;
-    font-size: 15px; /* Decreased from default (usually 16px) */
+    font-size: 15px; /* Decreased from default */
 }
 
 h1, h2 {
@@ -30,7 +30,7 @@ header {
     top: 0;
     background-color: white;
     z-index: 1000;
-    padding: 10px 0;
+    padding: 5px 0; /* Reduced space at the top and bottom of the menu */
     border-bottom: none; /* Remove line under header */
 }
 
@@ -70,11 +70,11 @@ nav ul li a:hover {
 
 /* Section Titles Styling */
 .section-title {
-    font-size: 17px; /* Decreased by 1 (previously 18px) */
+    font-size: 17px; /* Decreased by 1 */
     font-weight: 400;
     text-align: left;
-    margin-top: 60px;
-    margin-bottom: 40px;
+    margin-top: 40px; /* Reduced space below the menu */
+    margin-bottom: 20px; /* Reduced space below the section title */
     padding-left: 20px;
 }
 
@@ -206,8 +206,8 @@ footer {
 
 .bio-text {
     flex: 1 1 45%;
-    padding: 0 20px; /* Added padding */
-    margin-top: 0; /* Remove negative margin */
+    padding: 0 20px; /* Ensure alignment with the section title */
+    margin-top: 0;
     font-size: 15px; /* Decreased by 1 for bio text */
 }
 
