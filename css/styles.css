@@ -126,20 +126,30 @@ nav ul li a:hover {
     padding: 20px;
 }
 
+/* Updated CSS for Selected Works thumbnails */
 #selected-works .grid-container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(150px, 1fr)); /* Smaller column width */
+    gap: 20px; /* Adjust the gap between thumbnails */
 }
 
+#selected-works .work-item img {
+    width: 100%;
+    max-width: 100%; /* Ensure images are contained within the grid */
+    height: auto;
+    object-fit: cover;
+}
+
+/* Grid for Exhibitions */
 #exhibitions .grid-container {
     grid-template-columns: repeat(4, 1fr);
 }
 
 @media (max-width: 768px) {
     #selected-works .grid-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile for Selected Works */
     }
     #exhibitions .grid-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on mobile for Exhibitions */
     }
 }
 
@@ -179,7 +189,7 @@ form button {
 form button:hover {
     background-color: grey;
 }
-  
+
 /* Footer */
 footer {
     text-align: center;
@@ -187,8 +197,6 @@ footer {
     font-size: 14px;
     color: grey;
 }
-
-
 
 /* About Section Layout */
 .about-container {
