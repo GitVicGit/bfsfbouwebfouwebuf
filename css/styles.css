@@ -15,7 +15,7 @@ body {
 }
 
 h1, h2 {
-    font-weight: 700;
+    font-weight: 400; /* No bold for section titles */
     margin-bottom: 20px;
 }
 
@@ -68,7 +68,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     font-weight: 400;
-    font-size: 24px; /* Keep the same style for the menu */
+    font-size: 18px; /* Set back to original size */
     color: black;
     transition: color 0.3s;
 }
@@ -79,8 +79,8 @@ nav ul li a:hover {
 
 /* Section Titles styling (same as menu items) */
 .section-title {
-    font-size: 24px; /* Same size as menu items */
-    font-weight: 400;
+    font-size: 18px; /* Match size with menu items */
+    font-weight: 400; /* No bold for subtitles */
     text-align: left;
     margin-top: 60px;
     margin-bottom: 40px;
