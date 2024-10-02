@@ -12,11 +12,13 @@ body {
     color: #000;
     line-height: 1.6;
     padding: 20px;
+    font-size: 15px; /* Decreased from default (usually 16px) */
 }
 
 h1, h2 {
     font-weight: 400; /* No bold for section titles */
     margin-bottom: 20px;
+    font-size: 17px; /* Decreased by 1 */
 }
 
 /* Navigation */
@@ -34,7 +36,7 @@ header {
 
 header .logo {
     margin-left: 20px;
-    font-size: 24px;
+    font-size: 24px; /* Keep VICTOR GUERIN at original size */
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -57,7 +59,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 17px; /* Decreased by 1 (previously 18px) */
     color: black;
     transition: color 0.3s;
 }
@@ -68,18 +70,18 @@ nav ul li a:hover {
 
 /* Section Titles Styling */
 .section-title {
-    font-size: 18px;
+    font-size: 17px; /* Decreased by 1 (previously 18px) */
     font-weight: 400;
     text-align: left;
     margin-top: 60px;
     margin-bottom: 40px;
     padding-left: 20px;
-    /* Align with bio-text and content */
 }
 
 /* Align Text with "V" of VICTOR GUERIN */
 .content, .bio-text {
     padding-left: 20px;
+    font-size: 15px; /* Decreased by 1 for general text */
 }
 
 /* Slideshow for Home Page */
@@ -161,7 +163,7 @@ img {
 
 .artwork-description {
     text-align: left;
-    font-size: 16px;
+    font-size: 15px; /* Decreased by 1 for artwork description */
     line-height: 1.2;
 }
 
@@ -171,7 +173,7 @@ form input, form button {
     margin: 10px auto;
     padding: 10px;
     width: 80%;
-    font-size: 16px;
+    font-size: 15px; /* Decreased by 1 for form elements */
 }
 
 form button {
@@ -189,7 +191,7 @@ form button:hover {
 footer {
     text-align: center;
     padding: 20px;
-    font-size: 14px;
+    font-size: 13px; /* Decreased by 1 for footer */
     color: grey;
 }
 
@@ -206,6 +208,7 @@ footer {
     flex: 1 1 45%;
     padding: 0 20px; /* Added padding */
     margin-top: 0; /* Remove negative margin */
+    font-size: 15px; /* Decreased by 1 for bio text */
 }
 
 .bio-image {
