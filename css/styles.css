@@ -68,7 +68,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     font-weight: 400;
-    font-size: 24px; /* Same size for menu and titles */
+    font-size: 24px; /* Keep the same style for the menu */
     color: black;
     transition: color 0.3s;
 }
@@ -77,17 +77,19 @@ nav ul li a:hover {
     color: grey;
 }
 
-/* Align section titles and text with "V" of VICTOR GUERIN */
+/* Section Titles styling (same as menu items) */
 .section-title {
+    font-size: 24px; /* Same size as menu items */
+    font-weight: 400;
     text-align: left;
-    font-size: 24px; /* Match size with menu items */
     margin-top: 60px;
     margin-bottom: 40px;
-    padding-left: 20px; /* Same left padding as the logo for alignment */
+    padding-left: 20px; /* Aligned with the "V" of VICTOR GUERIN */
 }
 
+/* Align the text in About and CV sections with the "V" */
 .content, .bio-text {
-    padding-left: 20px; /* Align text with "V" of VICTOR GUERIN */
+    padding-left: 20px; /* Same alignment for text as VICTOR GUERIN */
 }
 
 /* Slideshow for Home Page */
