@@ -15,7 +15,7 @@ body {
 }
 
 h1, h2 {
-    font-weight: 400; /* No bold for section titles */
+    font-weight: 700;
     margin-bottom: 20px;
 }
 
@@ -50,11 +50,6 @@ header .logo a:visited, header .logo a:hover {
     text-decoration: none;
 }
 
-/* Remove line under header */
-header {
-    border-bottom: none;
-}
-
 nav ul {
     list-style-type: none;
     display: flex;
@@ -68,7 +63,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     font-weight: 400;
-    font-size: 18px; /* Set back to original size */
+    font-size: 24px; /* Ensure the same font size for the menu */
     color: black;
     transition: color 0.3s;
 }
@@ -77,107 +72,38 @@ nav ul li a:hover {
     color: grey;
 }
 
-/* Section Titles styling (same as menu items) */
+/* Section Title */
 .section-title {
-    font-size: 18px; /* Match size with menu items */
-    font-weight: 400; /* No bold for subtitles */
+    font-size: 24px; /* Match the font size to the menu */
+    font-weight: 400;
     text-align: left;
     margin-top: 60px;
     margin-bottom: 40px;
-    padding-left: 20px; /* Aligned with the "V" of VICTOR GUERIN */
+    padding-left: 20px; /* Align with the "V" of VICTOR GUERIN */
 }
 
-/* Align the text in About and CV sections with the "V" */
-.content, .bio-text {
-    padding-left: 20px; /* Same alignment for text as VICTOR GUERIN */
-}
-
-/* Slideshow for Home Page */
-#home {
-    text-align: center;
-    padding: 40px;
-}
-
-.slideshow-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-}
-
-.slideshow-container img {
-    width: 100%;
-    height: auto;
-}
-
-.fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-}
-
-/* Grid for Selected Works and Exhibitions */
-.grid-container {
-    display: grid;
-    gap: 30px;
+/* About Section Layout */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding: 20px;
 }
 
-#selected-works .grid-container {
-    grid-template-columns: repeat(3, 1fr);
+.bio-text, .bio-image {
+    flex: 1 1 45%;
+    padding: 20px;
 }
 
-#exhibitions .grid-container {
-    grid-template-columns: repeat(4, 1fr);
+.bio-image img {
+    width: 100%;
+    height: auto;
 }
 
 @media (max-width: 768px) {
-    #selected-works .grid-container {
-        grid-template-columns: repeat(2, 1fr);
+    .bio-text, .bio-image {
+        flex: 1 1 100%; /* Stack image below text on mobile */
     }
-    #exhibitions .grid-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Thumbnail and Text Adjustments */
-.work-item img, .exhibition-item img {
-    margin-bottom: 10px;
-}
-
-.artwork-description {
-    text-align: left;
-    font-size: 16px;
-    line-height: 1.2;
-}
-
-/* Contact Form */
-form input, form button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    font-size: 16px;
-}
-
-form button {
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: grey;
 }
 
 /* Footer */
