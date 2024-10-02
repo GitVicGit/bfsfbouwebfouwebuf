@@ -203,18 +203,29 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-start; /* Align items at the top */
     padding: 20px;
 }
-.bio-text, .bio-image {
-    flex: 1 1 45%; /* 45% width for both text and image */
+
+.bio-text {
+    flex: 1 1 45%; /* 45% width for the bio text */
+    padding: 20px;
+    margin-top: -30px; /* Adjust margin to align with section title */
+}
+
+.bio-image {
+    flex: 1 1 45%; /* 45% width for the image */
     padding: 20px;
 }
+
 .bio-image img {
     width: 100%;
     height: auto;
 }
+
 @media (max-width: 768px) {
     .bio-text, .bio-image {
         flex: 1 1 100%; /* Stack image below text on mobile */
+        margin-top: 0; /* Reset margin on mobile */
     }
 }
