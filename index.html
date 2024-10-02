@@ -26,9 +26,15 @@
 
     <section id="home">
         <div class="slideshow-container">
-            <img class="fade" src="images/i_echoes_of_extraction.jpg" alt="Slide 1">
-            <img class="fade" src="images/i_ephemeral_structures.jpg" alt="Slide 2" style="display:none;">
-            <img class="fade" src="images/landscape3.jpg" alt="Slide 3" style="display:none;">
+            <div class="slide">
+                <img src="images/i_echoes_of_extraction.jpg" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="images/i_ephemeral_structures.jpg" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="images/landscape3.jpg" alt="Slide 3">
+            </div>
         </div>
     </section>
 
@@ -41,15 +47,16 @@
         showSlides();
 
         function showSlides() {
-            let slides = document.querySelectorAll(".slideshow-container img");
+            let slides = document.querySelectorAll(".slideshow-container .slide");
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";  
             }
             slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
             setTimeout(showSlides, 8000); // Change image every 8 seconds
         }
     </script>
+
 </body>
 </html>
