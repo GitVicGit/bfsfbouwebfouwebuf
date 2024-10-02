@@ -91,10 +91,10 @@ nav ul li a:hover {
     to {opacity: 1}
 }
 
-/* White Space and Text Alignment for Selected Works and Exhibitions */
+/* Grid for Selected Works and Exhibitions */
 .grid-container {
     display: grid;
-    gap: 40px; /* Increased spacing between thumbnails */
+    gap: 30px; /* Adjust the spacing between items */
     padding: 20px;
 }
 
@@ -120,16 +120,41 @@ nav ul li a:hover {
     }
 }
 
-/* Adjusting Text Alignment and Spacing */
-.artwork-description {
-    text-align: left; /* Align text to left */
-    font-size: 16px;
-    margin-top: 10px;
-    line-height: 1.2; /* Reduced line spacing */
+/* Thumbnail and Text Adjustments */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .work-item img, .exhibition-item img {
-    margin-bottom: 10px; /* More white space between thumbnails */
+    margin-bottom: 10px; /* Spacing between the image and the text */
+}
+
+.artwork-description {
+    text-align: left; /* Align text to left */
+    font-size: 16px;
+    line-height: 1.2; /* Reduced line spacing */
+}
+
+/* Contact Form */
+form input, form button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    font-size: 16px;
+}
+
+form button {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: grey;
 }
 
 /* Footer */
