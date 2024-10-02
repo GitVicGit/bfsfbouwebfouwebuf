@@ -11,14 +11,8 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
-    padding: 20px;
-    font-size: 15px; /* Decreased from default */
-}
-
-h1, h2 {
-    font-weight: 400; /* No bold for section titles */
-    margin-bottom: 20px;
-    font-size: 17px; /* Decreased by 1 */
+    font-size: 15px;
+    margin-top: 0; /* Remove any margin above header */
 }
 
 /* Navigation */
@@ -29,14 +23,12 @@ header {
     position: sticky;
     top: 0;
     background-color: white;
-    z-index: 1000;
-    padding: 5px 0; /* Reduced space at the top and bottom of the menu */
-    border-bottom: none; /* Remove line under header */
+    padding: 0 20px; /* Remove vertical padding */
+    margin-bottom: 10px; /* Reduce space below the menu */
 }
 
 header .logo {
-    margin-left: 20px;
-    font-size: 24px; /* Keep VICTOR GUERIN at original size */
+    font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -44,12 +36,12 @@ header .logo {
 header .logo a {
     color: black;
     text-decoration: none;
+    margin-left: 0; /* Ensure no extra left margin */
 }
 
 nav ul {
     list-style-type: none;
     display: flex;
-    margin-right: 20px;
 }
 
 nav ul li {
@@ -58,8 +50,8 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    font-weight: 400; /* No bold for menu items */
-    font-size: 17px; /* Decreased by 1 (previously 18px) */
+    font-weight: 400;
+    font-size: 17px;
     color: black;
     transition: color 0.3s;
 }
@@ -68,153 +60,35 @@ nav ul li a:hover {
     color: grey;
 }
 
-/* Section Titles Styling (same as menu items, not bold) */
+/* Section Titles */
 .section-title {
-    font-size: 17px; /* Match size with menu items */
-    font-weight: 400; /* No bold for subtitles */
-    text-align: left;
-    margin-top: 30px; /* Reduced space below the menu */
-    margin-bottom: 10px; /* Reduced space below the section title */
-    padding-left: 20px;
+    font-size: 17px;
+    font-weight: 400;
+    margin-top: 0; /* Align with top of content */
+    margin-bottom: 10px;
+    padding-left: 20px; /* Align with content */
 }
 
-/* Align Text with "V" of VICTOR GUERIN */
+/* Content Alignment */
 .content, .bio-text {
     padding-left: 20px;
-    font-size: 15px; /* Decreased by 1 for general text */
+    padding-right: 20px;
+    font-size: 15px;
 }
 
-/* Ensure bio starts aligned with 'About' */
+/* Bio Text Alignment */
 .bio-text {
-    margin-top: 0; /* Ensures bio text starts at the same level as the "About" title */
+    margin-top: 0;
 }
 
-/* Slideshow for Home Page */
-#home {
-    text-align: center;
-    padding: 40px;
-}
+/* CV Section */
 
-.slideshow-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-}
-
-.slideshow-container img {
-    width: 100%;
-    height: auto;
-}
-
-.fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@keyframes fade {
-    from { opacity: .4; }
-    to { opacity: 1; }
-}
-
-/* Grid Container */
-.grid-container {
-    display: grid;
-    gap: 30px; /* Adjusted gap between thumbnails */
-    padding: 20px;
-}
-
-/* Selected Works Grid */
-#selected-works .grid-container {
-    grid-template-columns: repeat(3, minmax(150px, 1fr));
-    gap: 30px; /* Increased gap */
-}
-
-#selected-works .work-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Exhibitions Grid */
-#exhibitions .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    #selected-works .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    #exhibitions .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns on mobile */
-    }
-    .bio-text, .bio-image {
-        flex: 1 1 100%; /* Stack image below text on mobile */
-        margin-top: 0;
-    }
-}
-
-/* Images */
-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Thumbnail and Text Adjustments */
-.work-item img, .exhibition-item img {
-    margin-bottom: 10px;
-}
-
-.artwork-description {
-    text-align: left;
-    font-size: 15px; /* Decreased by 1 for artwork description */
-    line-height: 1.2;
-}
-
-/* Contact Form */
-form input, form button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    font-size: 15px; /* Decreased by 1 for form elements */
-}
-
-form button {
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: grey;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 13px; /* Decreased by 1 for footer */
-    color: grey;
-}
-
-/* About Section Layout */
-.about-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-}
-
-/* Year Alignment - Ensure year starts aligned with V of VICTOR GUERIN */
+/* Year and Empty Year Alignment */
 .row {
     display: block;
     margin-bottom: 10px;
-    padding-left: 84px; /* Aligns the year with the 'V' of VICTOR GUERIN */
-    text-indent: -64px; /* Pulls year back to align properly */
+    padding-left: 20px; /* Align with 'V' of VICTOR GUERIN */
+    text-indent: 0;
 }
 
 .year {
@@ -223,13 +97,22 @@ footer {
 }
 
 .empty-year {
-    width: 70px; /* Same width as year column for alignment */
+    width: 70px;
     display: inline-block;
-    visibility: hidden; /* Keeps the space but hides the content */
+    visibility: hidden;
 }
 
 /* Subtitle Styling */
 .section-subtitle {
     font-weight: 400;
     margin-top: 20px;
+    padding-left: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: grey;
 }
