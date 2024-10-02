@@ -3,203 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Victor Guerin</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            font-family: sans-serif;
-            background-color: white;
-            font-size: 17px; 
-        }
-        .container {
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .navigation {
-            padding: 20px;
-            background-color: transparent;
-            width: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-sizing: border-box;
-            font-size: 17px;
-            white-space: nowrap;
-        }
-        .navigation a, .navigation p {
-            margin: 0;
-            color: black;
-            text-decoration: none;
-            line-height: 1.5;
-        }
-        .content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-y: auto;
-            text-align: justify;
-        }
-        .content div {
-            max-width: 900px;
-            margin: auto;
-        }
-        .content h1, .content p {
-            font-size: 17px;
-        }
-        .content h1 {
-            margin-top: 0;
-        }
-        .content p {
-            line-height: 1.6;
-        }
-        .works-link {
-            display: block;
-            margin-top: 20px;
-            text-decoration: underline !important; 
-        }
-        .mobile-banner {
-                display: none;
-        }
-        .mobile-footer {
-                display: none;
-        }
-
-        @media (max-width: 768px) {
-            .navigation {
-                display: none;
-            }
-            .content {
-                padding-top: 60px;
-                padding-bottom: 60px;
-                overflow-y: auto;
-                display: block;
-                width: 100%;
-            }
-            .content p {
-                text-indent: 25px; /* Apply text indentation only on mobile */
-            }
-            
-            .mobile-banner {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                padding: 10px 0; /* Reduced vertical padding */
-                position: fixed;
-                top: 0;
-                background-color: #fff;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                z-index: 1001;
-            }
-            .mobile-banner a {
-                display: inline-block;
-                margin: 0;
-                padding: 0 10px; /* Added horizontal padding */
-                text-align: justify; /* Justify text */
-                text-justify: distribute-all-lines; /* Justify all lines */
-                font-size: 16px; /* Set font size */
-                color: black; /* Set color to black */
-                text-decoration: none; /* Remove default underline */
-            }
-            .mobile-banner a.works-link {
-                text-decoration: underline; /* Underline only 'Works' link */
-            }
-            .mobile-banner .content {
-                flex-grow: 1;
-                text-align: justify;
-                margin-left: 20px; /* Adjusted margin */
-                margin-right: 20px; /* Adjusted margin */
-            }
-            .mobile-footer {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                padding: 10px 0; /* Reduced vertical padding */
-                position: fixed;
-                bottom: 0;
-                background-color: #fff;
-                box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-                z-index: 1001;
-            }
-            .mobile-footer a {
-                display: inline-block;
-                margin: 0;
-                padding: 0 10px; /* Added horizontal padding */
-                text-align: justify; /* Justify text */
-                text-justify: distribute-all-lines; /* Justify all lines */
-                font-size: 16px; /* Set font size */
-                color: black; /* Set color to black */
-                text-decoration: none; /* Remove default underline */
-            }
-            .mobile-footer a.works-link {
-                text-decoration: underline; /* Underline only 'Works' link */
-            }
-
-        }
-    </style>
+    <title>About | Victor Guerin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    
-    <div class="container">
-        <div class="navigation">
-            <div>
-                <a href="hello.html" style="font-weight: bold; font-size: 30px;">VICTOR GUERIN</a>
-                <br><br><br><br>
-                 <!-- <a href="RCA Graduate Show 2024.html">RCA Graduate Show 2024</a> -->
-                <a href="statement.html">Statement</a><br>
-                <a href="about.html">About</a><br>
-                <a href="cv.html">CV</a><br><br>
-                <a href="mailto:victorguerin.fr+web@pm.me">Email</a><br>
-                <a href="https://www.linkedin.com/in/guerinvictor/">LinkedIn</a><br>
-                <a href="https://www.instagram.com/victorguerin.fr/">Instagram</a><br>
+    <section id="about">
+        <div class="about-container">
+            <div class="bio-text">
+                <h2>About</h2>
+                <p>A native of Poitiers, France, Victor Guerin was raised in a rural setting on the outskirts of the city where he developed a deep love of nature that continues to shape his world view.</p>
+                <p>Guerin’s Arts et Métiers degree initially prepared him for a career as a mechanical and industrial engineer, but from the outset, he embarked on a decidedly unique trajectory... (full bio content)</p>
+                <p>Looking forward, Victor aims to create large-scale outdoor installations that engage and inspire, leveraging his innovative approach to highlight sustainability and provoke a reevaluation of our environmental impact.</p>
             </div>
-            <a href="hello.html" class="works-link">Works</a>
-        </div>
-        <div class="content">
-            <div>
-                <p>A native of Poitiers, France, Victor Guerin was raised in a rural setting on the outskirts of the city where he developed a deep love of nature that continues to shape his world view.
-                </p>
-                <p>Guerin’s Arts et Métiers degree initially prepared him for a career as a mechanical and industrial engineer, but from the outset, he embarked on a decidedly unique trajectory. After experiences with Christian Dior Paris and Moët Hennessy, Guerin worked for Louis Vuitton as a project manager of fine jewellery. From there, at the age of 25, he became the director of production in the decorative arts ateliers and design studio of Hervé Van der Straeten. The discipline and precision of Guerin’s engineering background, combined with his deep appreciation of craftsmanship, have enabled him to develop an artistic sensibility grounded in scientific curiosity. This pushed Guerin to simultaneously embark on his own artistic endeavours as a painter in 2020. It was not long before he was exhibiting works in galleries in Jersey, Guernsey, London and Edinburgh. Guerin then decided to pursue his training in Sculpture at the Royal College of Art in 2023, on scholarship. 
-                </p> 
-                <p>Deeply influenced by his background, Guerin uses materials like recycled bronze, aluminium and glass, along with botanical elements. Employing techniques ranging from lost-wax casting to digital-assisted manufacturing, Guerin’s work proposes a harmony and respect for nature through this combination of materials and processes that bridge traditional craftsmanship with contemporary innovation.
-                </p>
-                <p>The 'Ephemeral Structures' series epitomises this melding of disciplines. By employing computer-aided coil built ceramic, he creates pieces that juxtapose geometric accuracy with organic fluidity, challenging the conventional dichotomy between the engineered and the natural. This is to reflect on the concept of a haven that exists both within us and in the world outside, echoing childhood memories of nature's tranquillity amongst chaos. The work becomes a conversation between the seen and unseen, a suggestion that deepest memories and unconscious experiences are intertwined with the natural world. This series, along with his broader oeuvre, invites viewers to ponder the intricate beauty of nature and the possibilities that arise when we consider ourselves not as separate from, but as integral to, the natural world. 
-                </p>
-                <p>Looking forward, Victor aims to create large-scale outdoor installations that engage and inspire, leveraging his innovative approach to highlight sustainability and provoke a reevaluation of our environmental impact.
-                </p>
-                <br>
+            <div class="bio-image">
+                <img src="../images/profile.jpg" alt="Victor Guerin">
             </div>
         </div>
-    </div>
-    
-    <!-- Mobile-specific Banner -->
-    <div class="mobile-banner">
-        <a href="hello.html" style="font-weight: bold;font-size: 17px">VICTOR GUERIN</a>
-        <div>
-            <!-- <a href="RCA Graduate Show 2024.html">RCA Graduate Show 2024</a> -->
-            <a href="statement.html">Statement</a>
-            <a href="about.html">About</a>
-            <a href="cv.html">CV</a>
-        </div>
-    </div>
-    
-    <!-- Mobile-specific Footer -->
-    <div class="mobile-footer">
-            <a href="hello.html" class="works-link">Works</a>
-        <div>
-            <a href="https://www.instagram.com/victorguerin.fr/">Instagram</a>
-            <a href="https://www.linkedin.com/in/guerinvictor/">LinkedIn</a>
-            <a href="mailto:victorguerin.fr+web@pm.me">Email</a>
-        </div>
-        
-    </div>
+    </section>
 </body>
 </html>
