@@ -58,7 +58,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 400; /* No bold for menu items */
     font-size: 17px; /* Decreased by 1 (previously 18px) */
     color: black;
     transition: color 0.3s;
@@ -68,13 +68,13 @@ nav ul li a:hover {
     color: grey;
 }
 
-/* Section Titles Styling */
+/* Section Titles Styling (same as menu items, not bold) */
 .section-title {
-    font-size: 17px; /* Decreased by 1 */
-    font-weight: 400;
+    font-size: 17px; /* Match size with menu items */
+    font-weight: 400; /* No bold for subtitles */
     text-align: left;
-    margin-top: 40px; /* Reduced space below the menu */
-    margin-bottom: 20px; /* Reduced space below the section title */
+    margin-top: 30px; /* Reduced space below the menu */
+    margin-bottom: 10px; /* Reduced space below the section title */
     padding-left: 20px;
 }
 
@@ -227,8 +227,8 @@ footer {
 .row {
     display: block;
     margin-bottom: 10px;
-    padding-left: 70px; /* Creates space for year column */
-    text-indent: -70px; /* Pulls year back to the left */
+    padding-left: 100px; /* Creates space to align the year with the "V" of VICTOR GUERIN */
+    text-indent: -100px; /* Pulls year back to the left */
 }
 
 .year {
@@ -245,8 +245,7 @@ footer {
 /* Section Titles */
 .section-title {
     font-size: 17px;
-    font-weight: bold;
-    margin-top: 40px;
+    font-weight: 400; /* Match menu style */
 }
 
 /* Subtitle Styling */
