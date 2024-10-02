@@ -1,0 +1,199 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: #fff;
+    color: #000;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+p, form {
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Header and Navigation */
+header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: 400;
+    color: black;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: grey;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: grey;
+}
+
+/* Home Section */
+#home {
+    text-align: center;
+    padding: 40px;
+}
+
+#home p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* About Section */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.bio-text, .bio-image {
+    flex: 1 1 45%;
+    padding: 20px;
+}
+
+.bio-text p {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .bio-text, .bio-image {
+        flex: 1 1 100%;
+    }
+}
+
+/* Grid for Selected Works and Exhibitions */
+.grid-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Selected Works grid (3 columns, adaptive for smaller screens) */
+#selected-works .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+    #selected-works .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Exhibitions grid (4 columns, adaptive for smaller screens) */
+#exhibitions .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+    #exhibitions .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Images and descriptions */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.work-item img {
+    aspect-ratio: 5 / 7;
+}
+
+.exhibition-item img {
+    aspect-ratio: 1 / 1;
+}
+
+.artwork-description {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* CV Section */
+.content {
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Contact Form */
+form input, form button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    font-size: 16px;
+}
+
+form button {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: grey;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: grey;
+}
