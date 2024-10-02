@@ -84,6 +84,11 @@ nav ul li a:hover {
     font-size: 15px; /* Decreased by 1 for general text */
 }
 
+/* Ensure bio starts aligned with 'About' */
+.bio-text {
+    margin-top: 0; /* Ensures bio text starts at the same level as the "About" title */
+}
+
 /* Slideshow for Home Page */
 #home {
     text-align: center;
@@ -204,31 +209,12 @@ footer {
     padding: 20px;
 }
 
-.bio-text {
-    flex: 1 1 45%;
-    padding: 0 20px; /* Ensure alignment with the section title */
-    margin-top: 0;
-    font-size: 15px; /* Decreased by 1 for bio text */
-}
-
-.bio-image {
-    flex: 1 1 45%;
-    padding: 0 20px;
-}
-
-.bio-image img {
-    width: 100%;
-    height: auto;
-}
-
-/* CV Section */
-
-/* Year and Empty Year Alignment */
+/* Year Alignment - Ensure year starts aligned with V of VICTOR GUERIN */
 .row {
     display: block;
     margin-bottom: 10px;
-    padding-left: 100px; /* Creates space to align the year with the "V" of VICTOR GUERIN */
-    text-indent: -100px; /* Pulls year back to the left */
+    padding-left: 84px; /* Aligns the year with the 'V' of VICTOR GUERIN */
+    text-indent: -64px; /* Pulls year back to align properly */
 }
 
 .year {
@@ -240,12 +226,6 @@ footer {
     width: 70px; /* Same width as year column for alignment */
     display: inline-block;
     visibility: hidden; /* Keeps the space but hides the content */
-}
-
-/* Section Titles */
-.section-title {
-    font-size: 17px;
-    font-weight: 400; /* Match menu style */
 }
 
 /* Subtitle Styling */
