@@ -15,14 +15,8 @@ body {
 }
 
 h1, h2 {
-    text-align: left;
     font-weight: 700;
     margin-bottom: 20px;
-}
-
-h2 {
-    margin-top: 20px;
-    margin-bottom: 40px;
 }
 
 /* Navigation */
@@ -74,6 +68,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     font-weight: 400;
+    font-size: 24px; /* Same size for menu and titles */
     color: black;
     transition: color 0.3s;
 }
@@ -82,12 +77,17 @@ nav ul li a:hover {
     color: grey;
 }
 
-/* Titles on specific pages (About, Selected Works, etc.) */
+/* Align section titles and text with "V" of VICTOR GUERIN */
 .section-title {
     text-align: left;
+    font-size: 24px; /* Match size with menu items */
     margin-top: 60px;
-    font-size: 32px;
     margin-bottom: 40px;
+    padding-left: 20px; /* Same left padding as the logo for alignment */
+}
+
+.content, .bio-text {
+    padding-left: 20px; /* Align text with "V" of VICTOR GUERIN */
 }
 
 /* Slideshow for Home Page */
