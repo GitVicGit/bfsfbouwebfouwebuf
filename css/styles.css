@@ -220,3 +220,37 @@ footer {
     width: 100%;
     height: auto;
 }
+
+/* CV Section */
+
+/* Year and Empty Year Alignment */
+.row {
+    display: block;
+    margin-bottom: 10px;
+    padding-left: 70px; /* Creates space for year column */
+    text-indent: -70px; /* Pulls year back to the left */
+}
+
+.year {
+    width: 70px;
+    display: inline-block;
+}
+
+.empty-year {
+    width: 70px; /* Same width as year column for alignment */
+    display: inline-block;
+    visibility: hidden; /* Keeps the space but hides the content */
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+/* Subtitle Styling */
+.section-subtitle {
+    font-weight: 400;
+    margin-top: 20px;
+}
