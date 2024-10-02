@@ -20,16 +20,11 @@ h1, h2 {
     margin-bottom: 20px;
 }
 
-p, form {
-    text-align: center;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-
-/* Sticky Navigation */
+/* Navigation */
 header {
-    text-align: center;
-    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     background-color: white;
@@ -38,19 +33,22 @@ header {
     border-bottom: 1px solid #ccc;
 }
 
-header h1 {
-    font-size: 32px;
+header .logo {
+    margin-left: 20px;
+    font-size: 24px;
     font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 nav ul {
     list-style-type: none;
-    padding: 0;
+    display: flex;
+    margin-right: 20px;
 }
 
 nav ul li {
-    display: inline-block;
-    margin: 0 10px;
+    margin-left: 20px;
 }
 
 nav ul li a {
@@ -94,47 +92,42 @@ nav ul li a:hover {
 /* Grid for Selected Works and Exhibitions */
 .grid-container {
     display: grid;
-    gap: 30px; /* Adjust the spacing between items */
+    gap: 30px;
     padding: 20px;
 }
 
-/* Selected Works grid (3 columns, adaptive for smaller screens) */
 #selected-works .grid-container {
     grid-template-columns: repeat(3, 1fr);
+}
+
+#exhibitions .grid-container {
+    grid-template-columns: repeat(4, 1fr);
 }
 
 @media (max-width: 768px) {
     #selected-works .grid-container {
         grid-template-columns: repeat(2, 1fr);
     }
-}
-
-/* Exhibitions grid (4 columns, adaptive for smaller screens) */
-#exhibitions .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 768px) {
     #exhibitions .grid-container {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-/* Thumbnail and Text Adjustments */
 img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     object-fit: cover;
 }
 
+/* Thumbnail and Text Adjustments */
 .work-item img, .exhibition-item img {
-    margin-bottom: 10px; /* Spacing between the image and the text */
+    margin-bottom: 10px;
 }
 
 .artwork-description {
-    text-align: left; /* Align text to left */
+    text-align: left;
     font-size: 16px;
-    line-height: 1.2; /* Reduced line spacing */
+    line-height: 1.2;
 }
 
 /* Contact Form */
