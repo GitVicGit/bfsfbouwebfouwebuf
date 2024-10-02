@@ -26,15 +26,16 @@ p, form {
     margin-bottom: 10px;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Header and Navigation */
+/* Sticky Navigation */
 header {
     text-align: center;
     margin: 20px 0;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
 }
 
 header h1 {
@@ -63,53 +64,37 @@ nav ul li a:hover {
     color: grey;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 14px;
-    color: grey;
-}
-
-/* Home Section */
+/* Slideshow for Home Page */
 #home {
     text-align: center;
     padding: 40px;
 }
 
-#home p {
-    font-size: 18px;
-    line-height: 1.5;
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
 }
 
-/* About Section */
-.about-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px;
+.slideshow-container img {
+    width: 100%;
+    height: auto;
 }
 
-.bio-text, .bio-image {
-    flex: 1 1 45%;
-    padding: 20px;
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
-.bio-text p {
-    text-align: left;
-    margin-bottom: 20px;
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
 }
 
-@media (max-width: 768px) {
-    .bio-text, .bio-image {
-        flex: 1 1 100%;
-    }
-}
-
-/* Grid for Selected Works and Exhibitions */
+/* White Space and Text Alignment for Selected Works and Exhibitions */
 .grid-container {
     display: grid;
-    gap: 20px;
+    gap: 40px; /* Increased spacing between thumbnails */
     padding: 20px;
 }
 
@@ -135,59 +120,16 @@ footer {
     }
 }
 
-/* Images and descriptions */
-img {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.work-item img {
-    aspect-ratio: 5 / 7;
-}
-
-.exhibition-item img {
-    aspect-ratio: 1 / 1;
-}
-
+/* Adjusting Text Alignment and Spacing */
 .artwork-description {
-    text-align: center;
+    text-align: left; /* Align text to left */
     font-size: 16px;
     margin-top: 10px;
+    line-height: 1.2; /* Reduced line spacing */
 }
 
-/* CV Section */
-.content {
-    padding: 20px;
-}
-
-.section {
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-/* Contact Form */
-form input, form button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    font-size: 16px;
-}
-
-form button {
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: grey;
+.work-item img, .exhibition-item img {
+    margin-bottom: 10px; /* More white space between thumbnails */
 }
 
 /* Footer */
