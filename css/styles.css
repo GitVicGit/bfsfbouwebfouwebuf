@@ -191,7 +191,7 @@ form button:hover {
 /* Footer */
 footer {
     text-align: center;
-    padding: 40px;
+    padding: 20px;
     font-size: 13px; /* Decreased by 1 for footer */
     color: grey;
 }
