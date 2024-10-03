@@ -223,24 +223,33 @@ footer {
 
 /* CV Section */
 
-/* Year and Empty Year Alignment */
+/* CV Section Update for Year and Description on Same Line */
 .row {
-    display: block;
+    display: flex;
+    align-items: flex-start;
     margin-bottom: 10px;
-    padding-left: 70px; /* Creates space for year column */
-    text-indent: 0px; /* Pulls year back to the left */
+    padding-left: 0;
 }
 
 .year {
-    width: 70px;
-    display: inline-block;
+    width: auto;
+    margin-right: 20px; /* Creates space between year and description */
+    font-weight: bold;
+    white-space: nowrap; /* Prevents wrapping of year */
 }
 
-.empty-year {
-    width: 70px; /* Same width as year column for alignment */
-    display: inline-block;
-    visibility: hidden; /* Keeps the space but hides the content */
+.description {
+    flex: 1;
+    text-align: left;
 }
+
+/* Example of empty year (invisible but keeps space aligned) */
+.empty-year {
+    width: auto;
+    margin-right: 20px;
+    visibility: hidden; /* Keeps spacing for alignment */
+}
+
 
 /* Section Titles */
 .section-title {
