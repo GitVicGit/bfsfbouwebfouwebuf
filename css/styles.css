@@ -11,7 +11,7 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
-    padding: 5 40px;
+    padding: 0 40px;
     font-size: 15px; /* Decreased from default */
 }
 
@@ -35,7 +35,7 @@ header {
     top: 0;
     background-color: white;
     z-index: 1000;
-    padding: 5px 0; /* Reduced space at the top and bottom of the menu */
+    padding: 8px 0; /* Reduced space at the top and bottom of the menu */
     border-bottom: none; /* Remove line under header */
 }
 
