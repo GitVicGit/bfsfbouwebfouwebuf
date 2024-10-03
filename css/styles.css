@@ -11,7 +11,7 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
-    padding: 0 40px;
+    padding: 5 40px;
     font-size: 15px; /* Decreased from default */
 }
 
@@ -237,7 +237,7 @@ footer {
 /* Example of empty year (invisible but keeps space aligned) */
 .empty-year {
     width: auto;
-    margin-right: 52px;
+    margin-right: 53px;
     visibility: hidden; /* Keeps spacing for alignment */
 }
 
