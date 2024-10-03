@@ -233,7 +233,7 @@ footer {
 .row {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     padding-left: 0;
 }
 
@@ -251,7 +251,7 @@ footer {
 /* Example of empty year (invisible but keeps space aligned) */
 .empty-year {
     width: auto;
-    margin-right: 50px;
+    margin-right: 55px;
     visibility: hidden; /* Keeps spacing for alignment */
 }
 
