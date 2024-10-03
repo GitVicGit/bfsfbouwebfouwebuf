@@ -237,7 +237,7 @@ footer {
 /* Example of empty year (invisible but keeps space aligned) */
 .empty-year {
     width: auto;
-    margin-right: 53px;
+    margin-right: 54px;
     visibility: hidden; /* Keeps spacing for alignment */
 }
 
