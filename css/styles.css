@@ -10,12 +10,12 @@ body {
     font-family: 'Raleway', sans-serif;
     background-color: #fff;
     color: #000;
-    line-height: 1.4;
-    padding: 20px;
+    line-height: 1.6;
+    padding: 0px;
     font-size: 15px; /* Decreased from default */
 }
 
-h1, h2, h4 {
+h1, h2 {
     font-weight: 400; /* No bold for section titles */
     margin-bottom: 10px;
     font-size: 17px; 
