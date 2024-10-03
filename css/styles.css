@@ -207,8 +207,8 @@ footer {
 }
 
 .bio-image img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
 }
 
 
@@ -217,7 +217,7 @@ footer {
 /* CV Section Update with Grid for Year and Description */
 .row {
     display: grid;
-    grid-template-columns: 80px 1fr; /* 70px for the year, remaining space for the description */
+    grid-template-columns: 70px 1fr; /* 70px for the year, remaining space for the description */
 }
 
 .year {
