@@ -11,7 +11,7 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
-    padding: 0 40px;
+    padding: 0 80px;
     font-size: 15px; /* Decreased from default */
 }
 
@@ -40,9 +40,9 @@ header {
 }
 
 header .logo {
-    margin-left: 20px;
-    font-size: 24px; /* Keep VICTOR GUERIN at original size */
-    font-weight: 600;
+    margin-left: 80px;
+    font-size: 24px; 
+    font-weight: 400;
     text-transform: uppercase;
 }
 
