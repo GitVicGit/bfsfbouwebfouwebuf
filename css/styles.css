@@ -78,7 +78,6 @@ nav ul li a:hover {
     padding-left: 20px;
 }
 
-
 /* Align Text with "V" of VICTOR GUERIN */
 .content, .bio-text {
     padding-left: 20px;
@@ -246,20 +245,15 @@ footer {
 /* Example of empty year (invisible but keeps space aligned) */
 .empty-year {
     width: auto;
-    margin-right: 20px;
+    margin-right: 40px;
     visibility: hidden; /* Keeps spacing for alignment */
 }
 
 
-/* Section Titles */
-.section-title {
-    font-size: 15px;
-    font-weight: 400;
-    margin-top: 40px;
-}
+
 
 /* Subtitle Styling */
 .section-subtitle {
-    font-weight: 400;
+    font-weight: bold;
     margin-top: 20px;
 }
