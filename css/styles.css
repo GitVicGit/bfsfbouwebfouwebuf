@@ -228,7 +228,7 @@ footer {
     display: block;
     margin-bottom: 10px;
     padding-left: 70px; /* Creates space for year column */
-    text-indent: -70px; /* Pulls year back to the left */
+    text-indent: 0px; /* Pulls year back to the left */
 }
 
 .year {
