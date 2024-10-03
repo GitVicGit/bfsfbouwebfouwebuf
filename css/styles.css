@@ -83,11 +83,6 @@ nav ul li a:hover {
     padding-left: 20px;
 }
 
-/* Align Text with "V" of VICTOR GUERIN */
-.content, .bio-text {
-    padding-left: 20px;
-    font-size: 15px; /* Decreased by 1 for general text */
-}
 
 /* Slideshow for Home Page */
 #home {
