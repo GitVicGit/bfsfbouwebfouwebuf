@@ -11,7 +11,7 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
-    padding: 0px;
+    padding: 0 40px;
     font-size: 15px; /* Decreased from default */
 }
 
@@ -140,20 +140,6 @@ nav ul li a:hover {
     grid-template-columns: repeat(4, 1fr);
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    #selected-works .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    #exhibitions .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns on mobile */
-    }
-    .bio-text, .bio-image {
-        flex: 1 1 100%; /* Stack image below text on mobile */
-        margin-top: 0;
-    }
-}
-
 /* Images */
 img {
     width: 100%;
@@ -254,4 +240,24 @@ footer {
     margin-right: 55px;
     visibility: hidden; /* Keeps spacing for alignment */
 }
+
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    #selected-works .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #exhibitions .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns on mobile */
+    }
+    .bio-text, .bio-image {
+        flex: 1 1 100%; /* Stack image below text on mobile */
+        margin-top: 0;
+    }
+     body {
+        padding: 0 10px; /* Less padding on mobile */
+    }
+}
+
 
