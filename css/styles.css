@@ -221,6 +221,7 @@ footer {
     height: auto;
 }
 
+
 /* CV Section */
 
 /* CV Section Update for Year and Description on Same Line */
@@ -249,11 +250,8 @@ footer {
     visibility: hidden; /* Keeps spacing for alignment */
 }
 
-
-
-
 /* Subtitle Styling */
 .section-subtitle {
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 10px;
 }
