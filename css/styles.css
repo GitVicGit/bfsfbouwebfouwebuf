@@ -95,13 +95,13 @@ nav ul li a:hover {
     max-width: 100%;
     margin: auto;
     overflow: hidden; /* Ensures content doesn't overflow the container */
-    height: 100vh; /* Adjust this value based on the desired height */
+    height: 100vh; /* Full viewport height, adjust based on the desired height */
 }
 
 .slideshow-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
+    object-fit: contain; /* Ensures the image is fully visible while maintaining aspect ratio */
 }
 
 .fade {
@@ -113,6 +113,7 @@ nav ul li a:hover {
     from { opacity: .4; }
     to { opacity: 1; }
 }
+
 
 /* Grid Container */
 .grid-container {
