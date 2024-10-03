@@ -35,7 +35,7 @@ header {
     top: 0;
     background-color: white;
     z-index: 1000;
-    padding: 8px 0; /* Reduced space at the top and bottom of the menu */
+    padding: 10px 0; /* Reduced space at the top and bottom of the menu */
     border-bottom: none; /* Remove line under header */
 }
 
@@ -215,30 +215,25 @@ footer {
 
 /* CV Section */
 
-/* CV Section Update for Year and Description on Same Line */
+/* CV Section Update with Grid for Year and Description */
 .row {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 5px;
-    padding-left: 0;
+    display: grid;
+    grid-template-columns: 70px 1fr; /* 70px for the year, remaining space for the description */
 }
 
 .year {
-    width: auto;
-    margin-right: 20px; /* Creates space between year and description */
-    white-space: nowrap; /* Prevents wrapping of year */
+    grid-column: 1; /* Year is always in the first column */
+    white-space: nowrap; /* Prevents wrapping */
+}
+
+.empty-year {
+    grid-column: 1; /* Keeps the space for year */
+    visibility: hidden; /* Makes the year invisible while keeping the layout intact */
 }
 
 .description {
-    flex: 1;
+    grid-column: 2; /* Description always goes in the second column */
     text-align: left;
-}
-
-/* Example of empty year (invisible but keeps space aligned) */
-.empty-year {
-    width: auto;
-    margin-right: 53px;
-    visibility: hidden; /* Keeps spacing for alignment */
 }
 
 
