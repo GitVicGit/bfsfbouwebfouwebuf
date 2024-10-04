@@ -84,40 +84,34 @@ nav ul li a:hover {
     padding-left: 20px;
 }
 
-/* About Section Layout */
-.about-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
+/* Home Page Slideshow */
+#home {
+    text-align: center;
+    padding: 0;
 }
 
-/* Respect <br> elements */
-.bio-text p {
-    margin-bottom: 20px; /* Ensure space between paragraphs */
-}
-
-.bio-text {
-    flex: 1 1 60%; /* Allow more space for text */
-    padding-right: 20px; /* Add space between text and image */
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-.bio-image {
-    flex: 1 1 30%; /* Allow space for the image */
-    max-height: 100vh; /* Ensure the image fits within the viewport */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.bio-image img {
+.slideshow-container {
+    position: relative;
     max-width: 100%;
-    max-height: calc(100vh - 120px); /* Adjust based on the header/footer */
-    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+    margin: auto;
+    overflow: hidden;
+    height: calc(100vh - 60px);
+}
+
+.slideshow-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from { opacity: .4; }
+    to { opacity: 1; }
 }
 
 /* Grid Container */
@@ -151,14 +145,122 @@ img {
     object-fit: cover;
 }
 
+/* Thumbnail and Text Adjustments */
+.work-item img, .exhibition-item img {
+    margin-bottom: 10px;
+}
+
+.artwork-description {
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.2;
+}
+
+/* Contact Form */
+form input, form button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    font-size: 15px;
+}
+
+form button {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: grey;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: grey;
+}
+
+/* About Section Layout */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.bio-text {
+    flex: 1 1 45%;
+    padding: 0 20px;
+    margin-top: 0;
+    font-size: 15px;
+}
+
+.bio-image {
+    flex: 1 1 45%;
+    padding: 0 20px;
+}
+
+.bio-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* CV Section */
+
+/* CV Section Update with Grid for Year and Description */
+#cv .content {
+    padding: 0 80px; /* Align CV content with body padding */
+}
+
+.section {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+/* Ensure that the year and description are spaced correctly */
+.row {
+    display: grid;
+    grid-template-columns: 70px 1fr; /* Allocate 70px for the year and the rest for description */
+    padding-left: 10px; /* Space on the left for the rows */
+    padding-right: 10px; /* Space on the right for the rows */
+}
+
+.year {
+    grid-column: 1;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.empty-year {
+    grid-column: 1;
+    visibility: hidden;
+}
+
+.description {
+    grid-column: 2;
+    text-align: left;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
+    #selected-works .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #exhibitions .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .bio-text, .bio-image {
-        flex: 1 1 100%; /* Stack image and text vertically on small screens */
-        text-align: center;
-        padding: 0;
+        flex: 1 1 100%;
+        margin-top: 0;
     }
     body {
         padding: 0 10px;
+    }
+    #cv .content {
+        padding: 0 10px; /* Adjust padding for mobile view */
     }
 }
