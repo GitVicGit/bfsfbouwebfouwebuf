@@ -36,13 +36,13 @@ header {
     top: 0;
     background-color: white;
     z-index: 1000;
-    padding: 10px 0;
-    border-bottom: none;
+    padding: 10px 0; /* Reduced space at the top and bottom of the menu */
+    border-bottom: none; /* Remove line under header */
 }
 
 header .logo {
     margin-left: 70px;
-    font-size: 24px;
+    font-size: 24px; 
     font-weight: 400;
     text-transform: uppercase;
 }
@@ -65,7 +65,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     font-weight: 400;
-    font-size: 17px;
+    font-size: 17px; /* Decreased by 1 (previously 18px) */
     color: black;
     transition: color 0.3s;
 }
@@ -76,18 +76,18 @@ nav ul li a:hover {
 
 /* Section Titles Styling */
 .section-title {
-    font-size: 17px;
+    font-size: 17px; /* Decreased by 1 */
     font-weight: 400;
     text-align: left;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 40px; /* Reduced space below the menu */
+    margin-bottom: 20px; /* Reduced space below the section title */
     padding-left: 20px;
 }
 
 /* Home Page Slideshow */
 #home {
     text-align: center;
-    padding: 0;
+    padding: 0; /* Remove extra padding */
 }
 
 .slideshow-container {
@@ -99,22 +99,32 @@ nav ul li a:hover {
 }
 
 .slideshow-container img {
-    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
+    opacity: 0; /* Hide initially */
+    position: absolute; /* Layer images on top of each other */
+    transition: opacity 2s ease-in-out; /* Smooth fade transition */
 }
 
 .slideshow-container img.active {
-    opacity: 1; /* Fully visible active image */
+    opacity: 1; /* Show the active image */
 }
 
 /* Smooth Fade Transition */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
 @keyframes fade {
     from { opacity: .4; }
     to { opacity: 1; }
+}
+
+/* Hide content before images are loaded */
+.loading {
+    display: none;
 }
 
 /* Grid Container */
@@ -214,6 +224,7 @@ footer {
 }
 
 /* CV Section */
+
 .row {
     display: grid;
     grid-template-columns: 70px 1fr;
