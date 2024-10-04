@@ -13,7 +13,6 @@ body {
     line-height: 1.6;
     padding: 0 80px; /* Set consistent padding for the entire body */
     font-size: 15px;
-    padding: 20px;
 }
 
 h1, h2 {
@@ -162,7 +161,7 @@ form input, form button {
     display: block;
     margin: 10px auto;
     padding: 10px;
-    width: 60%;
+    width: 80%;
     font-size: 15px;
 }
 
@@ -191,6 +190,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+    padding: 20px;
 }
 
 .bio-text {
@@ -244,6 +244,17 @@ footer {
     grid-column: 2;
     text-align: left;
 }
+
+/* General link styling to ensure links stay black */
+a {
+    color: black; /* Set links to black */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    color: grey; /* Optional: Change color on hover */
+}
+
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
