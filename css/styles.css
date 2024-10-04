@@ -94,10 +94,22 @@ a:hover {
     padding-left: 20px;
 }
 
+
 /* Contact Page Layout */
 .contact-container {
     padding-left: 20px;
+    text-align: center; /* Center the text in the contact container */
 }
+
+form input, form button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 60%; /* You can adjust this width for the inputs and button */
+    font-size: 15px;
+    text-align: center; /* Ensure input fields text is centered */
+}
+
 
 /* About Section Layout */
 .about-container {
