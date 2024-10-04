@@ -13,6 +13,7 @@ body {
     line-height: 1.6;
     padding: 0 80px; /* Set consistent padding for the entire body */
     font-size: 15px;
+    padding: 20px;
 }
 
 h1, h2 {
@@ -102,16 +103,24 @@ nav ul li a:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    position: absolute;
+    transition: opacity 2.5s ease-in-out; /* Added transition for a smoother fade */
+}
+
+.slideshow-container img.active {
+    opacity: 1;
+}
+
+/* Smooth Fade Transition */
+@keyframes fade {
+    from { opacity: .4; }
+    to { opacity: 1; }
 }
 
 .fade {
     animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@keyframes fade {
-    from { opacity: .4; }
-    to { opacity: 1; }
+    animation-duration: 2.5s; /* Slower fade effect */
 }
 
 /* Grid Container */
@@ -161,7 +170,7 @@ form input, form button {
     display: block;
     margin: 10px auto;
     padding: 10px;
-    width: 80%;
+    width: 60%;
     font-size: 15px;
 }
 
@@ -190,7 +199,6 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
 }
 
 .bio-text {
@@ -214,7 +222,7 @@ footer {
 
 /* CV Section Update with Grid for Year and Description */
 #cv .content {
-    padding: 0 80px; /* Align CV content with body padding */
+    padding: 0 80px;
 }
 
 .section {
@@ -222,17 +230,16 @@ footer {
     padding-right: 80px;
 }
 
-/* Ensure that the year and description are spaced correctly */
 .row {
     display: grid;
-    grid-template-columns: 70px 1fr; /* Allocate 70px for the year and the rest for description */
-    padding-left: 10px; /* Space on the left for the rows */
-    padding-right: 10px; /* Space on the right for the rows */
+    grid-template-columns: 70px 1fr;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .year {
     grid-column: 1;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
 }
 
 .empty-year {
@@ -244,17 +251,6 @@ footer {
     grid-column: 2;
     text-align: left;
 }
-
-/* General link styling to ensure links stay black */
-a {
-    color: black; /* Set links to black */
-    text-decoration: none; /* Remove underline */
-}
-
-a:hover {
-    color: grey; /* Optional: Change color on hover */
-}
-
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
@@ -272,6 +268,6 @@ a:hover {
         padding: 0 10px;
     }
     #cv .content {
-        padding: 0 10px; /* Adjust padding for mobile view */
+        padding: 0 10px;
     }
 }
