@@ -94,16 +94,24 @@ nav ul li a:hover {
     position: relative;
     max-width: 100%;
     margin: auto;
-    overflow: hidden; /* Ensures content doesn't overflow the container */
-    height: calc(100vh - 60px); /* Full viewport height minus the height of the header (adjust the value if needed) */
+    overflow: hidden;
+    height: calc(100vh - 60px); /* Full viewport height minus the header */
 }
 
 .slideshow-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
+    object-fit: cover;
+    opacity: 0; /* Hide initially */
+    position: absolute; /* Layer images on top of each other */
+    transition: opacity 2s ease-in-out; /* Smooth fade transition */
 }
 
+.slideshow-container img.active {
+    opacity: 1; /* Show the active image */
+}
+
+/* Smooth Fade Transition */
 .fade {
     animation-name: fade;
     animation-duration: 1.5s;
@@ -114,17 +122,22 @@ nav ul li a:hover {
     to { opacity: 1; }
 }
 
+/* Hide content before images are loaded */
+.loading {
+    display: none;
+}
+
 /* Grid Container */
 .grid-container {
     display: grid;
-    gap: 30px; /* Adjusted gap between thumbnails */
+    gap: 30px;
     padding: 20px;
 }
 
 /* Selected Works Grid */
 #selected-works .grid-container {
     grid-template-columns: repeat(3, minmax(150px, 1fr));
-    gap: 30px; /* Increased gap */
+    gap: 30px;
 }
 
 #selected-works .work-item img {
@@ -152,7 +165,7 @@ img {
 
 .artwork-description {
     text-align: left;
-    font-size: 15px; /* Decreased by 1 for artwork description */
+    font-size: 15px;
     line-height: 1.2;
 }
 
@@ -162,7 +175,7 @@ form input, form button {
     margin: 10px auto;
     padding: 10px;
     width: 80%;
-    font-size: 15px; /* Decreased by 1 for form elements */
+    font-size: 15px;
 }
 
 form button {
@@ -180,7 +193,7 @@ form button:hover {
 footer {
     text-align: center;
     padding: 20px;
-    font-size: 13px; /* Decreased by 1 for footer */
+    font-size: 13px;
     color: grey;
 }
 
@@ -195,9 +208,9 @@ footer {
 
 .bio-text {
     flex: 1 1 45%;
-    padding: 0 20px; /* Ensure alignment with the section title */
+    padding: 0 20px;
     margin-top: 0;
-    font-size: 15px; /* Decreased by 1 for bio text */
+    font-size: 15px;
 }
 
 .bio-image {
@@ -212,40 +225,39 @@ footer {
 
 /* CV Section */
 
-/* CV Section Update with Grid for Year and Description */
 .row {
     display: grid;
-    grid-template-columns: 70px 1fr; /* 70px for the year, remaining space for the description */
+    grid-template-columns: 70px 1fr;
 }
 
 .year {
-    grid-column: 1; /* Year is always in the first column */
-    white-space: nowrap; /* Prevents wrapping */
+    grid-column: 1;
+    white-space: nowrap;
 }
 
 .empty-year {
-    grid-column: 1; /* Keeps the space for year */
-    visibility: hidden; /* Makes the year invisible while keeping the layout intact */
+    grid-column: 1;
+    visibility: hidden;
 }
 
 .description {
-    grid-column: 2; /* Description always goes in the second column */
+    grid-column: 2;
     text-align: left;
 }
 
-/* Media Queries for Responsiveness */
+/* Media Queries */
 @media (max-width: 768px) {
     #selected-works .grid-container {
         grid-template-columns: repeat(2, 1fr);
     }
     #exhibitions .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns on mobile */
+        grid-template-columns: repeat(2, 1fr);
     }
     .bio-text, .bio-image {
-        flex: 1 1 100%; /* Stack image below text on mobile */
+        flex: 1 1 100%;
         margin-top: 0;
     }
-     body {
-        padding: 0 10px; /* Less padding on mobile */
+    body {
+        padding: 0 10px;
     }
 }
