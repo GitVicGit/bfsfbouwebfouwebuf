@@ -74,6 +74,16 @@ nav ul li a:hover {
     color: grey;
 }
 
+/* Links */ 
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: grey;
+}
+
 /* Section Titles Styling */
 .section-title {
     font-size: 17px;
