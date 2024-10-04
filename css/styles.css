@@ -11,7 +11,7 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
-    padding: 0 80px; /* Set consistent padding for the entire body */
+    padding: 0 80px;
     font-size: 15px;
 }
 
@@ -19,12 +19,6 @@ h1, h2 {
     font-weight: 400;
     margin-bottom: 10px;
     font-size: 17px;
-}
-
-h3 {
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 15px;
 }
 
 /* Navigation */
@@ -37,7 +31,6 @@ header {
     background-color: white;
     z-index: 1000;
     padding: 10px 0;
-    border-bottom: none;
 }
 
 header .logo {
@@ -45,11 +38,6 @@ header .logo {
     font-size: 24px;
     font-weight: 400;
     text-transform: uppercase;
-}
-
-header .logo a {
-    color: black;
-    text-decoration: none;
 }
 
 nav ul {
@@ -74,7 +62,7 @@ nav ul li a:hover {
     color: grey;
 }
 
-/* Links */ 
+/* Links */
 a {
     color: black;
     text-decoration: none;
@@ -91,100 +79,23 @@ a:hover {
     text-align: left;
     margin-top: 40px;
     margin-bottom: 20px;
-    padding-left: 20px;
 }
 
-/* Home Page Slideshow */
-#home {
-    text-align: center;
-    padding: 0;
-}
-
-.slideshow-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
-    height: calc(100vh - 60px);
-}
-
-.slideshow-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 2.5s ease-in-out; /* Added transition for a smoother fade */
-}
-
-.fade {
-    animation-name: fade;
-    animation-duration: 2.5s;
-}
-
-@keyframes fade {
-    from { opacity: .4; }
-    to { opacity: 1; }
-}
-
-/* Grid Container */
-.grid-container {
-    display: grid;
-    gap: 30px;
-    padding: 20px;
-}
-
-/* Selected Works Grid */
-#selected-works .grid-container {
-    grid-template-columns: repeat(3, minmax(150px, 1fr));
-    gap: 30px;
-}
-
-#selected-works .work-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Exhibitions Grid */
-#exhibitions .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-/* Images */
-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Thumbnail and Text Adjustments */
-.work-item img, .exhibition-item img {
+/* About Section */
+#about p {
     margin-bottom: 10px;
 }
 
-.artwork-description {
-    text-align: left;
-    font-size: 15px;
-    line-height: 1.2;
+/* Image Alignment */
+.bio-image {
+    float: right;
+    width: 40%;
+    margin-left: 20px;
 }
 
-/* Contact Form */
-form input, form button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 50%;
-    font-size: 15px;
-}
-
-form button {
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: grey;
+.bio-image img {
+    width: 100%;
+    height: auto;
 }
 
 /* Footer */
@@ -195,99 +106,11 @@ footer {
     color: grey;
 }
 
-/* Contact Section Layout */
-.contact-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-}
-
-/* About Section Layout */
-.about-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-}
-
-/* Ensure bio-text and bio-image are aligned side by side on large screens */
-.bio-text {
-    flex: 1 1 50%; /* Take up half the space for the text */
-    padding: 0 20px;
-    margin-top: 0;
-    font-size: 15px;
-}
-
-.bio-image {
-    flex: 1 1 40%; /* Take up less space for the image */
-    padding: 0 20px;
-    align-self: flex-start; /* Ensures the image starts at the top */
-}
-
-.bio-image img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
-
-
-/* CV Section */
-
-/* CV Section Update with Grid for Year and Description */
-#cv .content {
-    padding: 0 80px; /* Align CV content with body padding */
-}
-
-.section {
-    padding-left: 80px;
-    padding-right: 80px;
-}
-
-/* Ensure that the year and description are spaced correctly */
-.row {
-    display: grid;
-    grid-template-columns: 70px 1fr; /* Allocate 70px for the year and the rest for description */
-    padding-left: 10px; /* Space on the left for the rows */
-    padding-right: 10px; /* Space on the right for the rows */
-}
-
-.year {
-    grid-column: 1;
-    white-space: nowrap; /* Prevent wrapping */
-}
-
-.empty-year {
-    grid-column: 1;
-    visibility: hidden;
-}
-
-.description {
-    grid-column: 2;
-    text-align: left;
-}
-
-/* Media Queries for Responsiveness */
+/* Media Queries */
 @media (max-width: 768px) {
-    #selected-works .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    #exhibitions .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .bio-text, .bio-image {
-        flex: 1 1 100%; /* Stack image below text on smaller screens */
-        margin-top: 20px;
-    }
-    
-    body {
-        padding: 0 10px;
-    }
-    #cv .content {
-        padding: 0 10px; /* Adjust padding for mobile view */
+    .bio-image {
+        float: none;
+        width: 100%;
+        margin: 0;
     }
 }
