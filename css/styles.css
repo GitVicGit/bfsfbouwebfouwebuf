@@ -108,9 +108,22 @@ footer {
 
 /* Media Queries */
 @media (max-width: 768px) {
-    .bio-image {
-        float: none;
-        width: 100%;
-        margin: 0;
+    #selected-works .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #exhibitions .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bio-text, .bio-image {
+        flex: 1 1 100%; /* Stack image below text on smaller screens */
+        margin-top: 0px;
+    }
+    
+    body {
+        padding: 0 10px;
+    }
+    #cv .content {
+        padding: 0 10px; /* Adjust padding for mobile view */
     }
 }
