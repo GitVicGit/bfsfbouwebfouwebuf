@@ -195,8 +195,8 @@ footer {
     color: grey;
 }
 
-/* About Section Layout */
-.about-container, contact-container {
+/* Contact Section Layout */
+.contact-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -204,22 +204,36 @@ footer {
     padding: 20px;
 }
 
+/* About Section Layout */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Ensure bio-text and bio-image are aligned side by side on large screens */
 .bio-text {
-    flex: 1 1 45%;
+    flex: 1 1 50%; /* Take up half the space for the text */
     padding: 0 20px;
     margin-top: 0;
     font-size: 15px;
 }
 
 .bio-image {
-    flex: 1 1 45%;
+    flex: 1 1 40%; /* Take up less space for the image */
     padding: 0 20px;
+    align-self: flex-start; /* Ensures the image starts at the top */
 }
 
 .bio-image img {
     width: 100%;
     height: auto;
+    object-fit: contain;
 }
+
+
 
 /* CV Section */
 
@@ -264,10 +278,12 @@ footer {
     #exhibitions .grid-container {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .bio-text, .bio-image {
-        flex: 1 1 100%;
-        margin-top: 0;
+        flex: 1 1 100%; /* Stack image below text on smaller screens */
+        margin-top: 20px;
     }
+    
     body {
         padding: 0 10px;
     }
