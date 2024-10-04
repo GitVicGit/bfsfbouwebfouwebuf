@@ -88,15 +88,18 @@ a:hover {
 
 /* Image Alignment */
 .bio-image {
-    float: right;
-    width: 40%;
-    margin-left: 20px;
+    flex: 0 0 40%; /* Image takes up 40% of the width */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Ensures image is centered within its container */
 }
 
 .bio-image img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100vh; /* Image will take up the full viewport height */
+    object-fit: contain; /* Ensures the image fits nicely without distortion */
 }
+
 
 /* Footer */
 footer {
