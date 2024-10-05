@@ -102,26 +102,27 @@ a:hover {
 }
 
 #about p {
-    flex: 1 1 55%; /* The text takes up 55% width on larger screens */
-    margin-right: 20px; /* Adds space between text and the image */
+    flex: 1 1 auto; /* The text should now take up the remaining space, no specific width */
+    margin-right: 40px; /* Adds space between text and the image */
     line-height: 1.6;
 }
 
+/* Adjusting spacing between paragraphs */
 #about p + p {
-    margin-top: 20px; /* Adds space between paragraphs */
+    margin-top: 20px;
 }
 
 .bio-image {
-    flex: 1 1 40%; /* Image takes 40% of the width */
-    align-self: flex-start;
+    flex: 0 0 40%; /* Ensure the image takes exactly 40% of the container width */
+    max-height: 100vh; /* Ensure the image height is constrained to viewport */
     position: sticky;
-    top: 80px; /* Adjusts the image to start below the header */
+    top: 80px; /* Makes sure the image starts right after the header */
 }
 
 .bio-image img {
     width: 100%;
-    height: 100vh; /* Ensures the image fits the full screen height */
-    object-fit: cover; /* Ensure the image scales properly */
+    height: auto;
+    object-fit: cover;
 }
 
 /* Home Page Slideshow */
