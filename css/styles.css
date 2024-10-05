@@ -102,23 +102,21 @@ a:hover {
 }
 
 #about p {
-    flex: 1 1 55%; /* The text takes up 55% width on larger screens */
-    margin-right: 20px;
+    flex: 1 1 60%; /* The text takes up 60% width on larger screens */
     line-height: 1.6;
+    margin-right: 20px; /* Adds space between the text and the image */
 }
 
-/* Adjusts the bio-image layout and ensures the height is always visible */
 .bio-image {
-    flex: 1 1 35%; /* Image takes 35% of the width */
+    flex: 1 1 40%; /* Image takes 40% of the width */
     align-self: flex-start;
+    height: 100vh; /* Make the image height fit the screen height */
 }
 
 .bio-image img {
     width: 100%;
-    height: auto;
-    max-height: 70vh; /* Restrict the image height to always fit within the viewport */
-    object-fit: contain; /* Ensure the image scales properly */
-    margin-top: -20px; /* Adjust starting position to be below the menu */
+    height: 100%; /* Make the image fit the full height of the container */
+    object-fit: cover; /* Ensure the image scales properly */
 }
 
 /* Home Page Slideshow */
