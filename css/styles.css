@@ -36,10 +36,8 @@ header {
     top: 0;
     background-color: white;
     z-index: 1000;
-    padding: 20px 100px;
+    padding: 10px 0;
     border-bottom: none;
-    width: 100%;
-    box-sizing: border-box; /* Ensure the full width is used */
 }
 
 header .logo {
@@ -84,12 +82,6 @@ a {
 
 a:hover {
     color: grey;
-}
-
-.container {
-    max-width: 1200px; /* Ensures the container does not stretch too wide */
-    margin: 0 auto;
-    padding: 0 100px; /* Consistent padding across all pages */
 }
 
 /* Section Titles Styling */
