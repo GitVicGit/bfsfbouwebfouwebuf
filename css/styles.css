@@ -11,12 +11,8 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
+    padding: 0 100px; /* Consistent padding for the entire body across all pages */
     font-size: 15px;
-}
-
-/* Container for Main Content */
-.container {
-    padding: 0 100px; /* Ensures consistent padding across all pages */
 }
 
 /* Consistent Header Styling */
@@ -28,7 +24,7 @@ header {
     top: 0;
     background-color: white;
     z-index: 1000;
-    padding: 10px 100px; /* Aligns header content with container */
+    padding: 10px 100px; /* Added padding to ensure menu is positioned consistently */
     border-bottom: none;
     width: 100%;
     box-sizing: border-box;
@@ -48,7 +44,7 @@ header .logo a {
 nav ul {
     list-style-type: none;
     display: flex;
-    margin-right: 0;
+    margin-right: 0; /* Remove any margin that might affect alignment */
 }
 
 nav ul li {
@@ -84,6 +80,7 @@ a:hover {
     text-align: left;
     margin-top: 40px;
     margin-bottom: 20px;
+    padding-left: 0; /* Align section titles with the body */
 }
 
 /* About Section */
@@ -91,20 +88,20 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 40px;
+    gap: 40px; /* Adjusts space between the text and the image */
 }
 
 #about p {
-    flex: 1 1 60%;
+    flex: 1 1 60%; /* Text takes up 60% of the width */
     line-height: 1.6;
 }
 
-/* Bio Image Styling */
+/* Bio Image Styling - Align with Exhibition Grid */
 .bio-image {
-    flex: 1 1 28%;
-    max-height: 90vh;
+    flex: 1 1 28%; /* Image takes 28% of the width, aligned with the exhibition grid */
+    max-height: 90vh; /* Ensure the image height is constrained to the viewport */
     position: sticky;
-    top: 80px;
+    top: 80px; /* Makes sure the image starts right after the header */
 }
 
 .bio-image img {
@@ -184,24 +181,24 @@ img {
 
 /* CV Section Update with Grid for Year and Description */
 #cv .content {
-    padding: 0 80px;
+    padding: 0 80px; /* Align CV content with body padding */
 }
 
 .section {
-    padding-left: 0px;
+    padding-left: 0px; /* Aligned with section titles and body text */
 }
 
 /* Ensure that the year and description are spaced correctly */
 .row {
     display: grid;
-    grid-template-columns: 70px 1fr;
-    padding-left: 10px;
-    padding-right: 10px;
+    grid-template-columns: 70px 1fr; /* Allocate 70px for the year and the rest for description */
+    padding-left: 10px; /* Space on the left for the rows */
+    padding-right: 10px; /* Space on the right for the rows */
 }
 
 .year {
     grid-column: 1;
-    white-space: nowrap;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .empty-year {
@@ -252,7 +249,7 @@ footer {
     }
 
     .bio-text, .bio-image {
-        flex: 1 1 100%;
+        flex: 1 1 100%; /* Stack image below text on smaller screens */
         margin-top: 20px;
     }
 
