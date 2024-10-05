@@ -186,6 +186,41 @@ img {
     line-height: 1.2;
 }
 
+
+/* CV Section Update with Grid for Year and Description */
+#cv .content {
+    padding: 0 80px; /* Align CV content with body padding */
+}
+
+.section {
+    padding-left: 0px; /* Aligned with section titles and body text */
+}
+
+/* Ensure that the year and description are spaced correctly */
+.row {
+    display: grid;
+    grid-template-columns: 70px 1fr; /* Allocate 70px for the year and the rest for description */
+    padding-left: 10px; /* Space on the left for the rows */
+    padding-right: 10px; /* Space on the right for the rows */
+}
+
+.year {
+    grid-column: 1;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.empty-year {
+    grid-column: 1;
+    visibility: hidden;
+}
+
+.description {
+    grid-column: 2;
+    text-align: left;
+}
+
+
+
 /* Contact Form */
 form input, form button {
     display: block;
@@ -205,6 +240,8 @@ form button {
 form button:hover {
     background-color: grey;
 }
+
+
 
 /* Footer */
 footer {
