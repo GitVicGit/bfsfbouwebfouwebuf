@@ -11,11 +11,23 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
-    padding: 0 100px; /* Consistent padding for the entire body across all pages */
+    padding: 0 100px; /* Consistent padding for the entire body */
     font-size: 15px;
 }
 
-/* Consistent Header Styling */
+h1, h2 {
+    font-weight: 400;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+/* Navigation */
 header {
     display: flex;
     justify-content: space-between;
@@ -24,13 +36,12 @@ header {
     top: 0;
     background-color: white;
     z-index: 1000;
-    padding: 10px 100px; /* Added padding to ensure menu is positioned consistently */
+    padding: 10px 0;
     border-bottom: none;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 header .logo {
+    margin-left: 0px;
     font-size: 24px;
     font-weight: 400;
     text-transform: uppercase;
@@ -44,7 +55,7 @@ header .logo a {
 nav ul {
     list-style-type: none;
     display: flex;
-    margin-right: 0; /* Remove any margin that might affect alignment */
+    margin-right: 20px;
 }
 
 nav ul li {
@@ -179,6 +190,7 @@ img {
     line-height: 1.2;
 }
 
+
 /* CV Section Update with Grid for Year and Description */
 #cv .content {
     padding: 0 80px; /* Align CV content with body padding */
@@ -211,6 +223,8 @@ img {
     text-align: left;
 }
 
+
+
 /* Contact Form */
 form input, form button {
     display: block;
@@ -230,6 +244,8 @@ form button {
 form button:hover {
     background-color: grey;
 }
+
+
 
 /* Footer */
 footer {
