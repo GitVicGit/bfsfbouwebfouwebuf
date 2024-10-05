@@ -99,14 +99,19 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-right: 60px; /* Adds space between text and the image */
+    gap: 60px; /* Adds space between the text and the image */
+}
+
+#about p {
+    flex: 1 1 55%; /* Text takes up 55% of the width */
     line-height: 1.6;
 }
 
-
+/* Bio Image Styling - Align with Exhibition Grid */
 .bio-image {
-    flex: 0 0 40%; /* Ensure the image takes exactly 40% of the container width */
-    max-height: 90vh; /* Ensure the image height is constrained to viewport */
+    flex: 1 1 30%; /* Image takes 30% of the width, aligned with the exhibition grid */
+    max-height: 90vh; /* Ensure the image height is constrained to the viewport */
+    margin-left: 40px; /* Add space between the text and image */
     position: sticky;
     top: 80px; /* Makes sure the image starts right after the header */
 }
