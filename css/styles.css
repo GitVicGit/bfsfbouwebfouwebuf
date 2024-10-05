@@ -11,9 +11,8 @@ body {
     background-color: #fff;
     color: #000;
     line-height: 1.6;
-    padding: 0 100px; /* Set consistent padding for the entire body */
+    padding: 0 100px; /* Consistent padding for the entire body */
     font-size: 15px;
-   
 }
 
 h1, h2 {
@@ -75,7 +74,7 @@ nav ul li a:hover {
     color: grey;
 }
 
-/* Links */ 
+/* Links */
 a {
     color: black;
     text-decoration: none;
@@ -92,7 +91,7 @@ a:hover {
     text-align: left;
     margin-top: 40px;
     margin-bottom: 20px;
-    /* Removed padding-left to align with the body content */
+    padding-left: 0; /* Align section titles with the grids */
 }
 
 /* Home Page Slideshow */
@@ -130,24 +129,20 @@ a:hover {
 .grid-container {
     display: grid;
     gap: 30px;
-    padding: 20px;
+    padding: 0; /* Remove padding from the grid container */
 }
 
 /* Selected Works Grid */
 #selected-works .grid-container {
     grid-template-columns: repeat(3, minmax(150px, 1fr));
     gap: 35px;
-}
-
-#selected-works .work-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    padding: 0; /* Align the grid with section titles */
 }
 
 /* Exhibitions Grid */
 #exhibitions .grid-container {
     grid-template-columns: repeat(4, 1fr);
+    padding: 0; /* Align the grid with section titles */
 }
 
 /* Images */
@@ -221,8 +216,6 @@ footer {
 }
 
 /* CV Section */
-
-/* CV Section Update with Grid for Year and Description */
 #cv .content {
     padding: 0 80px; /* Align CV content with body padding */
 }
@@ -267,7 +260,7 @@ footer {
         flex: 1 1 100%; /* Stack image below text on smaller screens */
         margin-top: 20px;
     }
-    
+
     body {
         padding: 0 10px;
     }
