@@ -99,22 +99,14 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-}
-
-#about p {
-    flex: 1 1 auto; /* The text should now take up the remaining space, no specific width */
     margin-right: 40px; /* Adds space between text and the image */
     line-height: 1.6;
 }
 
-/* Adjusting spacing between paragraphs */
-#about p + p {
-    margin-top: 20px;
-}
 
 .bio-image {
     flex: 0 0 40%; /* Ensure the image takes exactly 40% of the container width */
-    max-height: 100vh; /* Ensure the image height is constrained to viewport */
+    max-height: 90vh; /* Ensure the image height is constrained to viewport */
     position: sticky;
     top: 80px; /* Makes sure the image starts right after the header */
 }
