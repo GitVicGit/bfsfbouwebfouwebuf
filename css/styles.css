@@ -99,7 +99,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-right: 40px; /* Adds space between text and the image */
+    margin-right: 60px; /* Adds space between text and the image */
     line-height: 1.6;
 }
 
