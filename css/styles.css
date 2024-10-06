@@ -127,6 +127,7 @@ a:hover {
     padding: 0;
 }
 
+/* Slideshow Container */
 .slideshow-container {
     position: relative;
     max-width: 100%;
@@ -135,20 +136,27 @@ a:hover {
     height: calc(100vh - 60px);
 }
 
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Start with hidden slides */
+    transition: opacity 2s ease-in-out; /* Smooth transition */
+    z-index: 0;
+}
+
+.fade-active {
+    opacity: 1; /* When active, fade to fully visible */
+    z-index: 1;
+}
+
+/* Ensure the images scale properly */
 .slideshow-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 6s ease-in-out; /* Soft fade-in and fade-out */
-}
-
-.fade {
-    opacity: 0;
-    transition: opacity 6s ease-in-out;
-}
-
-.fade-active {
-    opacity: 1;
 }
 
 
