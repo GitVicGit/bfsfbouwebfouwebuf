@@ -317,5 +317,26 @@ body img {
     body {
         padding: 0 10px;
     }
+    
+    nav ul {
+        flex-wrap: wrap; /* Allows menu items to wrap onto a new line */
+        padding: 0; /* Removes extra padding on smaller screens */
+        margin: 0; /* Removes margin for better alignment */
+        justify-content: center; /* Centers the menu items on smaller screens */
+    }
+
+    nav ul li {
+        margin-left: 10px; /* Reduces the margin between items */
+        margin-right: 10px; /* Adds a margin on the right side as well */
+    }
+
+    nav ul li a {
+        font-size: 14px; /* Reduces font size for better fitting */
+    }
+
+    header {
+        padding: 10px 0; /* Reduces header padding */
+    }
+
 }
 }
