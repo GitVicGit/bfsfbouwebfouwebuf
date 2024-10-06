@@ -29,7 +29,7 @@ h3 {
 
 /* Navigation */
 header {
-    max-width: 1200px; /* Set the maximum width */
+    max-width: 1200px; /* Set the maximum width for the header */
     margin: 0 auto; /* Center the header on the page */
     display: flex;
     justify-content: space-between;
@@ -56,11 +56,12 @@ header .logo a {
 nav ul {
     list-style-type: none;
     display: flex;
-    margin-right: 20px;
+    margin-right: 0; /* Ensure there's no inconsistent margin */
+    gap: 20px; /* Consistent gap between navigation items */
 }
 
 nav ul li {
-    margin-left: 20px;
+    margin-left: 0; /* Remove any extra margin between list items */
 }
 
 nav ul li a {
@@ -160,8 +161,6 @@ a:hover {
     object-fit: cover;
 }
 
-
-
 @keyframes fade {
     from { opacity: .4; }
     to { opacity: 1; }
@@ -205,7 +204,6 @@ img {
     line-height: 1.2;
 }
 
-
 /* CV Section Update with Grid for Year and Description */
 #cv .content {
     padding: 0 80px; /* Align CV content with body padding */
@@ -238,8 +236,6 @@ img {
     text-align: left;
 }
 
-
-
 /* Contact Form */
 form input, form button {
     display: block;
@@ -260,8 +256,6 @@ form button:hover {
     background-color: grey;
 }
 
-
-
 /* Footer */
 footer {
     text-align: center;
@@ -269,7 +263,6 @@ footer {
     font-size: 13px;
     color: grey;
 }
-
 
 /* Prevent image download by overlay */
 .image-container {
@@ -302,8 +295,6 @@ body {
 body img {
     pointer-events: none; /* Disable right-click functionality on images */
 }
-
-
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
