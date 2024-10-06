@@ -29,6 +29,8 @@ h3 {
 
 /* Navigation */
 header {
+    max-width: 1200px; /* Set the maximum width */
+    margin: 0 auto; /* Center the header on the page */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,7 +39,6 @@ header {
     background-color: white;
     z-index: 1000;
     padding: 10px 0;
-    border-bottom: none;
 }
 
 header .logo {
