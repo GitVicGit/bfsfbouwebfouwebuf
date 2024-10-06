@@ -337,6 +337,19 @@ body img {
     header {
         padding: 10px 0; /* Reduces header padding */
     }
+    
+    /* Center the slideshow both vertically and horizontally */
+    .slideshow-container {
+        display: flex;
+        justify-content: center; /* Horizontally center the slideshow */
+        align-items: center;     /* Vertically center the slideshow */
+        height: 100vh;           /* Make sure it takes the full height of the viewport */
+    }
 
+    .slideshow-container img {
+        width: 100%;    /* Ensure the image still fills the width of the container */
+        height: auto;   /* Maintain aspect ratio */
+        object-fit: cover; /* Ensure the image covers the container nicely */
+    }
 }
 }
