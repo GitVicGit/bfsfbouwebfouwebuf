@@ -255,6 +255,41 @@ footer {
     color: grey;
 }
 
+
+/* Prevent image download by overlay */
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container img {
+    display: block;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0); /* Fully transparent overlay */
+    cursor: not-allowed; /* Change cursor to indicate no interaction */
+}
+
+/* Disable right-click on the entire page */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; /* Prevent text selection */
+}
+
+body img {
+    pointer-events: none; /* Disable right-click functionality on images */
+}
+
+
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     #selected-works .grid-container {
