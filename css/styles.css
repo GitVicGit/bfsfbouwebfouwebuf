@@ -305,12 +305,17 @@ body img {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    #about {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+    }
+
     .bio-text, .bio-image {
-        flex: 1 1 100%; /* Stack image below text on smaller screens */
-        margin-top: 20px;
+        flex: 1 1 100%; /* Ensure the image and text take full width */
+        margin-top: 20px; /* Adds space between text and image */
     }
 
     body {
         padding: 0 10px;
     }
+}
 }
