@@ -44,19 +44,20 @@
     </footer>
 
     <script>
-        let slideIndex = 0;
+       let slideIndex = 0;
         showSlides();
-
+        
         function showSlides() {
             let slides = document.querySelectorAll(".slideshow-container .slide");
             for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
+                slides[i].classList.remove("slide-active");  // Hide the slides by removing the class
             }
             slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            slides[slideIndex-1].style.display = "block";
-            setTimeout(showSlides, 8000); // Change image every 8 seconds
+            if (slideIndex > slides.length) { slideIndex = 1; }  // Loop back to the first slide
+            slides[slideIndex - 1].classList.add("slide-active");  // Show the active slide
+            setTimeout(showSlides, 5000);  // Change image every 5 seconds
         }
+
     </script>
 
 </body>
