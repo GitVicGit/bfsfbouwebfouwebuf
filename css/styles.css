@@ -13,6 +13,7 @@ body {
     line-height: 1.6;
     padding: 0 100px; /* Consistent padding for the entire body */
     font-size: 15px;
+    user-select: text; /* Allow text selection */
 }
 
 h1, h2 {
@@ -151,13 +152,6 @@ a:hover {
     opacity: 1;
 }
 
-
-
-@keyframes fade {
-    from { opacity: .4; }
-    to { opacity: 1; }
-}
-
 /* Grid Container */
 .grid-container {
     display: grid;
@@ -196,7 +190,6 @@ img {
     line-height: 1.2;
 }
 
-
 /* CV Section Update with Grid for Year and Description */
 #cv .content {
     padding: 0 80px; /* Align CV content with body padding */
@@ -206,7 +199,6 @@ img {
     padding-left: 0px; /* Aligned with section titles and body text */
 }
 
-/* Ensure that the year and description are spaced correctly */
 .row {
     display: grid;
     grid-template-columns: 70px 1fr; /* Allocate 70px for the year and the rest for description */
@@ -229,39 +221,6 @@ img {
     text-align: left;
 }
 
-
-
-/* Contact Form */
-form input, form button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 50%;
-    font-size: 15px;
-}
-
-form button {
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: grey;
-}
-
-
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 13px;
-    color: grey;
-}
-
-
 /* Prevent image download by overlay */
 .image-container {
     position: relative;
@@ -270,6 +229,7 @@ footer {
 
 .image-container img {
     display: block;
+    pointer-events: none; /* Disable right-click functionality on images */
 }
 
 .image-overlay {
@@ -282,19 +242,14 @@ footer {
     cursor: not-allowed; /* Change cursor to indicate no interaction */
 }
 
-/* Disable right-click on the entire page */
-body {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; /* Prevent text selection */
-}
-
+/* Allow text selection */
 body img {
     pointer-events: none; /* Disable right-click functionality on images */
 }
 
-
+body, p, h1, h2, h3, a {
+    user-select: text; /* Allow text selection */
+}
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
@@ -317,7 +272,7 @@ body img {
     body {
         padding: 0 10px;
     }
-    
+
     nav ul {
         flex-wrap: wrap; /* Allows menu items to wrap onto a new line */
         padding: 0; /* Removes extra padding on smaller screens */
@@ -337,7 +292,7 @@ body img {
     header {
         padding: 10px 0; /* Reduces header padding */
     }
-    
+
     /* Center the slideshow both vertically and horizontally */
     .slideshow-container {
         display: flex;
@@ -351,5 +306,4 @@ body img {
         height: auto;   /* Maintain aspect ratio */
         object-fit: cover; /* Ensure the image covers the container nicely */
     }
-}
 }
