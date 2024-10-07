@@ -1,348 +1,38 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Victor Guerin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Updated path to CSS -->
+</head>
+<body>
 
-/* Body Styling */
-body {
-    font-family: 'Raleway', sans-serif;
-    background-color: #fff;
-    color: #000;
-    line-height: 1.6;
-    padding: 0 100px; /* Consistent padding for the entire body */
-    font-size: 15px;
-    user-select: text; /* Allow text selection */
-}
+    <header>
+        <div class="logo">
+            <a href="/">VICTOR GUERIN</a> <!-- Homepage link should point to the root -->
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/about/">About</a></li> <!-- Updated to point to the About folder -->
+                <li><a href="/selected-works/">Selected Works</a></li> <!-- Updated to point to the Selected Works folder -->
+                <li><a href="/exhibitions/">Exhibitions</a></li> <!-- Updated to point to the Exhibitions folder -->
+                <li><a href="/cv/">CV</a></li> <!-- Updated to point to the CV folder -->
+                <li><a href="/contact/">Contact</a></li> <!-- Updated to point to the Contact folder -->
+            </ul>
+        </nav>
+    </header>
 
-h1, h2 {
-    font-weight: 400;
-    margin-bottom: 10px;
-    font-size: 17px;
-}
+    <section id="home">
+        <div class="image-container">
+            <img src="/images/d_echoes_of_extraction3.2.jpg" alt="Echoes of Extraction">
+        </div>
+    </section>
 
-h3 {
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 15px;
-}
+    <footer>
+        <p>&copy; 2024 Victor Guerin. All rights reserved.</p>
+    </footer>
 
-/* Navigation */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 1000;
-    padding: 10px 0;
-    border-bottom: none;
-}
-
-header .logo {
-    margin-left: 0px;
-    font-size: 24px;
-    font-weight: 400;
-    text-transform: uppercase;
-}
-
-header .logo a {
-    color: black;
-    text-decoration: none;
-}
-
-
-nav ul {
-    list-style-type: none;
-    display: flex;
-    margin-right: 20px;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 17px;
-    color: black;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: grey;
-}
-
-/* Contact Form */
-form input, form button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 50%;
-    font-size: 15px;
-}
-
-form button {
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: grey;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 13px;
-    color: grey;
-}
-
-/* Links */
-a {
-    color: black;
-    text-decoration: none;
-}
-
-a:hover {
-    color: grey;
-}
-
-/* Section Titles Styling */
-.section-title {
-    font-size: 17px;
-    font-weight: 400;
-    text-align: left;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    padding-left: 0; /* Align section titles with the body */
-}
-
-/* About Section */
-#about {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px; /* Adjusts space between the text and the image */
-}
-
-#about p {
-    flex: 1 1 60%; /* Text takes up 60% of the width */
-    line-height: 1.6;
-}
-
-/* Bio Image Styling - Align with Exhibition Grid */
-.bio-image {
-    flex: 1 1 28%; /* Image takes 28% of the width, aligned with the exhibition grid */
-    max-height: 90vh; /* Ensure the image height is constrained to the viewport */
-    position: sticky;
-    top: 80px; /* Makes sure the image starts right after the header */
-}
-
-.bio-image img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Home Page Slideshow */
-#home {
-    text-align: center;
-    padding: 0;
-}
-
-.slideshow-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
-    height: calc(100vh - 60px);
-}
-
-.slideshow-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
-
-.slide {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0; /* Hidden by default */
-    transition: opacity 2s ease-in-out; /* Smooth fade transition */
-    z-index: 0; /* Ensure slides are layered properly */
-}
-
-.slideshow-container .slide-active {
-    opacity: 1; /* Show the active slide */
-    z-index: 1; /* Bring the active slide to the front */
-}
-
-
-
-/* Grid Container */
-.grid-container {
-    display: grid;
-    gap: 30px;
-    padding: 0;
-}
-
-/* Selected Works Grid */
-#selected-works .grid-container {
-    grid-template-columns: repeat(3, minmax(150px, 1fr));
-    gap: 35px;
-    padding: 0;
-}
-
-/* Exhibitions Grid */
-#exhibitions .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-    padding: 0;
-}
-
-/* Images */
-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Thumbnail and Text Adjustments */
-.work-item img, .exhibition-item img {
-    margin-bottom: 10px;
-}
-
-.artwork-description {
-    text-align: left;
-    font-size: 15px;
-    line-height: 1.2;
-}
-
-/* CV Section Update with Grid for Year and Description */
-#cv .content {
-    padding: 0 80px; /* Align CV content with body padding */
-}
-
-.section {
-    padding-left: 0px; /* Aligned with section titles and body text */
-}
-
-.row {
-    display: grid;
-    grid-template-columns: 70px 1fr; /* Allocate 70px for the year and the rest for description */
-    padding-left: 10px; /* Space on the left for the rows */
-    padding-right: 10px; /* Space on the right for the rows */
-}
-
-.year {
-    grid-column: 1;
-    white-space: nowrap; /* Prevent wrapping */
-}
-
-.empty-year {
-    grid-column: 1;
-    visibility: hidden;
-}
-
-.description {
-    grid-column: 2;
-    text-align: left;
-}
-
-/* Prevent image download by overlay */
-.image-container {
-    position: relative;
-    display: inline-block;
-}
-
-.image-container img {
-    display: block;
-    pointer-events: none; /* Disable right-click functionality on images */
-}
-
-.image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0); /* Fully transparent overlay */
-    cursor: not-allowed; /* Change cursor to indicate no interaction */
-}
-
-/* Allow text selection */
-body img {
-    pointer-events: none; /* Disable right-click functionality on images */
-}
-
-body, p, h1, h2, h3, a {
-    user-select: text; /* Allow text selection */
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    #selected-works .grid-container {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    #exhibitions .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #about {
-        flex-direction: column; /* Stack elements vertically on smaller screens */
-    }
-
-    .bio-text, .bio-image {
-        flex: 1 1 100%; /* Ensure the image and text take full width */
-        margin-top: 20px; /* Adds space between text and image */
-    }
-
-    body {
-        padding: 0 10px;
-    }
-
-    nav ul {
-        flex-wrap: wrap; /* Allows menu items to wrap onto a new line */
-        padding: 0; /* Removes extra padding on smaller screens */
-        margin: 0; /* Removes margin for better alignment */
-        justify-content: center; /* Centers the menu items on smaller screens */
-    }
-
-    nav ul li {
-        margin-left: 10px; /* Reduces the margin between items */
-        margin-right: 10px; /* Adds a margin on the right side as well */
-    }
-
-    nav ul li a {
-        font-size: 14px; /* Reduces font size for better fitting */
-    }
-
-    header {
-        padding: 10px 0; /* Reduces header padding */
-    }
-
-    /* Center the slideshow both vertically and horizontally */
-    .slideshow-container {
-        display: flex;
-        justify-content: center; /* Horizontally center the slideshow */
-        align-items: center;     /* Vertically center the slideshow */
-        height: 100vh;           /* Make sure it takes the full height of the viewport */
-    }
-
-    .slideshow-container img {
-        width: 100%;    /* Ensure the image still fills the width of the container */
-        height: auto;   /* Maintain aspect ratio */
-        object-fit: cover; /* Ensure the image covers the container nicely */
-    }
-}
+</body>
+</html>
