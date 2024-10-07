@@ -25,57 +25,39 @@
     </header>
 
     <section id="home">
-    <div class="slideshow-container">
-        <div class="image-container slide">
-            <img src="/images/d_echoes_of_extraction3.2.jpg" alt="Slide 1">
+        <div class="slideshow-container">
+            <div class="image-container slide">
+                <img src="/images/d_echoes_of_extraction3.2.jpg" alt="Slide 1"> <!-- Updated path for images -->
+            </div>
+            <div class="image-container slide">
+                <img src="/images/d_ephemeral_structures3.2.jpg" alt="Slide 2"> <!-- Updated path for images -->
+            </div>
+            <div class="image-container slide">
+                <img src="/images/d_acanthus_ascendant3.2.jpg" alt="Slide 3"> <!-- Updated path for images -->
+            </div>
         </div>
-        <div class="image-container slide">
-            <img src="images/d_ephemeral_structures3.2.jpg" alt="Slide 2">
-        </div>
-        <div class="image-container slide">
-            <img src="/images/d_acanthus_ascendant3.2.jpg" alt="Slide 3">
-        </div>
-    </div>
-</section>
+    </section>
 
-<br><br>
-<footer>
-    <p>&copy; 2024 Victor Guerin. All rights reserved.</p>
-</footer>
+    <br><br>
+    <footer>
+        <p>&copy; 2024 Victor Guerin. All rights reserved.</p>
+    </footer>
 
-<!-- Script to run after the DOM is fully loaded 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
+    <script>
         let slideIndex = 0;
-        const slides = document.querySelectorAll(".slideshow-container .slide");
+        showSlides();
 
         function showSlides() {
-            // Hide all slides
-            slides.forEach((slide) => {
-                slide.style.opacity = "0"; // Ensure all slides are hidden
-                slide.style.zIndex = "0";  // Reset z-index for all slides
-            });
-
-            // Increment the slide index
-            slideIndex++;
-
-            // Loop back to the first slide if necessary
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
+            let slides = document.querySelectorAll(".slideshow-container .slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
             }
-
-            // Show the current slide
-            slides[slideIndex - 1].style.opacity = "1";   // Make current slide visible
-            slides[slideIndex - 1].style.zIndex = "1";    // Bring the current slide to front
-
-            // Change slide every 5 seconds
-            setTimeout(showSlides, 5000); // Recursive call to keep the slideshow running
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(showSlides, 8000); // Change image every 8 seconds
         }
-
-        // Initialize the slideshow
-        showSlides();
-    });
-</script>-->
+    </script>
 
 </body>
 </html>
