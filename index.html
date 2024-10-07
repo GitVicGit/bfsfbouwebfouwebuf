@@ -46,31 +46,36 @@
     </footer>
 
     <script>
-       let slideIndex = 0;
-        showSlides();
-        
-        function showSlides() {
-            let slides = document.querySelectorAll(".slideshow-container .slide");
-            
-            // Hide all slides
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].classList.remove("slide-active");
-            }
-            
-            // Increment the slide index
-            slideIndex++;
-            
-            // Loop back to the first slide if necessary
-            if (slideIndex > slides.length) { 
-                slideIndex = 1; 
-            }
-            
-            // Show the current slide
-            slides[slideIndex - 1].classList.add("slide-active");
-        
-            // Change slide every 5 seconds
-            setTimeout(showSlides, 5000);
-        }
+let slideIndex = 0;
+const slides = document.querySelectorAll(".slideshow-container .slide");
+
+showSlides();
+
+function showSlides() {
+    // Hide all slides
+    slides.forEach((slide) => {
+        slide.classList.remove("slide-active");
+    });
+
+    // Increment the slide index
+    slideIndex++;
+
+    // Loop back to the first slide if necessary
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+
+    // Show the current slide
+    slides[slideIndex - 1].classList.add("slide-active");
+
+    // Change slide every 5 seconds
+    setTimeout(showSlides, 5000);
+}
+
+// Make sure the first slide is initially active
+slides[0].classList.add("slide-active");
+
+
 
     </script>
 
