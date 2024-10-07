@@ -25,18 +25,20 @@
     </header>
 
     <section id="home">
-        <div class="slideshow-container">
-            <div class="image-container slide">
-                <img src="/images/d_echoes_of_extraction3.2.jpg" alt="Slide 1"> <!-- Updated path for images -->
-            </div>
-            <div class="image-container slide">
-                <img src="/images/d_ephemeral_structures3.2.jpg" alt="Slide 2"> <!-- Updated path for images -->
-            </div>
-            <div class="image-container slide">
-                <img src="/images/d_acanthus_ascendant3.2.jpg" alt="Slide 3"> <!-- Updated path for images -->
-            </div>
+    <div class="slideshow-container">
+        <div class="image-container slide">
+            <img src="/images/d_echoes_of_extraction3.2.jpg" alt="Slide 1">
         </div>
-    </section>
+        <div class="image-container slide">
+            <img src="/images/d_ephemeral_structures3.2.jpg" alt="Slide 2">
+        </div>
+        <div class="image-container slide">
+            <img src="/images/d_acanthus_ascendant3.2.jpg" alt="Slide 3">
+        </div>
+    </div>
+</section>
+
+    
 
     <br><br>
     <footer>
@@ -45,18 +47,31 @@
 
     <script>
        let slideIndex = 0;
-        showSlides();
-        
-        function showSlides() {
-            let slides = document.querySelectorAll(".slideshow-container .slide");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].classList.remove("slide-active");  // Hide the slides by removing the class
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1; }  // Loop back to the first slide
-            slides[slideIndex - 1].classList.add("slide-active");  // Show the active slide
-            setTimeout(showSlides, 5000);  // Change image every 5 seconds
-        }
+showSlides();
+
+function showSlides() {
+    let slides = document.querySelectorAll(".slideshow-container .slide");
+    
+    // Hide all slides
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("slide-active");
+    }
+    
+    // Increment the slide index
+    slideIndex++;
+    
+    // Loop back to the first slide if necessary
+    if (slideIndex > slides.length) { 
+        slideIndex = 1; 
+    }
+    
+    // Show the current slide
+    slides[slideIndex - 1].classList.add("slide-active");
+
+    // Change slide every 5 seconds
+    setTimeout(showSlides, 5000);
+}
+
 
     </script>
 
