@@ -52,7 +52,7 @@ const slides = document.querySelectorAll(".slideshow-container .slide");
 showSlides();
 
 function showSlides() {
-    // Hide all slides
+    // Hide all slides by removing "slide-active"
     slides.forEach((slide) => {
         slide.classList.remove("slide-active");
     });
@@ -60,21 +60,20 @@ function showSlides() {
     // Increment the slide index
     slideIndex++;
 
-    // Loop back to the first slide if necessary
+    // Loop back to the first slide if we've passed the last one
     if (slideIndex > slides.length) {
         slideIndex = 1;
     }
 
-    // Show the current slide
+    // Show the current slide by adding "slide-active"
     slides[slideIndex - 1].classList.add("slide-active");
 
-    // Change slide every 5 seconds
+    // Automatically change the slide every 5 seconds
     setTimeout(showSlides, 5000);
 }
 
-// Make sure the first slide is initially active
+// Initial activation of the first slide
 slides[0].classList.add("slide-active");
-
 
 
     </script>
