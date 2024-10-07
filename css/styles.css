@@ -186,12 +186,11 @@ a:hover {
     z-index: 1; /* Bring the active slide to the front */
 }
 
-/* Ensure the first slide is visible initially */
+/* Ensures the first slide is initially visible */
 .slideshow-container .slide:first-child {
     opacity: 1;
+    z-index: 1;
 }
-
-
 /* Grid Container */
 .grid-container {
     display: grid;
