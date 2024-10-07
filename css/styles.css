@@ -177,20 +177,18 @@ a:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    opacity: 0; /* Hidden by default */
+    opacity: 0; /* Initially hidden */
+    z-index: 0; /* Ensure inactive slides are behind the active one */
     transition: opacity 2s ease-in-out; /* Smooth fade transition */
 }
 
 .slide-active {
     opacity: 1; /* Show the active slide */
-    z-index: 1; /* Bring the active slide to the front */
+    z-index: 1; /* Ensure active slide is in front */
 }
 
-/* Ensures the first slide is initially visible */
-.slideshow-container .slide:first-child {
-    opacity: 1;
-    z-index: 1;
-}
+
+
 /* Grid Container */
 .grid-container {
     display: grid;
