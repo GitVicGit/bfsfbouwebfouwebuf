@@ -27,13 +27,13 @@
     <section id="home">
         <div class="slideshow-container">
             <div class="image-container slide">
-                <img src="/images/d_echoes_of_extraction3.2.jpg" alt="Slide 1"> <!-- Updated path for images -->
+                <img src="/images/d_echoes_of_extraction3.2.jpg" alt="Slide 1" style="display: block;"> <!-- Display Slide 1 statically -->
             </div>
-            <div class="image-container slide">
-                <img src="/images/d_ephemeral_structures3.2.jpg" alt="Slide 2"> <!-- Updated path for images -->
+            <div class="image-container slide" style="display: none;">
+                <img src="/images/d_ephemeral_structures3.2.jpg" alt="Slide 2">
             </div>
-            <div class="image-container slide">
-                <img src="/images/d_acanthus_ascendant3.2.jpg" alt="Slide 3"> <!-- Updated path for images -->
+            <div class="image-container slide" style="display: none;">
+                <img src="/images/d_acanthus_ascendant3.2.jpg" alt="Slide 3">
             </div>
         </div>
     </section>
@@ -43,6 +43,8 @@
         <p>&copy; 2024 Victor Guerin. All rights reserved.</p>
     </footer>
 
+    <!-- Commenting out the JavaScript to stop the slideshow -->
+    <!--
     <script>
         let slideIndex = 0;
         showSlides();
@@ -58,6 +60,7 @@
             setTimeout(showSlides, 8000); // Change image every 8 seconds
         }
     </script>
-
+    -->
+    
 </body>
 </html>
