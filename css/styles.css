@@ -262,14 +262,20 @@ footer {
 }
 
 
-/* Prevent image download by overlay */
+/* Disable right-click on images */
+img {
+    pointer-events: none; /* Disable right-click functionality on images */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; /* Prevent selection of images */
+}
+
 .image-container {
     position: relative;
     display: inline-block;
-}
-
-.image-container img {
-    display: block;
 }
 
 .image-overlay {
@@ -282,18 +288,14 @@ footer {
     cursor: not-allowed; /* Change cursor to indicate no interaction */
 }
 
-/* Disable right-click on the entire page */
-body {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; /* Prevent text selection */
-}
 
-body img {
-    pointer-events: none; /* Disable right-click functionality on images */
+/* Enable text selection */
+body, p, h1, h2, h3, h4, h5, h6, a, span, li {
+    -webkit-user-select: text; /* Enable text selection */
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
-
 
 
 /* Media Queries for Responsiveness */
