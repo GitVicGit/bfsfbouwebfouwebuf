@@ -5,34 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Victor Guerin</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Updated path to CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .slide {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
-
     <header>
         <div class="logo">
-            <a href="/">VICTOR GUERIN</a> <!-- Homepage link should point to the root -->
+            <a href="/">VICTOR GUERIN</a>
         </div>
         <nav>
             <ul>
-                <li><a href="/about/">About</a></li> <!-- Updated to point to the About folder -->
-                <li><a href="/selected-works/">Selected Works</a></li> <!-- Updated to point to the Selected Works folder -->
-                <li><a href="/exhibitions/">Exhibitions</a></li> <!-- Updated to point to the Exhibitions folder -->
-                <li><a href="/cv/">CV</a></li> <!-- Updated to point to the CV folder -->
-                <li><a href="/contact/">Contact</a></li> <!-- Updated to point to the Contact folder -->
+                <li><a href="/about/">About</a></li>
+                <li><a href="/selected-works/">Selected Works</a></li>
+                <li><a href="/exhibitions/">Exhibitions</a></li>
+                <li><a href="/cv/">CV</a></li>
+                <li><a href="/contact/">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home">
         <div class="slideshow-container">
-            <div class="image-container slide">
-                <img src="/images/d_echoes_of_extraction7.5.jpg" alt="Slide 1" style="display: block;"> <!-- Display Slide 1 statically -->
+            <div class="image-container slide active">
+                <img src="/images/d_echoes_of_extraction7.5.jpg" alt="Slide 1">
             </div>
-            <div class="image-container slide" style="display: none;">
+            <div class="image-container slide">
                 <img src="/images/d_ephemeral_structures3.2.jpg" alt="Slide 2">
             </div>
-            <div class="image-container slide" style="display: none;">
+            <div class="image-container slide">
                 <img src="/images/d_acanthus_ascendant3.2.jpg" alt="Slide 3">
             </div>
         </div>
@@ -43,24 +58,19 @@
         <p>&copy; 2025 Victor Guerin. All rights reserved.</p>
     </footer>
 
-    <!-- Commenting out the JavaScript to stop the slideshow -->
-    <!--
     <script>
         let slideIndex = 0;
-        showSlides();
-
+        const slides = document.querySelectorAll(".slide");
         function showSlides() {
-            let slides = document.querySelectorAll(".slideshow-container .slide");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
+            slides.forEach((slide, index) => {
+                slide.classList.remove("active");
+            });
             slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            slides[slideIndex-1].style.display = "block";
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            slides[slideIndex].classList.add("active");
             setTimeout(showSlides, 8000); // Change image every 8 seconds
         }
+        setTimeout(showSlides, 8000); // Start after 8 seconds
     </script>
-    -->
-    
 </body>
 </html>
