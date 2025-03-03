@@ -8,14 +8,21 @@
     <link rel="stylesheet" href="/css/styles.css">
     <style>
         .slideshow-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 80px); /* Adjust based on your header height */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    width: auto;
+    height: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures full visibility of the image */
+}
 
         .slide {
             position: absolute;
@@ -32,12 +39,7 @@
             opacity: 1;
         }
         
-        .slide img {
-            max-width: 80%;
-            max-height: 100%;
-            object-fit: contain; /* Ensures the full image is visible with max height */
-            display: flex;
-        }
+     
     </style>
 </head>
 <body>
