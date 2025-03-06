@@ -42,14 +42,40 @@
         </div>
         <br> <br> <br> <br>
         
-        <form action="https://formspree.io/f/xgvewaey" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="text" name="surname" placeholder="Your Surname" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="hidden" name="_next" value="https://victorguerin.com/"> 
-            <button type="submit">Subscribe to Newsletter</button>
+        <form id="newsletter-form" action="https://formspree.io/f/xgvewaey" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="text" name="surname" placeholder="Your Surname" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <button type="submit">Subscribe to Newsletter</button>
         </form>
+        
     </div>
+        
+    <script>
+        document.getElementById("newsletter-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Stop default submission
+    
+            let form = this;
+            let formData = new FormData(form);
+    
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = "https://victorguerin.com/"; // Redirect to home page
+                } else {
+                    alert("There was an issue submitting the form. Please try again.");
+                }
+            }).catch(error => {
+                console.error("Error:", error);
+                alert("There was an error. Please check your connection.");
+            });
+        });
+    </script>
+
+
 
     <footer>
         <p>&copy; 2025 Victor Guerin. All rights reserved.</p>
