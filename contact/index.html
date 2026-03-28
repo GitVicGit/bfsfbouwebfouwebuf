@@ -5,25 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Victor Guerin</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css"> <!-- Updated path -->
-
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 
     <header>
-    <div class="logo">
-        <a href="/">VICTOR GUERIN</a> <!-- Updated path -->
-    </div>
-    <nav>
-        <ul>
-            <li><a href="../about/">About</a></li>
-            <li><a href="../loudspeaker/">Loud Speaker</a></li>
-            <li><a href="../selected-works/">Selected Works</a></li>
-            <li><a href="../exhibitions/">Exhibitions</a></li>
-            <li><a href="../cv/">CV</a></li>
-            <li><a href="../contact/">Contact</a></li>
-        </ul>
-    </nav>
+        <div class="logo">
+            <a href="/">VICTOR GUERIN</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../about/">About</a></li>
+                <li><a href="../loudspeaker/">Loud Speaker</a></li>
+                <li><a href="../selected-works/">Selected Works</a></li>
+                <li><a href="../exhibitions/">Exhibitions</a></li>
+                <li><a href="../cv/">CV</a></li>
+                <li><a href="../contact/">Contact</a></li>
+                <li class="lang-item">
+                    <a href="/fr/contact/" class="lang-switch" aria-label="Voir la version française">
+                        <img src="../images/FR.png" alt="Français" class="lang-flag">
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <div class="container">
@@ -37,7 +41,7 @@
             <div class="year">Press</div>
             <div class="description">&nbsp;&nbsp;<a href="mailto:press@victorguerin.com">press@victorguerin.com</a></div>
         </div>
-        <br> 
+        <br>
         <div class="row">
             <div class="year">Instagram</div>
             <div class="description">&nbsp;&nbsp;<a href="https://www.instagram.com/victorguerin.fr" target="_blank">@victorguerin.fr</a></div>
@@ -46,31 +50,30 @@
             <div class="year">LinkedIn</div>
             <div class="description">&nbsp;&nbsp;<a href="https://www.linkedin.com/in/guerinvictor/" target="_blank">in/guerinvictor</a></div>
         </div>
-        <br> <br> <br> <br>
+        <br><br><br><br>
         
         <form id="newsletter-form" action="https://formspree.io/f/xgvewaey" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="text" name="surname" placeholder="Your Surname" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <button type="submit">Subscribe to Newsletter</button>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="text" name="surname" placeholder="Your Surname" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <button type="submit">Subscribe to Newsletter</button>
         </form>
-        
     </div>
         
     <script>
         document.getElementById("newsletter-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Stop default submission
-    
+            event.preventDefault();
+
             let form = this;
             let formData = new FormData(form);
-    
+
             fetch(form.action, {
                 method: form.method,
                 body: formData,
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
-                    window.location.href = "https://victorguerin.com/"; // Redirect to home page
+                    window.location.href = "https://victorguerin.com/";
                 } else {
                     alert("There was an issue submitting the form. Please try again.");
                 }
@@ -80,8 +83,6 @@
             });
         });
     </script>
-
-
 
     <footer>
         <p>&copy; 2026 Victor Guerin. All rights reserved.</p>
