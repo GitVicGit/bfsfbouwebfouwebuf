@@ -74,6 +74,406 @@ nav ul li a:hover {
     color: grey;
 }
 
+/* Language switch */
+.lang-item {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.lang-flag {
+    height: 17px;
+    width: auto;
+    display: block;
+    pointer-events: auto;
+}
+
+.lang-switch:hover .lang-flag {
+    opacity: 0.7;
+}
+
+/* Links */
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: grey;
+}
+
+/* Section Titles Styling */
+.section-title {
+    font-size: 17px;
+    font-weight: 400;
+    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+/* Container and content */
+.container {
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+}
+
+/* About Section */
+#about {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+#about p {
+    flex: 1 1 60%;
+    line-height: 1.6;
+}
+
+/* Bio Image */
+.bio-image {
+    flex: 1 1 28%;
+    max-height: 90vh;
+    position: sticky;
+    top: 80px;
+}
+
+.bio-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Home Page Slideshow */
+#home {
+    text-align: center;
+    padding: 0;
+}
+
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    height: calc(100vh - 60px);
+}
+
+.slideshow-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 6s ease-in-out;
+}
+
+.fade {
+    opacity: 0;
+    transition: opacity 6s ease-in-out;
+}
+
+.fade-active {
+    opacity: 1;
+}
+
+@keyframes fade {
+    from { opacity: .4; }
+    to { opacity: 1; }
+}
+
+/* Grid Container */
+.grid-container {
+    display: grid;
+    gap: 30px;
+    padding: 0;
+}
+
+/* Selected Works Grid */
+#selected-works .grid-container {
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+    gap: 35px;
+    padding: 0;
+}
+
+/* Exhibitions Grid */
+#exhibitions .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0;
+}
+
+/* Images */
+img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.work-item img, .exhibition-item img {
+    margin-bottom: 10px;
+}
+
+.artwork-description {
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.2;
+}
+
+/* CV Section */
+#cv .content {
+    padding: 0 80px;
+}
+
+.section {
+    padding-left: 0;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.year {
+    grid-column: 1;
+    white-space: nowrap;
+}
+
+.empty-year {
+    grid-column: 1;
+    visibility: hidden;
+}
+
+.description {
+    grid-column: 2;
+    text-align: left;
+}
+
+/* Contact Form */
+form input, form button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 50%;
+    font-size: 15px;
+}
+
+form button {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: grey;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: grey;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    cursor: not-allowed;
+}
+
+/* Enable text selection */
+body, p, h1, h2, h3, h4, h5, h6, a, span, li {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Vimeo video */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 2rem 0;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    #selected-works .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #exhibitions .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #about {
+        flex-direction: column;
+    }
+
+    .bio-text, .bio-image {
+        flex: 1 1 100%;
+        margin-top: 20px;
+    }
+
+    body {
+        padding: 0 10px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+    }
+
+    header {
+        padding: 10px 0;
+    }
+
+    .slideshow-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .slideshow-container img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .video-wrapper {
+        width: 100%;
+        padding-bottom: 56.25%;
+    }
+
+    .lang-flag {
+        height: 14px;
+    }
+}/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: #fff;
+    color: #000;
+    line-height: 1.6;
+    padding: 0 100px;
+    font-size: 15px;
+}
+
+h1, h2 {
+    font-weight: 400;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+/* Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
+    padding: 10px 0;
+    border-bottom: none;
+}
+
+header .logo {
+    margin-left: 0;
+    font-size: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+header .logo a {
+    color: black;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    margin-right: 20px;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 17px;
+    color: black;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: grey;
+}
+
 /* Links */
 a {
     color: black;
