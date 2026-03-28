@@ -309,7 +309,27 @@ body, p, h1, h2, h3, h4, h5, h6, a, span, li {
     width: 100%;
     height: 100%;
 }
+.lang-item {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
 
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+}
+
+.lang-flag {
+    width: 20px;
+    height: auto;
+    display: block;
+    pointer-events: auto;
+}
+
+.lang-switch:hover .lang-flag {
+    opacity: 0.7;
+}
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     #selected-works .grid-container {
