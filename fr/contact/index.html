@@ -6,6 +6,15 @@
     <title>Contact | Victor Guerin</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .newsletter-message {
+            margin-top: 2em;
+            color: #1f4d2e;
+            display: none;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
@@ -57,6 +66,7 @@
             <input type="text" name="surname" placeholder="Votre nom" required>
             <input type="email" name="email" placeholder="Votre e-mail" required>
             <button type="submit">S’inscrire à la newsletter</button>
+            <p id="newsletter-success" class="newsletter-message">Merci pour votre inscription.</p>
         </form>
     </div>
         
@@ -64,20 +74,24 @@
         document.getElementById("newsletter-form").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            let form = this;
-            let formData = new FormData(form);
+            const form = this;
+            const formData = new FormData(form);
+            const successMessage = document.getElementById("newsletter-success");
 
             fetch(form.action, {
                 method: form.method,
                 body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
+                headers: { "Accept": "application/json" }
+            })
+            .then(response => {
                 if (response.ok) {
-                    window.location.href = "https://victorguerin.com/fr/";
+                    successMessage.style.display = "block";
+                    form.reset();
                 } else {
                     alert("Un problème est survenu lors de l’envoi du formulaire. Veuillez réessayer.");
                 }
-            }).catch(error => {
+            })
+            .catch(error => {
                 console.error("Error:", error);
                 alert("Une erreur s’est produite. Veuillez vérifier votre connexion.");
             });
