@@ -9,30 +9,29 @@
     <style>
         .slideshow-container {
             position: relative;
-            width: 100vw;
-            height: calc(100vh - 80px);
+            width: 100%;
+            aspect-ratio: 16 / 9;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
+
         .slide {
             position: absolute;
-            width: 100vw;
-            height: 100%;
+            inset: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-        
+
         .slide img {
+            width: 100%;
             height: 100%;
-            width: auto;
-            max-width: 100vw;
             object-fit: contain;
+            display: block;
         }
 
         .slide.active {
@@ -63,21 +62,26 @@
     </header>
 
     <section id="home">
-        <div class="slideshow-container">
-            <div class="image-container slide active">
-                <img src="/images/d_sustenance_3.2.v2.jpg" alt="Slide 1">
-            </div>
-            <div class="image-container slide">
-                <img src="/images/d_Cracks of Potential 3.2.jpg" alt="Slide 2">
-            </div>
-            <div class="image-container slide">
-                <img src="/images/d_liminal 3.2.jpg" alt="Slide 3">
-            </div>
-            <div class="image-container slide">
-                <img src="/images/d_echoes_of_extraction3.2.jpg" alt="Slide 4">
-            </div>
-            <div class="image-container slide">
-                <img src="/images/d_nature's_chromatic symphony_3.2.jpg" alt="Slide 5">
+        <div class="container">
+            <div class="slideshow-container">
+                <div class="image-container slide active">
+                    <img src="/images/d_liminal_16-9.jpg" alt="Liminal">
+                </div>
+                <div class="image-container slide">
+                    <img src="/images/d_cracks_of_potential_16-9.jpg" alt="Cracks of Potential">
+                </div>
+                <div class="image-container slide">
+                    <img src="/images/d_loud_speaker_16-9.jpg" alt="Loud Speaker">
+                </div>
+                <div class="image-container slide">
+                    <img src="/images/d_sustenance_16-9.jpg" alt="Sustenance">
+                </div>
+                <div class="image-container slide">
+                    <img src="/images/d_echoes_of_extraction_16-9.jpg" alt="Echoes of Extraction">
+                </div>
+                <div class="image-container slide">
+                    <img src="/images/d_natures_chromatic_symphony_16-9.jpg" alt="Nature's Chromatic Symphony">
+                </div>
             </div>
         </div>
     </section>
