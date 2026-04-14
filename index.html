@@ -7,6 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
     <style>
+        .slideshow-wrapper {
+            width: 100%;
+        }
+
         .slideshow-container {
             position: relative;
             width: 100%;
@@ -27,6 +31,10 @@
             transition: opacity 1s ease-in-out;
         }
 
+        .slide.active {
+            opacity: 1;
+        }
+
         .slide img {
             width: 100%;
             height: 100%;
@@ -34,8 +42,41 @@
             display: block;
         }
 
-        .slide.active {
-            opacity: 1;
+        .slideshow-meta {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .slideshow-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            line-height: 1;
+        }
+
+        .slide-nav {
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .slide-nav:hover {
+            opacity: 0.7;
+        }
+
+        .slide-caption {
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #000;
         }
     </style>
 </head>
@@ -63,53 +104,107 @@
 
     <section id="home">
         <div class="container">
-            <div class="slideshow-container">
-                <div class="image-container slide active">
-                    <img src="/images/d_liminal_16-9.jpg" alt="Liminal">
+            <div class="slideshow-wrapper">
+                <div class="slideshow-container">
+                    <div class="image-container slide active">
+                        <img src="/images/d_liminal_16-9.jpg" alt="Liminal">
+                    </div>
+                    <div class="image-container slide">
+                        <img src="/images/d_cracks_of_potential_16-9.jpg" alt="Cracks of Potential">
+                    </div>
+                    <div class="image-container slide">
+                        <img src="/images/d_loud_speaker_16-9.jpg" alt="Loud Speaker">
+                    </div>
+                    <div class="image-container slide">
+                        <img src="/images/d_sustenance_16-9.jpg" alt="Sustenance">
+                    </div>
+                    <div class="image-container slide">
+                        <img src="/images/d_echoes_of_extraction_16-9.jpg" alt="Echoes of Extraction">
+                    </div>
+                    <div class="image-container slide">
+                        <img src="/images/d_natures_chromatic_symphony_16-9.jpg" alt="Nature's Chromatic Symphony">
+                    </div>
                 </div>
-                <div class="image-container slide">
-                    <img src="/images/d_cracks_of_potential_16-9.jpg" alt="Cracks of Potential">
-                </div>
-                <div class="image-container slide">
-                    <img src="/images/d_loud_speaker_16-9.jpg" alt="Loud Speaker">
-                </div>
-                <div class="image-container slide">
-                    <img src="/images/d_sustenance_16-9.jpg" alt="Sustenance">
-                </div>
-                <div class="image-container slide">
-                    <img src="/images/d_echoes_of_extraction_16-9.jpg" alt="Echoes of Extraction">
-                </div>
-                <div class="image-container slide">
-                    <img src="/images/d_natures_chromatic_symphony_16-9.jpg" alt="Nature's Chromatic Symphony">
+
+                <div class="slideshow-meta">
+                    <div class="slideshow-controls">
+                        <button class="slide-nav prev" aria-label="Previous slide">&lt;</button>
+                        <button class="slide-nav next" aria-label="Next slide">&gt;</button>
+                    </div>
+                    <div class="slide-caption" id="slide-caption">
+                        Liminal (2025), Neumünster Abbey residency, Luxembourg (LU)
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <br>
+
     <footer>
-        <p>&copy; 2026 Victor Guerin. All rights reserved.</p>
+        <p>&copy; 2026 Victor Guerin. Tous droits réservés.</p>
     </footer>
 
     <script>
         let slideIndex = 0;
         const slides = document.querySelectorAll(".slide");
+        const caption = document.getElementById("slide-caption");
+        const prevButton = document.querySelector(".prev");
+        const nextButton = document.querySelector(".next");
 
-        function showSlides() {
+        const captions = [
+            "Liminal (2025), Neumünster Abbey residency, Luxembourg (LU)",
+            "Cracks of Potential (2025), Neumünster Abbey residency, Luxembourg (LU)",
+            "Loud Speaker (2026), ArtHouse Jersey commission, Jersey (C.I.)",
+            "Sustenance exhibition installation shot (2025), The Handbag Factory, London",
+            "Echoes of Extraction exhibition installation shot (2024), Royal College of Art, London",
+            "Nature's Chromatic Symphony (2023), Hangzhou Archaeological Site, Hangzhou (CN)"
+        ];
+
+        let slideshowTimer;
+
+        function updateSlide(index) {
             slides.forEach((slide) => {
                 slide.classList.remove("active");
             });
 
+            slides[index].classList.add("active");
+            caption.textContent = captions[index];
+        }
+
+        function showNextSlide() {
             slideIndex++;
             if (slideIndex >= slides.length) {
                 slideIndex = 0;
             }
-
-            slides[slideIndex].classList.add("active");
-            setTimeout(showSlides, 8000);
+            updateSlide(slideIndex);
         }
 
-        setTimeout(showSlides, 8000);
+        function showPrevSlide() {
+            slideIndex--;
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+            updateSlide(slideIndex);
+        }
+
+        function startSlideshow() {
+            clearInterval(slideshowTimer);
+            slideshowTimer = setInterval(showNextSlide, 8000);
+        }
+
+        prevButton.addEventListener("click", function () {
+            showPrevSlide();
+            startSlideshow();
+        });
+
+        nextButton.addEventListener("click", function () {
+            showNextSlide();
+            startSlideshow();
+        });
+
+        updateSlide(slideIndex);
+        startSlideshow();
     </script>
 </body>
 </html>
