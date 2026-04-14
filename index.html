@@ -41,22 +41,21 @@
             object-fit: contain;
             display: block;
         }
-
         .slideshow-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: start;
+            column-gap: 10px;
             margin-top: 12px;
-            flex-wrap: wrap;
         }
-
+        
         .slideshow-controls {
             display: flex;
             align-items: center;
             gap: 14px;
             line-height: 1;
+            white-space: nowrap;
         }
-
         .slide-nav {
             background: none;
             border: none;
@@ -72,12 +71,14 @@
         .slide-nav:hover {
             opacity: 0.7;
         }
-
         .slide-caption {
             font-family: 'Raleway', sans-serif;
             font-size: 14px;
             font-weight: 400;
             color: #777;
+            line-height: 1.4;
+            text-align: left;
+            min-width: 0;
         }
     </style>
 </head>
