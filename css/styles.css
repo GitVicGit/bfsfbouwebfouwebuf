@@ -328,6 +328,14 @@ footer {
     cursor: not-allowed;
 }
 
+.image-left {
+    display: block;
+    width: 6cm;
+    max-width: 100%;
+    height: auto;
+    margin-top: 1.5rem;
+}
+
 /* Enable text selection */
 body,
 p,
