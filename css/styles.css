@@ -330,7 +330,7 @@ footer {
 
 .image-left {
     display: block;
-    width: clamp(130px, 18vw, 200px);
+    width: clamp(120px, 15vw, 170px);
     height: auto;
     margin-top: 1.5rem;
 }
