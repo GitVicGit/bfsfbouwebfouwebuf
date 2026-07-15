@@ -388,6 +388,68 @@ li {
     margin: 0 auto 2rem;
 }
 
+.millenium-content {
+    max-width: 760px;
+}
+
+.pdf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+    margin-top: 32px;
+    margin-bottom: 24px;
+}
+
+.pdf-download-button {
+    display: inline-block;
+    padding: 14px 24px;
+    border: 1px solid #000;
+    background: #000;
+    color: #fff;
+    font-family: "Raleway", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.pdf-download-button:hover,
+.pdf-download-button:focus-visible {
+    background: transparent;
+    color: #000;
+}
+
+.pdf-view-link {
+    color: #000;
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.pdf-view-link:hover,
+.pdf-view-link:focus-visible {
+    text-decoration-thickness: 2px;
+}
+
+.pdf-download-button:focus-visible,
+.pdf-view-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+}
+
+.pdf-help {
+    max-width: 620px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
     body {
@@ -488,4 +550,17 @@ li {
     footer {
         padding: 10px 0 14px;
     }
+
+    
+     .pdf-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .pdf-download-button {
+        box-sizing: border-box;
+        width: 100%;
+        text-align: center;
+    }
+}
 }
