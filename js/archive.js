@@ -1,242 +1,729 @@
-(() => {
-    const grid = document.querySelector("#work-grid");
-    const filters = document.querySelector(".archive-filters");
-    if (!grid || !filters) return;
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tdm-reservation" content="1">
+    <meta name="robots" content="index, follow, max-image-preview:none, noai, noimageai">
+    <title>Works | Victor Guerin</title>
+    <meta name="description" content="A filterable archive of sculpture, installation, painting and moving-image works by Victor Guerin.">
+    <link rel="canonical" href="https://victorguerin.com/selected-works/">
+    <link rel="alternate" hreflang="en" href="https://victorguerin.com/selected-works/">
+    <link rel="alternate" hreflang="fr" href="https://victorguerin.com/fr/oeuvres/">
+    <link rel="alternate" hreflang="x-default" href="https://victorguerin.com/selected-works/">
+    <meta property="og:title" content="Works | Victor Guerin">
+    <meta property="og:description" content="A filterable archive of sculpture, installation, painting and moving-image works by Victor Guerin.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://victorguerin.com/selected-works/">
+    <meta name="twitter:card" content="summary">
+    <script>
+        document.documentElement.classList.replace("no-js", "has-js");
+        window.setTimeout(() => {
+            document.documentElement.classList.add("archive-reveal-fallback");
+        }, 2500);
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css?v=20260729t">
+</head>
+<body class="flush-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+   
+    <header class="site-header">
+        <div class="logo site-brand">
+            <a href="/">VICTOR GUERIN</a>
+        </div>
+        <nav class="primary-nav" aria-label="Primary navigation">
+            <ul>
+                <li><a href="../selected-works/" aria-current="page">Works</a></li>
+                <li><a href="../exhibitions/">Exhibitions</a></li>
+                <li><a href="../about/">About</a></li>
+                <li><a href="../cv/">CV</a></li>
+                <li><a href="../contact/">Contact</a></li>
+                <li class="lang-item"><a href="/fr/oeuvres/" class="lang-switch" lang="fr" hreflang="fr" aria-label="Voir la version française">FR</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    const buttons = Array.from(filters.querySelectorAll("button[data-filter]"));
-    const works = Array.from(grid.querySelectorAll(".work-item"));
-    const seriesIntroductions = Array.from(document.querySelectorAll("[data-series-introduction]"));
-    const archivePage = document.querySelector(".archive-page");
-    const languageSwitch = document.querySelector(".lang-switch");
-    const languageSwitchUrl = languageSwitch
-        ? new URL(languageSwitch.getAttribute("href"), location.href)
-        : null;
-    const paintingOrder2025 = new Map([
-        ["Genesis of Steel III", 10],
-        ["Genesis of Steel I", 20],
-        ["Genesis of Steel II", 30],
-        ["Topography of a Meditation I", 40],
-        ["Topography of a Meditation II", 50],
-        ["Verdant Vistas I to IV", 60],
-        ["Genèse de l’acier III", 10],
-        ["Genèse de l’acier I", 20],
-        ["Genèse de l’acier II", 30],
-        ["Topographie d’une Méditation I", 40],
-        ["Topographie d’une Méditation II", 50]
-    ]);
-    const options = new Set([
-        "sculpture",
-        "installation",
-        "painting",
-        "moving-image",
-        "series-cracks-of-potential",
-        "series-antidote",
-        "series-echoes-of-extraction",
-        "series-ephemeral-structures",
-        "series-deposit"
-    ]);
-    let layoutFrame = 0;
-    let layoutRun = 0;
-    let canRevealLayout = false;
+    <main id="main-content" class="archive-page" data-lightbox-gallery>
+        <h1 class="visually-hidden">Works</h1>
 
-    function workYear(work) {
-        const paragraphs = Array.from(work.querySelectorAll(".artwork-description p"));
-        const year = paragraphs
-            .map((paragraph) => paragraph.textContent.trim())
-            .find((value) => /^(?:19|20)\d{2}$/.test(value));
-        return Number.parseInt(year, 10) || 0;
-    }
+        <div class="archive-toolbar">
+            <div class="archive-filters" aria-label="Filter works">
+                <div class="archive-filter-set" role="group" aria-label="Medium">
+                    <button type="button" aria-controls="work-grid" data-filter="all" aria-pressed="true">Selection</button>
+                    <button type="button" aria-controls="work-grid" data-filter="sculpture" aria-pressed="false">Sculpture</button>
+                    <button type="button" aria-controls="work-grid" data-filter="installation" aria-pressed="false">Installation</button>
+                    <button type="button" aria-controls="work-grid" data-filter="painting" aria-pressed="false">Painting</button>
+                    <button type="button" aria-controls="work-grid" data-filter="moving-image" aria-pressed="false">Moving image</button>
+                </div>
+                <div class="archive-filter-set archive-filter-set--collections" role="group" aria-label="Related works">
+                    <span class="archive-filter-spacer" aria-hidden="true">Selection</span>
+                    <button type="button" aria-controls="work-grid" data-filter="series-deposit" aria-pressed="false">Deposit</button>
+                    <a class="archive-filter-option" href="/loudspeaker/">Loud Speaker</a>
+                    <button type="button" aria-controls="work-grid" data-filter="series-cracks-of-potential" aria-pressed="false">Cracks of Potential</button>
+                    <button type="button" aria-controls="work-grid" data-filter="series-echoes-of-extraction" aria-pressed="false">Echoes of Extraction</button>
+                    <button type="button" aria-controls="work-grid" data-filter="series-antidote" aria-pressed="false">Antidote</button>
+                    <button type="button" aria-controls="work-grid" data-filter="series-ephemeral-structures" aria-pressed="false">Ephemeral Structures</button>
+                </div>
+            </div>
+            <a class="archive-portfolio-link" href="/portfolio/">Portfolio</a>
+        </div>
+        <noscript><p class="archive-noscript">All works are shown. <a href="/deposit/">Read about Deposit</a>. Enable JavaScript to filter by medium or related works.</p></noscript>
 
-    const workRecords = works.map((work, index) => ({
-        work,
-        index,
-        year: workYear(work),
-        title: work.querySelector("img:not([data-lightbox-only])")?.alt.trim() || ""
-    }));
+        <section class="series-introduction series-introduction--deposit" data-series-introduction="deposit" hidden aria-labelledby="series-deposit-title">
+            <h2 class="series-introduction__title" id="series-deposit-title">DEPOSIT</h2>
+            <details class="series-essay">
+                <summary>
+                    <span class="series-essay__preview">Across fields of Portuguese cork, Victor Guerin arranges fragments collected in the United States, Canada, the United Kingdom and France - stones, bark, wood, lichens, mosses and fibres - alongside dye-trapping laundry sheets bearing the traces of washing cycles. The compositions alternate between horizontality and verticality, rigorous geometry and organic irregularity, pictorial surface and sculptural projection. They simultaneously evoke the scientific plate, the sampling tray, the reliquary and constructed abstraction.</span>
+                    <span class="series-essay__toggle">
+                        <span class="series-essay__toggle-closed">Continue reading <span aria-hidden="true">↓</span></span>
+                    </span>
+                </summary>
 
-    function orderWorks(selected) {
-        workRecords
-            .slice()
-            .sort((left, right) => {
-                const yearDifference = right.year - left.year;
-                if (yearDifference) return yearDifference;
+                <div class="series-essay__expanded">
+                <button class="series-essay__collapse" type="button" data-collapse-series-essay>Collapse text <span aria-hidden="true">↑</span></button>
+                <article class="project-text project-text--essay series-essay__body">
+            <p>Across fields of Portuguese cork, Victor Guerin arranges fragments collected in the United States, Canada, the United Kingdom and France - stones, bark, wood, lichens, mosses and fibres - alongside dye-trapping laundry sheets bearing the traces of washing cycles. The compositions alternate between horizontality and verticality, rigorous geometry and organic irregularity, pictorial surface and sculptural projection. They simultaneously evoke the scientific plate, the sampling tray, the reliquary and constructed abstraction.</p>
 
-                if (selected === "painting" && left.year === 2025) {
-                    const leftOrder = paintingOrder2025.get(left.title) || 1000;
-                    const rightOrder = paintingOrder2025.get(right.title) || 1000;
-                    if (leftOrder !== rightOrder) return leftOrder - rightOrder;
-                }
+            <p class="essay-paragraph-break">A deposit is something that settles, something that remains after the passage of a flow, but also something entrusted to a place intended to preserve it. It therefore implies a temporal dimension: something has circulated before coming to rest, potentially only provisionally, upon a surface. In <em>Deposit</em>, each work becomes a miniature catchment basin, a device in which matter is transported, intercepted, retained and subsequently presented for observation.</p>
+            <p>The dye-trapping sheets form the conceptual axis of the series. Ordinary objects designed to capture some of the dyes released during a washing cycle, they are transformed here from domestic accessories into documentary membranes. Their colours are not painted but result from an event of migration. As the material imprint of a transfer, colour becomes an index - the visible manifestation of matter that has detached itself from one body, circulated through water and become fixed elsewhere.</p>
+            <p>This displacement is decisive. What was intended to prevent chromatic contamination becomes evidence of its permanent possibility. Placed alongside a stone, a piece of bark or seaweed, the sheet situates the everyday act of washing within a far broader chain of processes: dissolution, transport, adsorption, deposition, accumulation and potential remobilisation.</p>
+            <p>The visual construction of the works reiterates this logic. The pale or saturated rectangles of the sheets and coloured surfaces introduce an almost administrative order, while the natural fragments resist measurement through their fractures, ramifications and textures. Cork operates simultaneously as skin, ground and cartography. Its cellular structure receives the objects without entirely neutralising them, recalling that any apparently passive surface may become an interface of exchange. The metal frames delimit these microterritories with quasi-clinical precision, without ever rendering them hermetic, as their corners remain unwelded.</p>
+            <p class="essay-paragraph-break"><em>Deposit</em> is informed by the conceptual grammar of scientific literature: sources, pathways, reservoirs and sinks. A synthesis published in <em>Science</em> in 2024, surveying twenty years of research into microplastics, emphasises the multiplicity of their sources, the extent of their environmental distribution and their circulation between different ecological compartments<sup><a href="#deposit-reference-1">1</a></sup>. A China-based study published in <em>Science Advances</em> in 2026 similarly describes the urban atmosphere as an active reservoir of microplastics and nanoplastics, subject to processes of transformation, transport and deposition<sup><a href="#deposit-reference-2">2</a></sup>.</p>
+            <p>Other studies demonstrate that deposition is never simply a form of disappearance. An analysis published in <em>Nature Communications</em> in 2024 establishes that soils can efficiently retain anthropogenic mercury transported through the atmosphere. Soil consequently functions simultaneously as a sink, a historical archive and a potential source of future exposure<sup><a href="#deposit-reference-3">3</a></sup>. That same year, a study of persistent organic pollutants demonstrated their continued presence in the oceans over several decades, despite policies intended to reduce emissions<sup><a href="#deposit-reference-4">4</a></sup>.</p>
+            <p>Natural matter is therefore not external to pollution: it intercepts, transforms and, in some cases, preserves it. Mosses and algae are used as sentinel organisms precisely because their tissues record atmospheric inputs of dust and metals. A study conducted in Portland used these organisms to map lead deposition originating from both contemporary infrastructure and historical emissions<sup><a href="#deposit-reference-5">5</a></sup>.</p>
+            <p>This porosity is also central to contemporary research into PFAS, substances characterised by their mobility, extreme persistence and capacity to accumulate across numerous environmental compartments. A joint report published in 2025 by Environment and Climate Change Canada and Health Canada stresses their circulation between air, water, soil, waste and living organisms, as well as the practical impossibility of removing them from the global environment once they have been dispersed<sup><a href="#deposit-reference-6">6</a></sup>. In this context, deposition no longer represents the conclusion of a cycle: it becomes one stage within a process of contamination capable of being reactivated.</p>
+            <p class="essay-paragraph-break">The scope of <em>Deposit</em> is epistemological rather than metrological: it does not produce data. Each work materialises a possible chain of events - emission, transfer, fixation and persistence.</p>
+            <p>This method extends the relational conception of nature described by Andrea Wulf in <em>The Invention of Nature</em><sup><a href="#deposit-reference-7">7</a></sup>. For Alexander von Humboldt, organisms, climates and territories could not be understood in isolation: nature constituted a network of interdependencies. In a world permeated by anthropogenic substances, to be connected also means to be susceptible to exposure. Interconnection is no longer solely a condition of fertility; it also becomes a potential vector of contamination.</p>
+            <p class="essay-paragraph-break"><em>Deposit</em> holds its materials within a zone of indeterminacy: residues of possible degradation, archives of their displacement and components of an unexpected aesthetic order. The resulting beauty offers no absolution. It reveals how forms of contamination may become seductive once they are isolated, framed and composed.</p>
+            <p>The significance of <em>Deposit</em> lies in this ethical instability. The works ask not so much what nature represents as what it retains; not so much what we see in a landscape as what our practices have already deposited within it. They transform every surface into a potential memory and every material into a silent witness to circulations that exceed the limits of our perception.</p>
 
-                return left.index - right.index;
-            })
-            .forEach(({ work }) => grid.append(work));
-    }
+            <hr>
+            <div class="project-references" aria-label="References">
+                <p id="deposit-reference-1"><sup>1</sup> Richard C. Thompson et al., “Twenty years of microplastic pollution research - what have we learned?”, <em>Science</em>, vol. 386, 2024, DOI: <a href="https://doi.org/10.1126/science.adl2746" target="_blank" rel="noopener noreferrer">10.1126/science.adl2746</a>.</p>
+                <p id="deposit-reference-2"><sup>2</sup> T. Hu et al., “Abundance of microplastics and nanoplastics in urban atmosphere”, <em>Science Advances</em>, vol. 12, 2026, DOI: <a href="https://doi.org/10.1126/sciadv.adz7779" target="_blank" rel="noopener noreferrer">10.1126/sciadv.adz7779</a>.</p>
+                <p id="deposit-reference-3"><sup>3</sup> Joshua D. Landis et al., “Quantifying soil accumulation of atmospheric mercury using fallout radionuclide chronometry”, <em>Nature Communications</em>, vol. 15, 2024, DOI: <a href="https://doi.org/10.1038/s41467-024-49789-7" target="_blank" rel="noopener noreferrer">10.1038/s41467-024-49789-7</a>.</p>
+                <p id="deposit-reference-4"><sup>4</sup> Xue Zhang et al., “Exploring global oceanic persistence and ecological effects of legacy persistent organic pollutants across five decades”, <em>Science Advances</em>, vol. 10, 2024, DOI: <a href="https://doi.org/10.1126/sciadv.ado5534" target="_blank" rel="noopener noreferrer">10.1126/sciadv.ado5534</a>.</p>
+                <p id="deposit-reference-5"><sup>5</sup> Alyssa E. Shiel, Sarah Jovan and Christina J. Murphy, “Lead-sheathed telecom cables and historic leaded gasoline emissions substantially raise environmental lead levels in Portland, Oregon”, <em>Communications Earth &amp; Environment</em>, vol. 5, 2024, DOI: <a href="https://doi.org/10.1038/s43247-024-01534-0" target="_blank" rel="noopener noreferrer">10.1038/s43247-024-01534-0</a>.</p>
+                <p id="deposit-reference-6"><sup>6</sup> Environment and Climate Change Canada and Health Canada, <em>State of per- and polyfluoroalkyl substances (PFAS) report</em>, 2025.</p>
+                <p id="deposit-reference-7"><sup>7</sup> Andrea Wulf, <em>The Invention of Nature: The Adventure of Alexander von Humboldt, the Lost Hero of Science</em>, London: John Murray Classics, 2025.</p>
+            </div>
+                </article>
+                </div>
+            </details>
+        </section>
 
-    function alignNearlyLevelDescriptions(visibleWorks) {
-        const columnCount = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
-        const descriptions = visibleWorks
-            .map((work) => work.querySelector(".artwork-description"))
-            .filter(Boolean);
+        <section class="series-introduction series-introduction--cracks-of-potential" data-series-introduction="cracks-of-potential" hidden aria-labelledby="series-cracks-of-potential-title">
+            <h2 class="series-introduction__title" id="series-cracks-of-potential-title">CRACKS OF POTENTIAL</h2>
+            <details class="series-essay">
+                <summary>
+                    <span class="series-essay__preview">Developed during a three-week residency at the historic Neimënster Abbey, Luxembourg, <em>Cracks of Potential</em> is a sculptural installation exploring the relationship between urban infrastructure and nature’s resilience. The work was commissioned for <em>Graines</em>, an exhibition featuring Thierry Ardouin’s photographic portraits of seeds.</span>
+                    <span class="series-essay__toggle">
+                        <span class="series-essay__toggle-closed">Continue reading <span aria-hidden="true">↓</span></span>
+                    </span>
+                </summary>
+                <div class="series-essay__expanded">
+                    <button class="series-essay__collapse" type="button" data-collapse-series-essay>Collapse text <span aria-hidden="true">↑</span></button>
+                    <article class="project-text project-text--essay series-essay__body">
+                        <p>Developed during a three-week residency at the historic Neimënster Abbey, Luxembourg, <em>Cracks of Potential</em> is a sculptural installation exploring the relationship between urban infrastructure and nature’s resilience. The work was commissioned for <em>Graines</em>, an exhibition featuring Thierry Ardouin’s photographic portraits of seeds.</p>
 
-        descriptions.forEach((description) => {
-            description.style.removeProperty("--description-align-offset");
-        });
-        if (columnCount < 2) return;
+                        <p>Guerin repurposes bitumen removed from Luxembourg’s roads, salvaged concrete and paving stones from Neimënster Abbey, incorporating seeds as living agents within the installation. By bringing together materials associated with construction, demolition and regeneration, the work reflects on the environmental consequences of urbanisation while revealing plant life’s persistent capacity to inhabit and reclaim the built environment.</p>
 
-        const lineHeight = descriptions[0]
-            ? Number.parseFloat(getComputedStyle(descriptions[0]).lineHeight)
-            : 0;
-        const maximumCorrection = lineHeight * 0.75;
-        const sorted = descriptions
-            .map((description) => ({
-                description,
-                top: description.getBoundingClientRect().top
-            }))
-            .sort((left, right) => left.top - right.top);
+                        <p>Movement is embedded within the sculptural forms, introducing a sense of instability and transformation. The installation invites audiences to consider the shifting tension between human intervention and ecological adaptation, and to encounter the crack not simply as a sign of rupture, but as a space in which new possibilities can emerge.</p>
 
-        let group = [];
-        sorted.forEach((item) => {
-            if (!group.length || item.top - group[0].top <= maximumCorrection) {
-                group.push(item);
-                return;
-            }
+                        <p class="essay-paragraph-break">“Cracks of Potential is a dialogue between material decay and ecological renewal. By repurposing the very fabric of the city - bitumen, concrete and stone - I invite visitors to consider how nature infiltrates and reclaims our constructed environments.</p>
 
-            alignGroup(group);
-            group = [item];
-        });
-        alignGroup(group);
+                        <p>As visitors move through the vaulted rooms of the Abbey, the works unfold in a narrative beginning with familiar moments of flora sprouting between stones, followed by a series of sculptures featuring dead leaves - evoking failed or suspended growth - before arriving at vigorous plant life breaking through layers of bitumen.</p>
 
-        function alignGroup(items) {
-            if (items.length < 2) return;
-            const targetTop = Math.max(...items.map((item) => item.top));
-            items.forEach(({ description, top }) => {
-                const correction = targetTop - top;
-                if (correction > 1 && correction <= maximumCorrection) {
-                    description.style.setProperty("--description-align-offset", `${correction}px`);
-                }
-            });
-        }
-    }
+                        <p>The journey culminates in Liminal, a quietly ambiguous space framed by an arrangement of paving stones. Poised between promise and desolation, it remains open to interpretation.</p>
 
-    function layoutWorks() {
-        cancelAnimationFrame(layoutFrame);
-        const currentRun = ++layoutRun;
-        layoutFrame = requestAnimationFrame(() => {
-            const visibleWorks = works.filter((work) => !work.hidden);
-            const initialLayout = !grid.classList.contains("is-masonry");
+                        <p>In dialogue with Thierry Ardouin’s seed portraits, my sculptures and installations offer a transnational commentary on ecological resilience, in which scent, form and time converge to reflect on future regrowth. The stones and soil of the Abbey become both medium and memory.”</p>
+                    </article>
+                </div>
+            </details>
+        </section>
 
-            if (initialLayout) {
-                visibleWorks.forEach((work) => {
-                    const spacing = Number.parseFloat(getComputedStyle(work).marginBottom) || 0;
-                    work.style.gridRowEnd = `span ${Math.ceil(work.scrollHeight + spacing)}`;
-                });
-                grid.classList.remove("is-measuring");
-                grid.classList.add("is-masonry");
-            } else {
-                visibleWorks.forEach((work) => {
-                    work.style.gridRowEnd = "auto";
-                });
-            }
+        <section class="series-introduction series-introduction--echoes-of-extraction" data-series-introduction="echoes-of-extraction" hidden aria-labelledby="series-echoes-of-extraction-title">
+            <h2 class="series-introduction__title" id="series-echoes-of-extraction-title">ECHOES OF EXTRACTION</h2>
+            <details class="series-essay">
+                <summary>
+                    <span class="series-essay__preview">During my degree show, I presented ‘<em>Echoes of Extraction</em>’ an exhibition exploring the lifecycle of materials and our environmental responsibilities. The paintings <em>Été Indien</em> and <em>Fractal Forest</em> depicted the visual and ecological impacts of mineral extraction.</span>
+                    <span class="series-essay__toggle">
+                        <span class="series-essay__toggle-closed">Continue reading <span aria-hidden="true">↓</span></span>
+                    </span>
+                </summary>
+                <div class="series-essay__expanded">
+                    <button class="series-essay__collapse" type="button" data-collapse-series-essay>Collapse text <span aria-hidden="true">↑</span></button>
+                    <article class="project-text project-text--essay series-essay__body">
+                        <p>During my degree show, I presented ‘<em>Echoes of Extraction</em>’ an exhibition exploring the lifecycle of materials and our environmental responsibilities.</p>
 
-            requestAnimationFrame(() => {
-                if (currentRun !== layoutRun) return;
-                visibleWorks.forEach((work) => {
-                    const spacing = Number.parseFloat(getComputedStyle(work).marginBottom) || 0;
-                    work.style.gridRowEnd = `span ${Math.ceil(work.scrollHeight + spacing)}`;
-                });
+                        <p>The paintings <em>Été Indien</em> and <em>Fractal Forest</em> depicted the visual and ecological impacts of mineral extraction. <em>Été Indien</em> with its stark orange palette, illustrated up close a barren, extracted landscape, evoking a sense of desolation and loss. Stepping back, the painting transforms into a skull, symbolising the hidden consequences of environmental degradation. The title, meaning 'Indian Summer' in French, alludes to the enjoyment of unusually warm autumn months, as a nod to global warming, as a <em>memento mori</em>. <em>Fractal Forest</em> used a gradient of greens to depict the depletion of natural resources, transitioning from lush abundance to stark scarcity. These paintings aimed to visually communicate the environmental degradation caused by over-extraction.</p>
 
-                requestAnimationFrame(() => {
-                    if (currentRun !== layoutRun) return;
-                    alignNearlyLevelDescriptions(visibleWorks);
-                    visibleWorks.forEach((work) => {
-                        const spacing = Number.parseFloat(getComputedStyle(work).marginBottom) || 0;
-                        work.style.gridRowEnd = `span ${Math.ceil(work.scrollHeight + spacing)}`;
-                    });
-                    if (canRevealLayout) {
-                        grid.classList.add("is-layout-ready");
-                        grid.removeAttribute("aria-busy");
-                    }
-                });
-            });
-        });
-    }
+                        <p>A rusty beam hanging as a symbol of overproduction stood as a testament to industrial excess and waste. This reclaimed beam, sourced from British Steel and found in a fly-tipping area, symbolised the lifecycle of manufactured materials. Its presence in the exhibition challenged viewers to consider the implications of overproduction and discard in our current economic systems, prompting a reflection on sustainability and resource management.</p>
 
-    function syncLanguageSwitch() {
-        if (!languageSwitch || !languageSwitchUrl) return;
-        const target = new URL(languageSwitchUrl.href);
-        target.hash = location.hash;
-        languageSwitch.href = `${target.pathname}${target.search}${target.hash}`;
-    }
+                        <p class="essay-paragraph-break"><em>Acanthus Ascendant</em>, is a sculptural vase made from recycled anticorodal aluminium, highlighting the aesthetic potential of repurposed materials while questioning the environmental cost of beauty. Created during my residency at the Sir John Soane’s Museum, <em>Acanthus Ascendant</em> captures and reflects light in a technique inspired by the architect's mastery. The vase features intricate acanthus leaves, seamlessly enveloping a pyramidal form, drawing a parallel to the sarcophagus housed in Soane’s basement. This piece invites reflection on cultural heritage and its complex legacy, contemplating the luxurious use of resources and the inherent value found in what is often considered waste.</p>
 
-    function applyFilter(filter, updateUrl = true) {
-        const selected = options.has(filter) ? filter : "all";
-        orderWorks(selected);
-        works.forEach((work) => {
-            const matchesMedium = work.dataset.medium === selected;
-            const matchesSeries = selected.startsWith("series-")
-                && work.dataset.series === selected.slice("series-".length);
-            work.hidden = selected !== "all" && !matchesMedium && !matchesSeries;
-        });
+                        <p>Pieces like the <em>Spinal Bloom</em> series focused on the transformation of natural resources into cultural artefacts. These works, created from clay extracted directly from the earth, embodied themes of fragility, resilience, and the cyclic nature of use and reuse in our interactions with the earth. The iridescent glaze echoes childhood memories of oil spills on the beaches of Brittany, presenting an ambiguous position: are the forms trapped in the spill or thriving despite it, similar to how nature has adapted in Chernobyl?</p>
 
-        buttons.forEach((button) => {
-            button.setAttribute("aria-pressed", String(button.dataset.filter === selected));
-        });
+                        <p><em>Fragile Beauty</em> made from a synthetic culture of bacteria and yeast showcased the innovative potential for sustainable materials in art. This piece symbolised the fusion of organic and synthetic elements, pointing towards a future where these materials coexist more harmoniously. It challenged conventional notions of material value and utility, advocating for a more sustainable approach to material use.</p>
 
-        seriesIntroductions.forEach((introduction) => {
-            introduction.hidden = selected !== `series-${introduction.dataset.seriesIntroduction}`;
-        });
-        archivePage?.classList.toggle(
-            "has-series-introduction",
-            seriesIntroductions.some((introduction) => !introduction.hidden)
-        );
+                        <p class="essay-paragraph-break">Overall, the exhibition aimed to spark a critical dialogue about resource use and our role in fostering a sustainable relationship with the environment. Each piece was carefully chosen to represent a different stage in the lifecycle of materials, from raw extraction to cultural elevation and eventual discard, urging viewers to reconsider their environmental responsibilities and the political dimensions of resource use.</p>
+                    </article>
+                </div>
+            </details>
+        </section>
 
-        if (updateUrl) {
-            const url = selected === "all" ? location.pathname : `#${selected}`;
-            history.replaceState(null, "", url);
-        }
-        syncLanguageSwitch();
-        layoutWorks();
-    }
 
-    function applyLocationHash() {
-        const hash = location.hash.slice(1);
-        const linkedWork = hash ? document.getElementById(hash) : null;
+        <div class="grid-container" id="work-grid">
 
-        if (linkedWork?.classList.contains("work-item")) {
-            applyFilter(linkedWork.dataset.medium || "all", false);
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => linkedWork.scrollIntoView({ block: "start" }));
-            });
-            return;
-        }
+            <article class="work-item work-item--project" id="work-loud-speaker" data-medium="installation" data-series="loudspeaker">
+                <a href="/loudspeaker/">
+                    <img src="../images/series/26%20loudspeaker/i_Loud%20Speaker%203.2.jpg" alt="Loud Speaker installed at ArtHouse Jersey" fetchpriority="high" width="3401" height="2268" decoding="async" srcset="../images/responsive/480/series/26%20loudspeaker/i_Loud%20Speaker%203.2.jpg 480w, ../images/responsive/series/26%20loudspeaker/i_Loud%20Speaker%203.2.jpg 960w, ../images/series/26%20loudspeaker/i_Loud%20Speaker%203.2.jpg 3401w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <div class="artwork-description">
+                        <p><strong>Loud Speaker</strong></p>
+                        <p>2026</p>
+                        <p>Monterey cypress, pine tar, wire</p>
+                        <p>300 x 200 x 260 cm</p>
+                        <p>ArtHouse Jersey, Jersey (C.I.)</p>
+                    </div>
+                </a>
+            </article>
 
-        if (!hash || options.has(hash)) applyFilter(hash, false);
-    }
+            <article class="work-item" id="work-echoes-of-extraction" data-medium="installation" data-series="echoes-of-extraction">
+                <img src="../images/series/24%20echoes%20of%20extraction/i_Echoes%20of%20Extraction%203.2.jpg" alt="Echoes of Extraction, installation view" width="3568" height="2379" loading="lazy" decoding="async" srcset="../images/responsive/480/series/24%20echoes%20of%20extraction/i_Echoes%20of%20Extraction%203.2.jpg 480w, ../images/responsive/series/24%20echoes%20of%20extraction/i_Echoes%20of%20Extraction%203.2.jpg 960w, ../images/series/24%20echoes%20of%20extraction/i_Echoes%20of%20Extraction%203.2.jpg 3568w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Echoes of Extraction</strong></p>
+                    <p>2024</p>
+                    <p>Mixed media</p>
+                    <p>250 x 350 x 300 cm</p>
+                </div>
+            </article>
 
-    grid.classList.add("is-measuring");
-    grid.setAttribute("aria-busy", "true");
-    filters.hidden = false;
-    filters.addEventListener("click", (event) => {
-        const button = event.target.closest("button[data-filter]");
-        if (button) applyFilter(button.dataset.filter);
-    });
-    window.addEventListener("hashchange", applyLocationHash);
-    window.addEventListener("resize", layoutWorks);
-    grid.querySelectorAll("img").forEach((image) => {
-        if (!image.complete) {
-            image.addEventListener("load", () => {
-                if (grid.classList.contains("is-layout-ready")) layoutWorks();
-            }, { once: true });
-        }
-    });
-    applyLocationHash();
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20GR.jpg" alt="Deposit GR" width="3969" height="2835" loading="lazy" decoding="async" data-lightbox-group="deposit-gr" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20GR.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20GR.jpg 960w, ../images/series/26%20deposit/i_Deposit%20GR.jpg 3969w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20GR-side.jpg" alt="Deposit GR" width="3534" height="2524" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-gr" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20GR-side2.jpg" alt="Deposit GR" width="4549" height="3249" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-gr" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit GR</strong></p>
+                        <p>2026</p>
+                        <p>Cork, dye-trapping laundry sheet, sandpaper, stone collected in Luxembourg, ink, sea urchin shell from Brittany, aluminium</p>
+                        <p>30 x 60 x 3 cm</p>
+                    </div>
+                </article>
 
-    const fontReadiness = document.fonts ? document.fonts.ready : Promise.resolve();
-    Promise.race([
-        Promise.resolve(fontReadiness).catch(() => undefined),
-        new Promise((resolve) => window.setTimeout(resolve, 1000))
-    ]).then(() => {
-        canRevealLayout = true;
-        layoutWorks();
-    });
-})();
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20GG.jpg" alt="Deposit GG" width="3969" height="2835" loading="lazy" decoding="async" data-lightbox-group="deposit-gg" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20GG.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20GG.jpg 960w, ../images/series/26%20deposit/i_Deposit%20GG.jpg 3969w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20GG-side.jpg" alt="Deposit GG" width="3694" height="2638" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-gg" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20GG-side2.jpg" alt="Deposit GG" width="2605" height="1860" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-gg" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit GG</strong></p>
+                        <p>2026</p>
+                        <p>Cork, dye-trapping laundry sheet, eucalyptus bark from Normandy, aluminium</p>
+                        <p>30 x 60 x 6 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20RP.jpg" alt="Deposit RP" width="2835" height="3969" loading="lazy" decoding="async" data-lightbox-group="deposit-rp" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20RP.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20RP.jpg 960w, ../images/series/26%20deposit/i_Deposit%20RP.jpg 2835w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20RP-side.jpg" alt="Deposit RP" width="3220" height="4508" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-rp" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20RP-side2.jpg" alt="Deposit RP" width="3224" height="4513" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-rp" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit RP</strong></p>
+                        <p>2026</p>
+                        <p>Cork, dye-trapping laundry sheet, stone from Brittany, sandpaper, steel, wood from Brighton, aluminium</p>
+                        <p>60 x 30 x 5 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20BG.jpg" alt="Deposit BG" width="3969" height="2835" loading="lazy" decoding="async" data-lightbox-group="deposit-bg" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20BG.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20BG.jpg 960w, ../images/series/26%20deposit/i_Deposit%20BG.jpg 3969w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20BG-side.jpg" alt="Deposit BG" width="3626" height="2590" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-bg" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit BG</strong></p>
+                        <p>2026</p>
+                        <p>Cork, dye-trapping laundry sheet, slate from Brighton, aluminium</p>
+                        <p>30 x 60 x 3 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20RG.jpg" alt="Deposit RG" width="3969" height="2835" loading="lazy" decoding="async" data-lightbox-group="deposit-rg" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20RG.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20RG.jpg 960w, ../images/series/26%20deposit/i_Deposit%20RG.jpg 3969w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20RG-side.jpg" alt="Deposit RG" width="3383" height="2417" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-rg" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20RG-side2.jpg" alt="Deposit RG" width="2347" height="1676" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-rg" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit RG</strong></p>
+                        <p>2026</p>
+                        <p>Cork, dye-trapping laundry sheet, eucalyptus bark from Normandy, pebbles from Brittany, aluminium</p>
+                        <p>30 x 60 x 4 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20WR.jpg" alt="Deposit WR" width="3969" height="2835" loading="lazy" decoding="async" data-lightbox-group="deposit-wr" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20WR.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20WR.jpg 960w, ../images/series/26%20deposit/i_Deposit%20WR.jpg 3969w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20WR-side.jpg" alt="Deposit WR" width="3812" height="2723" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-wr" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20WR-side2.jpg" alt="Deposit WR" width="4759" height="3399" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-wr" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit WR</strong></p>
+                        <p>2026</p>
+                        <p>Cork, dye-trapping laundry sheet, ink, moss, chalk, aluminium</p>
+                        <p>30 x 60 x 4 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20WG.jpg" alt="Deposit WG" width="3969" height="2835" loading="lazy" decoding="async" data-lightbox-group="deposit-wg" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20WG.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20WG.jpg 960w, ../images/series/26%20deposit/i_Deposit%20WG.jpg 3969w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20WG-side.jpg" alt="Deposit WG" width="3760" height="2686" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-wg" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20WG-side2.jpg" alt="Deposit WG" width="3956" height="2825" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-wg" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit WG</strong></p>
+                        <p>2026</p>
+                        <p>Cork, paper from America, oil, wool, Canadian wood, aluminium</p>
+                        <p>30 x 60 x 4 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20BR.jpg" alt="Deposit BR" width="3969" height="2835" loading="lazy" decoding="async" data-lightbox-group="deposit-br" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20BR.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20BR.jpg 960w, ../images/series/26%20deposit/i_Deposit%20BR.jpg 3969w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20BR-side.jpg" alt="Deposit BR" width="4358" height="3113" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-br" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20BR-side2.jpg" alt="Deposit BR" width="4481" height="3201" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-br" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit BR</strong></p>
+                        <p>2026</p>
+                        <p>Cork, dye-trapping laundry sheet, seaweed from Brittany, roller, sandpaper, aluminium</p>
+                        <p>30 x 60 x 4 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20BB.jpg" alt="Deposit BB" width="2835" height="3969" loading="lazy" decoding="async" data-lightbox-group="deposit-bb" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20BB.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20BB.jpg 960w, ../images/series/26%20deposit/i_Deposit%20BB.jpg 2835w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20BB-side.jpg" alt="Deposit BB" width="3131" height="4384" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-bb" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20BB-side2.jpg" alt="Deposit BB" width="3544" height="4961" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-bb" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit BB</strong></p>
+                        <p>2026</p>
+                        <p>Cork, dye-trapping laundry sheet, bone from the River Thames, cord, Lebanese cedar cone from Normandy, aluminium</p>
+                        <p>60 x 30 x 5 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="deposit">
+                    <img src="../images/series/26%20deposit/i_Deposit%20BY.jpg" alt="Deposit BY" width="2835" height="3969" loading="lazy" decoding="async" data-lightbox-group="deposit-by" srcset="../images/responsive/480/series/26%20deposit/i_Deposit%20BY.jpg 480w, ../images/responsive/series/26%20deposit/i_Deposit%20BY.jpg 960w, ../images/series/26%20deposit/i_Deposit%20BY.jpg 2835w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <img src="../images/series/26%20deposit/i_Deposit%20BY-side.jpg" alt="Deposit BY" width="3298" height="4617" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-by" hidden>
+                    <img src="../images/series/26%20deposit/i_Deposit%20BY-side2.jpg" alt="Deposit BY" width="3493" height="4890" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="deposit-by" hidden>
+                    <div class="artwork-description">
+                        <p><strong>Deposit BY</strong></p>
+                        <p>2026</p>
+                        <p>Cork, paper from America, oil, moss, brush head, aluminium</p>
+                        <p>60 x 30 x 4 cm</p>
+                    </div>
+                </article>
+
+            <article class="work-item" id="work-cracks-of-potential" data-medium="installation" data-series="cracks-of-potential">
+                <img src="../images/series/25%20cracks-of-potential/i_Cracks%20of%20Potential%203.2.jpg" alt="Cracks of Potential, installation view" width="7387" height="4925" loading="lazy" decoding="async" data-lightbox-group="cracks-of-potential-installation" srcset="../images/responsive/480/series/25%20cracks-of-potential/i_Cracks%20of%20Potential%203.2.jpg 480w, ../images/responsive/series/25%20cracks-of-potential/i_Cracks%20of%20Potential%203.2.jpg 960w, ../images/series/25%20cracks-of-potential/i_Cracks%20of%20Potential%203.2.jpg 7387w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20cracks-of-potential/i_Cracks%20of%20Potential%205.7.jpg" alt="Cracks of Potential, installation view" width="3024" height="4234" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="cracks-of-potential-installation" hidden>
+                <div class="artwork-description">
+                    <p><strong>Cracks of Potential</strong></p>
+                    <p>2025</p>
+                    <p>Salvaged concrete, bitumen and stone</p>
+                    <p>neimënster, Neumünster Abbey, Luxembourg</p>
+                </div>
+            </article>
+
+            <article class="work-item" id="work-liminal" data-medium="installation" data-series="cracks-of-potential">
+                <img src="../images/series/25%20cracks-of-potential/i_liminal%203.2.jpg" alt="Liminal, installation view" width="4602" height="3068" loading="lazy" decoding="async" data-lightbox-group="liminal" srcset="../images/responsive/480/series/25%20cracks-of-potential/i_liminal%203.2.jpg 480w, ../images/responsive/series/25%20cracks-of-potential/i_liminal%203.2.jpg 960w, ../images/series/25%20cracks-of-potential/i_liminal%203.2.jpg 4602w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20cracks-of-potential/i_liminal%205.7.jpg" alt="Liminal" width="1033" height="1446" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="liminal" hidden>
+                <img src="../images/series/25%20cracks-of-potential/i_liminal%205.7%203.jpg" alt="Liminal" width="1259" height="1762" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="liminal" hidden>
+                <div class="artwork-description">
+                    <p><strong>Liminal</strong></p>
+                    <p>2025</p>
+                    <p>Neumünster Abbey’s paving stone, metal</p>
+                    <p>31 x 85 x 85 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item work-item--project" data-medium="moving-image">
+                <a href="/foamscape/">
+                    <img src="../images/moving-image/i_Foamscape%209.16.jpg" alt="Foamscape" width="1080" height="1920" loading="lazy" decoding="async" srcset="../images/responsive/480/moving-image/i_Foamscape%209.16.jpg 270w, ../images/responsive/moving-image/i_Foamscape%209.16.jpg 540w, ../images/moving-image/i_Foamscape%209.16.jpg 1080w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                    <div class="artwork-description">
+                        <p><strong>Foamscape</strong></p>
+                        <p>2026</p>
+                        <p>Video</p>
+                        <p>1min13s</p>
+                        <p>Belle-Île-en-Mer, Brittany, France</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="cracks-of-potential">
+                <img loading="lazy" decoding="async" src="../images/series/25%20cracks-of-potential/i_Fossil%20whispers%205.7.jpg" alt="Fossil whispers" width="1226" height="1715" data-lightbox-group="fossil-whispers" srcset="../images/responsive/480/series/25%20cracks-of-potential/i_Fossil%20whispers%205.7.jpg 343w, ../images/responsive/series/25%20cracks-of-potential/i_Fossil%20whispers%205.7.jpg 686w, ../images/series/25%20cracks-of-potential/i_Fossil%20whispers%205.7.jpg 1226w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20cracks-of-potential/i_Fossil%20whispers%205.7%202.jpg" alt="Fossil whispers" width="2618" height="3666" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="fossil-whispers" hidden>
+                <img src="../images/series/25%20cracks-of-potential/i_Fossil%20whispers%205.7%203.jpeg" alt="Fossil whispers" width="1811" height="2535" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="fossil-whispers" hidden>
+                <div class="artwork-description">
+                    <p><strong>Fossil whispers</strong></p>
+                    <p>2025</p>
+                    <p>Neumünster Abbey’s stone, metal, ficus lyrata leaf</p>
+                    <p>220 x 86 x 27 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="cracks-of-potential">
+                <img loading="lazy" decoding="async" src="../images/series/25%20cracks-of-potential/i_lingering%20presences%205.7.jpg" alt="Lingering Presences" width="4806" height="3204" data-lightbox-group="lingering-presences" srcset="../images/responsive/480/series/25%20cracks-of-potential/i_lingering%20presences%205.7.jpg 480w, ../images/responsive/series/25%20cracks-of-potential/i_lingering%20presences%205.7.jpg 960w, ../images/series/25%20cracks-of-potential/i_lingering%20presences%205.7.jpg 4806w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20cracks-of-potential/i_lingering%20presences%205.7%202.jpg" alt="Lingering Presences" width="5235" height="3739" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="lingering-presences" hidden>
+                <img src="../images/series/25%20cracks-of-potential/i_lingering%20presences%205.7%203.jpg" alt="Lingering Presences" width="2462" height="3446" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="lingering-presences" hidden>
+                <div class="artwork-description">
+                    <p><strong>Présences latentes (Lingering Presences)</strong></p>
+                    <p>2025</p>
+                    <p>Neumünster Abbey’s stone, trestle, cress, moss, metal</p>
+                    <p>130 x 120 x 200 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+         
+            <article class="work-item" data-medium="sculpture" data-series="cracks-of-potential">
+                <img loading="lazy" decoding="async" src="../images/series/25%20cracks-of-potential/i_Rien%20ne%20se%20perd%205.7.jpg" alt="Rien ne se perd" width="2311" height="3235" data-lightbox-group="rien-ne-se-perd" srcset="../images/responsive/480/series/25%20cracks-of-potential/i_Rien%20ne%20se%20perd%205.7.jpg 343w, ../images/responsive/series/25%20cracks-of-potential/i_Rien%20ne%20se%20perd%205.7.jpg 685w, ../images/series/25%20cracks-of-potential/i_Rien%20ne%20se%20perd%205.7.jpg 2311w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20cracks-of-potential/i_Rien%20ne%20se%20perd%205.7%202.jpg" alt="Rien ne se perd" width="2048" height="1463" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="rien-ne-se-perd" hidden>
+                <div class="artwork-description">
+                    <p><strong>Rien ne se perd (Nothing is lost)</strong></p>
+                    <p>2025</p>
+                    <p>Neumünster Abbey’s paving stone, salvaged bitumen, pine tar, ficus lyrata leaf</p>
+                    <p>39 x 14 x 13 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="cracks-of-potential">
+                <img loading="lazy" decoding="async" src="../images/series/25%20cracks-of-potential/i_Neimënster's%20scholar's%20rock%205.7%202.jpg" alt="Neumünster's Scholar's Rock" width="2685" height="3759" data-lightbox-group="scholars-rock" srcset="../images/responsive/480/series/25%20cracks-of-potential/i_Neimënster's%20scholar's%20rock%205.7%202.jpg 343w, ../images/responsive/series/25%20cracks-of-potential/i_Neimënster's%20scholar's%20rock%205.7%202.jpg 685w, ../images/series/25%20cracks-of-potential/i_Neimënster's%20scholar's%20rock%205.7%202.jpg 2685w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20cracks-of-potential/i_Neimënster's%20scholar's%20rock%205.7.jpg" alt="Neumünster's Scholar's Rock" width="2882" height="4034" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="scholars-rock" hidden>
+                <img src="../images/series/25%20cracks-of-potential/i_Neimënster's%20scholar's%20rock%205.7%203.jpg" alt="Neumünster's Scholar's Rock" width="3857" height="5399" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="scholars-rock" hidden>
+                <div class="artwork-description">
+                    <p><strong>Neumünster's Scholar's Rock</strong></p>
+                    <p>2025</p>
+                    <p>Neumünster Abbey’s stone, concrete, roots and metal</p>
+                    <p>52 x 26 x 20 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+         
+            <article class="work-item" data-medium="sculpture" data-series="cracks-of-potential">
+                <img loading="lazy" decoding="async" src="../images/series/25%20cracks-of-potential/i_Rien%20ne%20se%20crée%205.7.jpg" alt="Rien ne se crée" width="4090" height="5725" data-lightbox-group="rien-ne-se-cree" srcset="../images/responsive/480/series/25%20cracks-of-potential/i_Rien%20ne%20se%20crée%205.7.jpg 343w, ../images/responsive/series/25%20cracks-of-potential/i_Rien%20ne%20se%20crée%205.7.jpg 686w, ../images/series/25%20cracks-of-potential/i_Rien%20ne%20se%20crée%205.7.jpg 4090w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20cracks-of-potential/i_Rien%20ne%20se%20crée%205.7%202.jpg" alt="Rien ne se crée" width="2048" height="1463" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="rien-ne-se-cree" hidden>
+                <div class="artwork-description">
+                    <p><strong>Rien ne se crée (Nothing is created)</strong></p>
+                    <p>2025</p>
+                    <p>Neumünster Abbey’s paving stone, salvaged bitumen, pine tar, ficus lyrata leaf</p>
+                    <p>23 x 37 x 15 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="antidote">
+                <img loading="lazy" decoding="async" src="../images/series/25%20antidote/i_Antidote%20(Alpha)%205.7.jpg" alt="Antidote (α)" width="4695" height="6572" data-lightbox-group="antidote-alpha" srcset="../images/responsive/480/series/25%20antidote/i_Antidote%20(Alpha)%205.7.jpg 343w, ../images/responsive/series/25%20antidote/i_Antidote%20(Alpha)%205.7.jpg 686w, ../images/series/25%20antidote/i_Antidote%20(Alpha)%205.7.jpg 4695w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20antidote/i_Antidote%20(Alpha)%205.7%202.jpg" alt="Antidote (α)" width="4080" height="5712" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="antidote-alpha" hidden>
+                <img src="../images/series/25%20antidote/i_Antidote%20(Alpha)%205.7%203.jpg" alt="Antidote (α)" width="4695" height="6572" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="antidote-alpha" hidden>
+                <div class="artwork-description">
+                    <p><strong>Antidote (α)</strong></p>
+                    <p>2025</p>
+                    <p>Discarded steel and wood, oil</p>
+                    <p>49 x 36 x 20 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+            
+            <article class="work-item" data-medium="sculpture" data-series="antidote">
+                <img loading="lazy" decoding="async" src="../images/series/25%20antidote/i_Tri-Hex%205.7%201.jpg" alt="Tri-Hex" width="2842" height="3978" data-lightbox-group="tri-hex" srcset="../images/responsive/480/series/25%20antidote/i_Tri-Hex%205.7%201.jpg 343w, ../images/responsive/series/25%20antidote/i_Tri-Hex%205.7%201.jpg 686w, ../images/series/25%20antidote/i_Tri-Hex%205.7%201.jpg 2842w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20antidote/i_Tri-Hex%205.7%202.jpg" alt="Tri-Hex" width="2854" height="3995" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="tri-hex" hidden>
+                <img src="../images/series/25%20antidote/i_Tri-Hex%205.7%203.jpg" alt="Tri-Hex" width="2732" height="3825" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="tri-hex" hidden>
+                <div class="artwork-description">
+                    <p><strong>Tri-Hex</strong></p>
+                    <p>2025</p>
+                    <p>Discarded steel, oil</p>
+                    <p>52 x 20 x 15 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+            
+            <article class="work-item" data-medium="sculpture" data-series="antidote">
+                <img loading="lazy" decoding="async" src="../images/series/25%20antidote/i_Antidote%20(Sigma)%205.7.jpg" alt="Antidote (σ)" width="4080" height="5712" data-lightbox-group="antidote-sigma" srcset="../images/responsive/480/series/25%20antidote/i_Antidote%20(Sigma)%205.7.jpg 343w, ../images/responsive/series/25%20antidote/i_Antidote%20(Sigma)%205.7.jpg 685w, ../images/series/25%20antidote/i_Antidote%20(Sigma)%205.7.jpg 4080w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/25%20antidote/i_Antidote%20(Sigma)%205.7%202.jpg" alt="Antidote (σ)" width="4695" height="6572" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="antidote-sigma" hidden>
+                <img src="../images/series/25%20antidote/i_Antidote%20(Sigma)%205.7%203.jpg" alt="Antidote (σ)" width="4080" height="5712" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="antidote-sigma" hidden>
+                <div class="artwork-description">
+                    <p><strong>Antidote (σ)</strong></p>
+                    <p>2025</p>
+                    <p>Discarded steel, oil</p>
+                    <p>40 x 21 x 12 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Verdant%20Vistas%207.5.jpg" alt="Verdant Vistas I to IV" width="2024" height="1446" srcset="../images/responsive/480/painting/i_Verdant%20Vistas%207.5.jpg 480w, ../images/responsive/painting/i_Verdant%20Vistas%207.5.jpg 960w, ../images/painting/i_Verdant%20Vistas%207.5.jpg 2024w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Verdant Vistas I to IV</strong></p>
+                    <p>2025</p>
+                    <p>Oil on canvas</p>
+                    <p>78 x 61 x 3.5 cm (each, framed)</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Topography%20of%20a%20Meditation%20I%205.7.jpg" alt="Topography of a Meditation I" width="4761" height="6665" srcset="../images/responsive/480/painting/i_Topography%20of%20a%20Meditation%20I%205.7.jpg 343w, ../images/responsive/painting/i_Topography%20of%20a%20Meditation%20I%205.7.jpg 685w, ../images/painting/i_Topography%20of%20a%20Meditation%20I%205.7.jpg 4761w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Topography of a Meditation I</strong></p>
+                    <p>2025</p>
+                    <p>Oil on canvas</p>
+                    <p>83 x 93 x 3.5 cm (framed)</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Topography%20of%20a%20Meditation%20II%205.7.jpg" alt="Topography of a Meditation II" width="4155" height="5818" srcset="../images/responsive/480/painting/i_Topography%20of%20a%20Meditation%20II%205.7.jpg 342w, ../images/responsive/painting/i_Topography%20of%20a%20Meditation%20II%205.7.jpg 685w, ../images/painting/i_Topography%20of%20a%20Meditation%20II%205.7.jpg 4155w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Topography of a Meditation II</strong></p>
+                    <p>2025</p>
+                    <p>Oil on canvas</p>
+                    <p>83 x 93 x 3.5 cm (framed)</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting" data-series="echoes-of-extraction">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Eté%20Indien%205.7.jpg" alt="Été Indien" width="1446" height="2024" data-lightbox-group="ete-indien" srcset="../images/responsive/480/painting/i_Eté%20Indien%205.7.jpg 343w, ../images/responsive/painting/i_Eté%20Indien%205.7.jpg 686w, ../images/painting/i_Eté%20Indien%205.7.jpg 1446w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/painting/i_Eté%20Indien%203.2%202.jpg" alt="Été Indien" width="3568" height="2379" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="ete-indien" hidden>
+                <div class="artwork-description">
+                    <p><strong>Été Indien</strong></p>
+                    <p>2024</p>
+                    <p>Raw pigments on canvas</p>
+                    <p>160 x 120 x 4 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting" data-series="echoes-of-extraction">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Fractal%20Forest.jpg" alt="Fractal Forest" width="3568" height="2379" data-lightbox-group="fractal-forest" srcset="../images/responsive/480/painting/i_Fractal%20Forest.jpg 480w, ../images/responsive/painting/i_Fractal%20Forest.jpg 960w, ../images/painting/i_Fractal%20Forest.jpg 3568w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/painting/i_Fractal%20Forest%202.jpg" alt="Fractal Forest" width="1938" height="1694" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="fractal-forest" hidden>
+                <div class="artwork-description">
+                    <p><strong>Fractal Forest</strong></p>
+                    <p>2024</p>
+                    <p>Raw pigments on canvas, oil, moss</p>
+                    <p>240 x 280 x 4 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Learn%20with%20me%20because%20I%20won't%20last%20for%20ever.jpg" alt="Learn with me because I won't last for ever" width="1784" height="2496" srcset="../images/responsive/480/painting/i_Learn%20with%20me%20because%20I%20won't%20last%20for%20ever.jpg 343w, ../images/responsive/painting/i_Learn%20with%20me%20because%20I%20won't%20last%20for%20ever.jpg 686w, ../images/painting/i_Learn%20with%20me%20because%20I%20won't%20last%20for%20ever.jpg 1784w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Learn with me because I won't last for ever</strong></p>
+                    <p>2023</p>
+                    <p>Acrylic on canvas</p>
+                    <p>90 x 120 x 4 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Nature's%20Chromatic%20Symphony%205.7.jpg?v=20260729" alt="Nature’s Chromatic Symphony" width="1378" height="1930" srcset="../images/responsive/480/painting/i_Nature's%20Chromatic%20Symphony%205.7.jpg?v=20260729 342w, ../images/responsive/painting/i_Nature's%20Chromatic%20Symphony%205.7.jpg?v=20260729 685w, ../images/painting/i_Nature's%20Chromatic%20Symphony%205.7.jpg?v=20260729 1378w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Nature’s Chromatic Symphony</strong></p>
+                    <p>2023</p>
+                    <p>Oil on canvas</p>
+                    <p>160 x 120 x 4 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Power%20of%20the%20Relics%205.7.jpg" alt="Power of the Relics" width="1097" height="1535" srcset="../images/responsive/480/painting/i_Power%20of%20the%20Relics%205.7.jpg 343w, ../images/responsive/painting/i_Power%20of%20the%20Relics%205.7.jpg 686w, ../images/painting/i_Power%20of%20the%20Relics%205.7.jpg 1097w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Power of the Relics</strong></p>
+                    <p>2023</p>
+                    <p>Oil on canvas</p>
+                    <p>160 x 120 x 4 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Symphonie%207.5.jpg" alt="Symphonie" width="2669" height="1906" srcset="../images/responsive/480/painting/i_Symphonie%207.5.jpg 480w, ../images/responsive/painting/i_Symphonie%207.5.jpg 960w, ../images/painting/i_Symphonie%207.5.jpg 2669w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Symphonie</strong></p>
+                    <p>2023</p>
+                    <p>Oil on canvas</p>
+                    <p>39 x 50 x 3.5 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Genesis%20of%20Steel%20%20III%205.7.jpg" alt="Genesis of Steel III" width="4187" height="5861" srcset="../images/responsive/480/i_Genesis%20of%20Steel%20%20III%205.7.jpg 343w, ../images/responsive/i_Genesis%20of%20Steel%20%20III%205.7.jpg 686w, ../images/painting/i_Genesis%20of%20Steel%20%20III%205.7.jpg 4187w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Genesis of Steel III</strong></p>
+                    <p>2025</p>
+                    <p>Oil on canvas</p>
+                    <p>100 x 100 x 4 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Genesis%20of%20Steel%20%20I%205.7.jpg" alt="Genesis of Steel I" width="4079" height="5711" srcset="../images/responsive/480/i_Genesis%20of%20Steel%20%20I%205.7.jpg 343w, ../images/responsive/i_Genesis%20of%20Steel%20%20I%205.7.jpg 685w, ../images/painting/i_Genesis%20of%20Steel%20%20I%205.7.jpg 4079w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Genesis of Steel I</strong></p>
+                    <p>2025</p>
+                    <p>Oil on canvas</p>
+                    <p>100 x 100 x 4 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="painting">
+                <img loading="lazy" decoding="async" src="../images/painting/i_Genesis%20of%20Steel%20%20II%205.7.jpg" alt="Genesis of Steel II" width="4187" height="5861" srcset="../images/responsive/480/i_Genesis%20of%20Steel%20%20II%205.7.jpg 343w, ../images/responsive/i_Genesis%20of%20Steel%20%20II%205.7.jpg 686w, ../images/painting/i_Genesis%20of%20Steel%20%20II%205.7.jpg 4187w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Genesis of Steel II</strong></p>
+                    <p>2025</p>
+                    <p>Oil on canvas</p>
+                    <p>100 x 100 x 4 cm</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture">
+                <img loading="lazy" decoding="async" src="../images/sculpture/i_triton%205.7.jpg" alt="Triton" width="2555" height="3576" data-lightbox-group="triton" srcset="../images/responsive/480/sculpture/i_triton%205.7.jpg 343w, ../images/responsive/sculpture/i_triton%205.7.jpg 686w, ../images/sculpture/i_triton%205.7.jpg 2555w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/sculpture/i_triton%205.7%202.jpg" alt="Triton" width="2460" height="3445" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="triton" hidden>
+                <img src="../images/sculpture/i_triton%205.7%203.jpg" alt="Triton" width="2050" height="2870" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="triton" hidden>
+                <div class="artwork-description">
+                    <p><strong>Triton</strong></p>
+                    <p>2024</p>
+                    <p>Recycled bronze by lost-wax casting</p>
+                    <p>23 x 21 x 21 cm</p>
+                    <p>Edition of 3 + 2 AP</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="echoes-of-extraction">
+                <img loading="lazy" decoding="async" src="../images/series/24%20echoes%20of%20extraction/i_Acanthus%20Ascendant%205.7.jpg" alt="Acanthus Ascendant" width="1561" height="2185" data-lightbox-group="acanthus-ascendant" srcset="../images/responsive/480/series/24%20echoes%20of%20extraction/i_Acanthus%20Ascendant%205.7.jpg 343w, ../images/responsive/series/24%20echoes%20of%20extraction/i_Acanthus%20Ascendant%205.7.jpg 686w, ../images/series/24%20echoes%20of%20extraction/i_Acanthus%20Ascendant%205.7.jpg 1561w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/24%20echoes%20of%20extraction/i_Acanthus%20Ascendant%205.7%202.jpg" alt="Acanthus Ascendant" width="2286" height="3201" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="acanthus-ascendant" hidden>
+                <img src="../images/series/24%20echoes%20of%20extraction/i_Acanthus%20Ascendant%205.7%203.jpg" alt="Acanthus Ascendant" width="3694" height="5172" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="acanthus-ascendant" hidden>
+                <div class="artwork-description">
+                    <p><strong>Acanthus Ascendant</strong></p>
+                    <p>2024</p>
+                    <p>Recycled anticorodal aluminium</p>
+                    <p>60 x 17 x 13 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="ephemeral-structures">
+                <img loading="lazy" decoding="async" src="../images/series/24%20ephemeral-structures/i_La%20Grande%20Bocca.jpg" alt="La Grande Bocca" width="2000" height="2001" data-lightbox-group="la-grande-bocca" srcset="../images/responsive/480/series/24%20ephemeral-structures/i_La%20Grande%20Bocca.jpg 479w, ../images/responsive/series/24%20ephemeral-structures/i_La%20Grande%20Bocca.jpg 959w, ../images/series/24%20ephemeral-structures/i_La%20Grande%20Bocca.jpg 2000w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/24%20ephemeral-structures/i_La%20Grande%20Bocca%202.jpg" alt="La Grande Bocca" width="2053" height="2053" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="la-grande-bocca" hidden>
+                <div class="artwork-description">
+                    <p><strong>La Grande Bocca</strong></p>
+                    <p>2023</p>
+                    <p>Computer-aided coil-built ceramic</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="ephemeral-structures">
+                <img loading="lazy" decoding="async" src="../images/series/24%20ephemeral-structures/i_impasse%205.7.jpg" alt="Impasse" width="2621" height="3670" srcset="../images/responsive/480/series/24%20ephemeral-structures/i_impasse%205.7.jpg 343w, ../images/responsive/series/24%20ephemeral-structures/i_impasse%205.7.jpg 685w, ../images/series/24%20ephemeral-structures/i_impasse%205.7.jpg 2621w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Impasse</strong></p>
+                    <p>2023</p>
+                    <p>Computer-aided coil-built ceramic, glaze</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="ephemeral-structures">
+                <img loading="lazy" decoding="async" src="../images/series/24%20ephemeral-structures/i_scottish_fantasy5.7.jpg" alt="Scottish Fantasy" width="1417" height="1984" srcset="../images/responsive/480/series/24%20ephemeral-structures/i_scottish_fantasy5.7.jpg 480w, ../images/responsive/series/24%20ephemeral-structures/i_scottish_fantasy5.7.jpg 960w, ../images/series/24%20ephemeral-structures/i_scottish_fantasy5.7.jpg 1417w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Scottish Fantasy</strong></p>
+                    <p>2024</p>
+                    <p>Computer-aided coil-built ceramic, glaze, wax</p>
+                    <p>43 x 30 x 24 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="ephemeral-structures">
+                <img loading="lazy" decoding="async" src="../images/series/24%20ephemeral-structures/i_euryale5.7.jpg" alt="Euryale" width="3305" height="4627" srcset="../images/responsive/480/series/24%20ephemeral-structures/i_euryale5.7.jpg 343w, ../images/responsive/series/24%20ephemeral-structures/i_euryale5.7.jpg 685w, ../images/series/24%20ephemeral-structures/i_euryale5.7.jpg 3305w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <div class="artwork-description">
+                    <p><strong>Euryale</strong></p>
+                    <p>2024</p>
+                    <p>Computer-aided coil-built ceramic, glaze</p>
+                    <p>44 x 25 x 20 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="ephemeral-structures">
+                <img loading="lazy" decoding="async" src="../images/series/24%20ephemeral-structures/i_Tours%20Détourés%205.7.jpg" alt="Tours Détourés" width="624" height="874" data-lightbox-group="tours-detoures" srcset="../images/responsive/480/series/24%20ephemeral-structures/i_Tours%20Détourés%205.7.jpg 342w, ../images/series/24%20ephemeral-structures/i_Tours%20Détourés%205.7.jpg 624w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/24%20ephemeral-structures/i_Tours%20Détourés%205.7%202.jpg" alt="Tours Détourés" width="2649" height="3708" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="tours-detoures" hidden>
+                <img src="../images/series/24%20ephemeral-structures/i_Tours%20Détourés%205.7%203.jpg" alt="Tours Détourés" width="3091" height="4327" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="tours-detoures" hidden>
+                <img src="../images/series/24%20ephemeral-structures/i_Tours%20Détourés%205.7%204.jpg" alt="Tours Détourés" width="2641" height="3697" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="tours-detoures" hidden>
+                <div class="artwork-description">
+                    <p><strong>Tours Détourés</strong></p>
+                    <p>2024</p>
+                    <p>Computer-aided coil-built ceramic, ink</p>
+                    <p>48 x 25 x 20 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+            
+            <article class="work-item" data-medium="sculpture" data-series="ephemeral-structures">
+                <img loading="lazy" decoding="async" src="../images/series/24%20ephemeral-structures/i_tours_et_detours%205.7.jpg" alt="Tours et Détours" width="2420" height="3389" data-lightbox-group="tours-et-detours" srcset="../images/responsive/480/series/24%20ephemeral-structures/i_tours_et_detours%205.7.jpg 342w, ../images/responsive/series/24%20ephemeral-structures/i_tours_et_detours%205.7.jpg 685w, ../images/series/24%20ephemeral-structures/i_tours_et_detours%205.7.jpg 2420w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/24%20ephemeral-structures/i_tours_et_detours%205.7%202.jpg" alt="Tours et Détours" width="3172" height="4440" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="tours-et-detours" hidden>
+                <img src="../images/series/24%20ephemeral-structures/i_tours_et_detours%205.7%203.jpg" alt="Tours et Détours" width="4004" height="4004" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="tours-et-detours" hidden>
+                <div class="artwork-description">
+                    <p><strong>Tours et Détours</strong></p>
+                    <p>2024</p>
+                    <p>Computer-aided coil-built ceramic, glaze</p>
+                    <p>53 x 30 x 24 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture">
+                <img loading="lazy" decoding="async" src="../images/sculpture/i_patinated_perspectives5.7.jpg" alt="Patinated Perspectives" width="2824" height="3954" data-lightbox-group="patinated-perspectives" srcset="../images/responsive/480/sculpture/i_patinated_perspectives5.7.jpg 343w, ../images/responsive/sculpture/i_patinated_perspectives5.7.jpg 685w, ../images/sculpture/i_patinated_perspectives5.7.jpg 2824w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/sculpture/i_patinated_perspectives5.7%202.jpeg" alt="Patinated Perspectives" width="1897" height="2656" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="patinated-perspectives" hidden>
+                <div class="artwork-description">
+                    <p><strong>Patinated Perspectives</strong></p>
+                    <p>2024</p>
+                    <p>Recycled steel, patina, bamboo charcoal</p>
+                    <p>75 x 45 x 45 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="echoes-of-extraction">
+                <img loading="lazy" decoding="async" src="../images/series/24%20echoes%20of%20extraction/i_spinal_bloom_in_situ5.7.jpg" alt="Spinal Bloom" width="3067" height="4293" data-lightbox-group="spinal-bloom" srcset="../images/responsive/480/series/24%20echoes%20of%20extraction/i_spinal_bloom_in_situ5.7.jpg 343w, ../images/responsive/series/24%20echoes%20of%20extraction/i_spinal_bloom_in_situ5.7.jpg 686w, ../images/series/24%20echoes%20of%20extraction/i_spinal_bloom_in_situ5.7.jpg 3067w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/24%20echoes%20of%20extraction/i_spinal_bloom_in_situ5.7%202.jpg" alt="Spinal Bloom" width="1649" height="2308" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="spinal-bloom" hidden>
+                <img src="../images/series/24%20echoes%20of%20extraction/i_spinal_bloom_in_situ5.7%203.jpg" alt="Spinal Bloom" width="2159" height="2159" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="spinal-bloom" hidden>
+                <div class="artwork-description">
+                    <p><strong>Spinal Bloom</strong></p>
+                    <p>2024</p>
+                    <p>Earthenware, glaze</p>
+                    <p>Variable dimensions, height 10 - 60 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+
+            <article class="work-item" data-medium="sculpture" data-series="echoes-of-extraction">
+                <img loading="lazy" decoding="async" src="../images/series/24%20echoes%20of%20extraction/i_fragile_beauty5.7.jpg" alt="Fragile Beauty" width="3107" height="4351" data-lightbox-group="fragile-beauty" srcset="../images/responsive/480/series/24%20echoes%20of%20extraction/i_fragile_beauty5.7.jpg 342w, ../images/responsive/series/24%20echoes%20of%20extraction/i_fragile_beauty5.7.jpg 685w, ../images/series/24%20echoes%20of%20extraction/i_fragile_beauty5.7.jpg 3107w" sizes="(max-width: 40rem) calc(100vw - 1.5rem), (max-width: 64rem) calc(50vw - 3rem), calc(25vw - 2rem)">
+                <img src="../images/series/24%20echoes%20of%20extraction/i_fragile_beauty%205.7%202.jpeg" alt="Fragile Beauty" width="3611" height="5056" loading="lazy" decoding="async" data-lightbox-only data-lightbox-group="fragile-beauty" hidden>
+                <div class="artwork-description">
+                    <p><strong>Fragile Beauty</strong></p>
+                    <p>2024</p>
+                    <p>Bioplastic made from a culture of bacteria and yeast</p>
+                    <p>23 x 12 x 16 cm</p>
+                    <p>Unique</p>
+                </div>
+            </article>
+            
+        </div>
+    </main>
+
+    <br><br>
+    <footer class="site-footer">
+        <p>&copy; 2026 Victor Guerin. All rights reserved.</p>
+    </footer>
+    <script src="/js/archive.js?v=20260729g" defer></script>
+    <script src="/js/series-essay.js?v=20260729b" defer></script>
+    <script src="/js/lightbox.js?v=20260729f" defer></script>
+    <script src="/js/image-protection.js?v=20260729a" defer></script>
+</body>
+</html>
