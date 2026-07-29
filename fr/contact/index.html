@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tdm-reservation" content="1">
+    <meta name="robots" content="index, follow, max-image-preview:none, noai, noimageai">
     <title>Contact | Victor Guerin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/styles.css">
+    <meta name="description" content="Coordonnées et inscription à la newsletter de l’artiste Victor Guerin.">
+    <link rel="canonical" href="https://victorguerin.com/fr/contact/">
+    <link rel="alternate" hreflang="en" href="https://victorguerin.com/contact/">
+    <link rel="alternate" hreflang="fr" href="https://victorguerin.com/fr/contact/">
+    <link rel="alternate" hreflang="x-default" href="https://victorguerin.com/contact/">
+    <meta property="og:title" content="Contact | Victor Guerin">
+    <meta property="og:description" content="Coordonnées et inscription à la newsletter de l’artiste Victor Guerin.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://victorguerin.com/fr/contact/">
+    <meta name="twitter:card" content="summary">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css?v=20260729o">
     <style>
         .newsletter-message {
             margin-top: 2em;
@@ -16,58 +30,64 @@
         }
     </style>
 </head>
-<body>
+<body class="flush-page">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
 
-    <header>
-        <div class="logo">
+    <header class="site-header">
+        <div class="logo site-brand">
             <a href="/fr/">VICTOR GUERIN</a>
         </div>
-        <nav>
+        <nav class="primary-nav" aria-label="Navigation principale">
             <ul>
-                <li><a href="/fr/a-propos/">À propos</a></li>
-                <li><a href="/fr/loudspeaker/">Loud Speaker</a></li>
                 <li><a href="/fr/oeuvres/">Œuvres</a></li>
                 <li><a href="/fr/expositions/">Expositions</a></li>
+                <li><a href="/fr/a-propos/">À propos</a></li>
                 <li><a href="/fr/cv/">CV</a></li>
-                <li><a href="/fr/contact/">Contact</a></li>
+                <li><a href="/fr/contact/" aria-current="page">Contact</a></li>
                 <li class="lang-item">
-                    <a href="/contact/" class="lang-switch" aria-label="View the English version">
-                        <img src="../../images/UK.png" alt="English" class="lang-flag">
-                    </a>
+                    <a href="/contact/" class="lang-switch" lang="en" hreflang="en" aria-label="View the English version">EN</a>
                 </li>
             </ul>
         </nav>
     </header>
 
+    <main id="main-content">
+
     <div class="container">
-        <h2 class="section-title">Contact</h2>
-        
-        <div class="row">
-            <div class="year">Info</div>
-            <div class="description">&nbsp;&nbsp;<a href="mailto:info@victorguerin.com">info@victorguerin.com</a></div>
+        <h1 class="section-title">Contact</h1>
+
+        <div class="contact-layout">
+            <div class="contact-details">
+                <div class="row">
+                    <div class="year">Info</div>
+                    <div class="description">&nbsp;&nbsp;<a href="mailto:info@victorguerin.com">info@victorguerin.com</a></div>
+                </div>
+                <div class="row">
+                    <div class="year">Instagram</div>
+                    <div class="description">&nbsp;&nbsp;<a href="https://www.instagram.com/victorguerin.fr" target="_blank" rel="noopener noreferrer">@victorguerin.fr</a></div>
+                </div>
+                <div class="row">
+                    <div class="year">LinkedIn</div>
+                    <div class="description">&nbsp;&nbsp;<a href="https://www.linkedin.com/in/guerinvictor/" target="_blank" rel="noopener noreferrer">in/guerinvictor</a></div>
+                </div>
+
+                <section class="contact-newsletter" aria-labelledby="newsletter-title">
+                    <h2 class="section-title" id="newsletter-title">Newsletter</h2>
+                    <p>Le meilleur moyen de rester informé(e).</p>
+                    <form id="newsletter-form" action="https://formspree.io/f/xgvewaey" method="POST">
+                        <label class="visually-hidden" for="newsletter-name">Prénom</label>
+                        <input id="newsletter-name" type="text" name="name" placeholder="Votre prénom" autocomplete="given-name" required>
+                        <label class="visually-hidden" for="newsletter-surname">Nom</label>
+                        <input id="newsletter-surname" type="text" name="surname" placeholder="Votre nom" autocomplete="family-name" required>
+                        <label class="visually-hidden" for="newsletter-email">E-mail</label>
+                        <input id="newsletter-email" type="email" name="email" placeholder="Votre e-mail" autocomplete="email" required>
+                        <button type="submit">S’inscrire à la newsletter</button>
+                        <p id="newsletter-success" class="newsletter-message" role="status" aria-live="polite">Merci pour votre inscription.</p>
+                    </form>
+                </section>
+            </div>
+
         </div>
-        <div class="row">
-            <div class="year">Presse</div>
-            <div class="description">&nbsp;&nbsp;<a href="mailto:press@victorguerin.com">press@victorguerin.com</a></div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="year">Instagram</div>
-            <div class="description">&nbsp;&nbsp;<a href="https://www.instagram.com/victorguerin.fr" target="_blank">@victorguerin.fr</a></div>
-        </div>
-        <div class="row">
-            <div class="year">LinkedIn</div>
-            <div class="description">&nbsp;&nbsp;<a href="https://www.linkedin.com/in/guerinvictor/" target="_blank">in/guerinvictor</a></div>
-        </div>
-        <br><br><br><br>
-        
-        <form id="newsletter-form" action="https://formspree.io/f/xgvewaey" method="POST">
-            <input type="text" name="name" placeholder="Votre prénom" required>
-            <input type="text" name="surname" placeholder="Votre nom" required>
-            <input type="email" name="email" placeholder="Votre e-mail" required>
-            <button type="submit">S’inscrire à la newsletter</button>
-            <p id="newsletter-success" class="newsletter-message">Merci pour votre inscription.</p>
-        </form>
     </div>
         
     <script>
@@ -97,9 +117,11 @@
             });
         });
     </script>
+    </main>
 
-    <footer>
+    <footer class="site-footer">
         <p>&copy; 2026 Victor Guerin. Tous droits réservés.</p>
     </footer>
+    <script src="/js/image-protection.js?v=20260729a" defer></script>
 </body>
 </html>

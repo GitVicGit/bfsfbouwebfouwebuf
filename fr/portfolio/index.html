@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tdm-reservation" content="1">
+    <meta name="robots" content="index, follow, max-image-preview:none, noai, noimageai">
+    <title>Portfolio | Victor Guerin</title>
+    <meta name="description" content="Demandez un code pour télécharger les portfolios français et anglais ainsi que le dossier Millenium de Victor Guerin.">
+    <link rel="canonical" href="https://victorguerin.com/fr/portfolio/">
+    <link rel="alternate" hreflang="en" href="https://victorguerin.com/portfolio/">
+    <link rel="alternate" hreflang="fr" href="https://victorguerin.com/fr/portfolio/">
+    <link rel="alternate" hreflang="x-default" href="https://victorguerin.com/portfolio/">
+    <meta property="og:title" content="Portfolio | Victor Guerin">
+    <meta property="og:description" content="Demandez un code pour télécharger les portfolios français et anglais ainsi que le dossier Millenium de Victor Guerin.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://victorguerin.com/fr/portfolio/">
+    <meta name="twitter:card" content="summary">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css?v=20260729r">
+</head>
+<body class="portfolio-document-page">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <header class="site-header">
+        <div class="logo site-brand"><a href="/fr/">VICTOR GUERIN</a></div>
+        <nav class="primary-nav" aria-label="Navigation principale">
+            <ul>
+                <li><a href="/fr/oeuvres/">Œuvres</a></li>
+                <li><a href="/fr/expositions/">Expositions</a></li>
+                <li><a href="/fr/a-propos/">À propos</a></li>
+                <li><a href="/fr/cv/">CV</a></li>
+                <li><a href="/fr/contact/">Contact</a></li>
+                <li class="lang-item"><a href="/portfolio/" class="lang-switch" lang="en" hreflang="en" aria-label="View the English version">EN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="portfolio-page portfolio-download-page">
+        <header class="portfolio-intro">
+            <div>
+                <h1 class="visually-hidden">Portfolio</h1>
+                <p>Les documents suivants sont disponibles au téléchargement. Pour demander un code de téléchargement, merci de <a href="/fr/contact/">me contacter</a>.</p>
+            </div>
+        </header>
+
+        <form
+            class="portfolio-download-form"
+            method="post"
+            data-protected-download-form
+            data-invalid-message="Le code de téléchargement est incorrect."
+            data-preparing-message="Préparation du téléchargement…"
+            data-success-message="Le téléchargement a commencé."
+            data-error-message="Le document n’a pas pu être téléchargé. Merci de réessayer."
+            data-unsupported-message="Les téléchargements protégés ne sont pas pris en charge par ce navigateur."
+        >
+            <div class="portfolio-code-field">
+                <label for="download-code">Code de téléchargement</label>
+                <input
+                    id="download-code"
+                    name="download-code"
+                    type="password"
+                    required
+                    autocomplete="off"
+                    autocapitalize="none"
+                    spellcheck="false"
+                    aria-describedby="download-code-help download-status"
+                    data-download-code
+                >
+                <p id="download-code-help" class="metadata-muted">Saisissez le code avant de choisir un document.</p>
+            </div>
+
+            <div class="portfolio-download-options">
+                <article class="portfolio-document">
+                    <div>
+                        <h2>Portfolio</h2>
+                        <p class="metadata-muted">Édition française</p>
+                    </div>
+                    <button class="portfolio-download-button" type="submit" data-download-id="portfolio-fr">Télécharger</button>
+                </article>
+
+                <article class="portfolio-document">
+                    <div>
+                        <h2>Portfolio</h2>
+                        <p class="metadata-muted">Édition anglaise</p>
+                    </div>
+                    <button class="portfolio-download-button" type="submit" data-download-id="portfolio-en">Télécharger</button>
+                </article>
+
+                <article class="portfolio-document">
+                    <div>
+                        <h2>Dossier Millenium</h2>
+                        <p class="metadata-muted">Édition française</p>
+                    </div>
+                    <button class="portfolio-download-button" type="submit" data-download-id="millenium-fr">Télécharger</button>
+                </article>
+            </div>
+
+            <p id="download-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+            <noscript><p>Ce téléchargement protégé nécessite JavaScript.</p></noscript>
+        </form>
+    </main>
+
+    <footer class="site-footer"><p>&copy; 2026 Victor Guerin. Tous droits réservés.</p></footer>
+    <script src="/js/protected-downloads.js?v=20260729a" defer></script>
+    <script src="/js/image-protection.js?v=20260729a" defer></script>
+</body>
+</html>
