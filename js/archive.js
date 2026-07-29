@@ -37,6 +37,7 @@
     ]);
     let layoutFrame = 0;
     let layoutRun = 0;
+    let canRevealLayout = false;
 
     function workYear(work) {
         const paragraphs = Array.from(work.querySelectorAll(".artwork-description p"));
@@ -122,9 +123,20 @@
         const currentRun = ++layoutRun;
         layoutFrame = requestAnimationFrame(() => {
             const visibleWorks = works.filter((work) => !work.hidden);
-            visibleWorks.forEach((work) => {
-                work.style.gridRowEnd = "auto";
-            });
+            const initialLayout = !grid.classList.contains("is-masonry");
+
+            if (initialLayout) {
+                visibleWorks.forEach((work) => {
+                    const spacing = Number.parseFloat(getComputedStyle(work).marginBottom) || 0;
+                    work.style.gridRowEnd = `span ${Math.ceil(work.scrollHeight + spacing)}`;
+                });
+                grid.classList.remove("is-measuring");
+                grid.classList.add("is-masonry");
+            } else {
+                visibleWorks.forEach((work) => {
+                    work.style.gridRowEnd = "auto";
+                });
+            }
 
             requestAnimationFrame(() => {
                 if (currentRun !== layoutRun) return;
@@ -140,6 +152,10 @@
                         const spacing = Number.parseFloat(getComputedStyle(work).marginBottom) || 0;
                         work.style.gridRowEnd = `span ${Math.ceil(work.scrollHeight + spacing)}`;
                     });
+                    if (canRevealLayout) {
+                        grid.classList.add("is-layout-ready");
+                        grid.removeAttribute("aria-busy");
+                    }
                 });
             });
         });
@@ -197,7 +213,8 @@
         if (!hash || options.has(hash)) applyFilter(hash, false);
     }
 
-    grid.classList.add("is-masonry");
+    grid.classList.add("is-measuring");
+    grid.setAttribute("aria-busy", "true");
     filters.hidden = false;
     filters.addEventListener("click", (event) => {
         const button = event.target.closest("button[data-filter]");
@@ -206,7 +223,20 @@
     window.addEventListener("hashchange", applyLocationHash);
     window.addEventListener("resize", layoutWorks);
     grid.querySelectorAll("img").forEach((image) => {
-        if (!image.complete) image.addEventListener("load", layoutWorks, { once: true });
+        if (!image.complete) {
+            image.addEventListener("load", () => {
+                if (grid.classList.contains("is-layout-ready")) layoutWorks();
+            }, { once: true });
+        }
     });
     applyLocationHash();
+
+    const fontReadiness = document.fonts ? document.fonts.ready : Promise.resolve();
+    Promise.race([
+        Promise.resolve(fontReadiness).catch(() => undefined),
+        new Promise((resolve) => window.setTimeout(resolve, 1000))
+    ]).then(() => {
+        canRevealLayout = true;
+        layoutWorks();
+    });
 })();

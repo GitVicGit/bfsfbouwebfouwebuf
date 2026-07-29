@@ -448,9 +448,20 @@ main {
     align-items: start;
 }
 
-.archive-page .grid-container.is-masonry .work-item {
+.archive-page .grid-container.is-masonry .work-item,
+.archive-page .grid-container.is-measuring .work-item {
     align-self: start;
     margin-bottom: var(--space-7);
+}
+
+.has-js .archive-page #work-grid:not(.is-layout-ready) {
+    min-height: 100svh;
+    visibility: hidden;
+}
+
+.archive-reveal-fallback .archive-page #work-grid:not(.is-layout-ready) {
+    min-height: 0;
+    visibility: visible;
 }
 
 #exhibitions .grid-container {
@@ -533,6 +544,10 @@ img[data-lightbox-only][hidden] {
 }
 
 .archive-filters[hidden] {
+    display: none;
+}
+
+.no-js .archive-filters {
     display: none;
 }
 
