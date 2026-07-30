@@ -1,23 +1,19 @@
 (() => {
     const grid = document.querySelector("#work-grid");
     const filters = document.querySelector(".archive-filters");
+    const archivePage = document.querySelector(".archive-page");
 
-    if (!grid || !filters) return;
+    if (!grid || !filters || !archivePage) return;
 
-    const buttons = Array.from(
-        filters.querySelectorAll("button[data-filter]")
-    );
-
-    const works = Array.from(
-        grid.querySelectorAll(".work-item")
-    );
-
+    const buttons = Array.from(filters.querySelectorAll("button[data-filter]"));
+    const works = Array.from(grid.querySelectorAll(".work-item"));
     const seriesIntroductions = Array.from(
         document.querySelectorAll("[data-series-introduction]")
     );
-
-    const archivePage = document.querySelector(".archive-page");
     const languageSwitch = document.querySelector(".lang-switch");
+    const loadingIndicator = document.querySelector(
+        ".archive-loading-indicator"
+    );
 
     const validFilters = new Set([
         "all",
@@ -40,8 +36,23 @@
         ["Topographie d’une Méditation II", 50]
     ]);
 
-    let layoutFrame = 0;
-    let layoutRun = 0;
+    const minimumLoadingTime = 180;
+    const maximumAssetWait = 3500;
+
+    let activeFilter = null;
+    let operationId = 0;
+    let resizeFrame = 0;
+    let resizeTimer = 0;
+
+    function nextFrame() {
+        return new Promise((resolve) => requestAnimationFrame(resolve));
+    }
+
+    function delay(milliseconds) {
+        return new Promise((resolve) => {
+            window.setTimeout(resolve, milliseconds);
+        });
+    }
 
     function workYear(work) {
         const year = Array.from(
@@ -68,18 +79,11 @@
             .slice()
             .sort((left, right) => {
                 const yearDifference = right.year - left.year;
+                if (yearDifference) return yearDifference;
 
-                if (yearDifference) {
-                    return yearDifference;
-                }
-
-                if (
-                    selected === "painting"
-                    && left.year === 2025
-                ) {
+                if (selected === "painting" && left.year === 2025) {
                     const leftOrder =
                         paintingOrder2025.get(left.title) || 1000;
-
                     const rightOrder =
                         paintingOrder2025.get(right.title) || 1000;
 
@@ -95,13 +99,126 @@
             });
     }
 
-    function alignNearlyLevelDescriptions(visibleWorks) {
-        const columnCount = getComputedStyle(grid)
-            .gridTemplateColumns
-            .split(" ")
-            .length;
+    function visibleWorks() {
+        return works.filter((work) => !work.hidden);
+    }
 
-        const descriptions = visibleWorks
+    function visiblePrimaryImages(currentWorks) {
+        return currentWorks
+            .map((work) =>
+                work.querySelector(
+                    "img:not([data-lightbox-only])"
+                )
+            )
+            .filter(Boolean);
+    }
+
+    function columnCount() {
+        const columns = getComputedStyle(grid).gridTemplateColumns;
+        return Math.max(1, columns.split(" ").filter(Boolean).length);
+    }
+
+    function imagesNeededBeforeReveal(images) {
+        /*
+         * Small series load completely. Larger archive views wait for
+         * two rows only. Every image already has width and height
+         * attributes, so later lazy loads cannot alter card geometry.
+         */
+        if (images.length <= 12) return images;
+
+        return images.slice(
+            0,
+            Math.min(images.length, columnCount() * 2)
+        );
+    }
+
+    function markImageReady(image) {
+        image.classList.add("is-image-ready");
+    }
+
+    async function settleImage(image) {
+        if (image.complete) {
+            try {
+                if (typeof image.decode === "function") {
+                    await image.decode();
+                }
+            } catch {
+                /*
+                 * A failed image must not leave the archive loading
+                 * indefinitely. Its declared dimensions still reserve
+                 * the correct layout space.
+                 */
+            }
+
+            markImageReady(image);
+            return;
+        }
+
+        await new Promise((resolve) => {
+            const finish = () => {
+                image.removeEventListener("load", finish);
+                image.removeEventListener("error", finish);
+                resolve();
+            };
+
+            image.addEventListener("load", finish, { once: true });
+            image.addEventListener("error", finish, { once: true });
+        });
+
+        try {
+            if (typeof image.decode === "function") {
+                await image.decode();
+            }
+        } catch {
+            // Loading or decoding failure is non-fatal.
+        }
+
+        markImageReady(image);
+    }
+
+    async function waitForAssets(currentWorks, includeFonts) {
+        const images = visiblePrimaryImages(currentWorks);
+        const priorityImages = imagesNeededBeforeReveal(images);
+
+        priorityImages.forEach((image, index) => {
+            image.loading = "eager";
+
+            if (index === 0) {
+                image.setAttribute("fetchpriority", "high");
+            }
+        });
+
+        const fontReadiness =
+            includeFonts && document.fonts
+                ? Promise.resolve(document.fonts.ready).catch(
+                    () => undefined
+                )
+                : Promise.resolve();
+
+        await Promise.race([
+            Promise.all([
+                fontReadiness,
+                Promise.all(priorityImages.map(settleImage))
+            ]),
+            delay(maximumAssetWait)
+        ]);
+    }
+
+    function setLoading(isLoading) {
+        archivePage.classList.toggle("is-loading", isLoading);
+        archivePage.setAttribute("aria-busy", String(isLoading));
+        grid.setAttribute("aria-busy", String(isLoading));
+
+        if (loadingIndicator) {
+            loadingIndicator.setAttribute(
+                "aria-hidden",
+                String(!isLoading)
+            );
+        }
+    }
+
+    function alignNearlyLevelDescriptions(currentWorks) {
+        const descriptions = currentWorks
             .map((work) =>
                 work.querySelector(".artwork-description")
             )
@@ -113,15 +230,12 @@
             );
         });
 
-        if (columnCount < 2 || !descriptions.length) {
-            return;
-        }
+        if (columnCount() < 2 || !descriptions.length) return;
 
         const lineHeight =
             Number.parseFloat(
                 getComputedStyle(descriptions[0]).lineHeight
             ) || 0;
-
         const maximumCorrection = lineHeight * 0.75;
 
         const sorted = descriptions
@@ -171,92 +285,37 @@
         alignGroup(group);
     }
 
-    function revealGrid() {
-        grid.classList.add("is-layout-ready");
-        grid.removeAttribute("aria-busy");
+    function setMasonrySpans(currentWorks) {
+        currentWorks.forEach((work) => {
+            const spacing =
+                Number.parseFloat(
+                    getComputedStyle(work).marginBottom
+                ) || 0;
+
+            /*
+             * Do not reset gridRowEnd to "auto". That was the source
+             * of the visible up-and-down jump between animation frames.
+             * scrollHeight reports the intrinsic card height while the
+             * existing span remains in place.
+             */
+            work.style.gridRowEnd =
+                `span ${Math.ceil(work.scrollHeight + spacing)}`;
+        });
     }
 
-    function layoutWorks() {
-        cancelAnimationFrame(layoutFrame);
+    async function layoutWorks(currentWorks) {
+        await nextFrame();
 
-        const currentRun = ++layoutRun;
+        setMasonrySpans(currentWorks);
+        grid.classList.remove("is-measuring");
+        grid.classList.add("is-masonry");
 
-        layoutFrame = requestAnimationFrame(() => {
-            try {
-                const visibleWorks = works.filter(
-                    (work) => !work.hidden
-                );
+        await nextFrame();
 
-                const initialLayout =
-                    !grid.classList.contains("is-masonry");
+        alignNearlyLevelDescriptions(currentWorks);
+        setMasonrySpans(currentWorks);
 
-                if (initialLayout) {
-                    visibleWorks.forEach((work) => {
-                        const spacing =
-                            Number.parseFloat(
-                                getComputedStyle(work).marginBottom
-                            ) || 0;
-
-                        work.style.gridRowEnd =
-                            `span ${Math.ceil(
-                                work.scrollHeight + spacing
-                            )}`;
-                    });
-
-                    grid.classList.remove("is-measuring");
-                    grid.classList.add("is-masonry");
-                } else {
-                    visibleWorks.forEach((work) => {
-                        work.style.gridRowEnd = "auto";
-                    });
-                }
-
-                requestAnimationFrame(() => {
-                    if (currentRun !== layoutRun) return;
-
-                    visibleWorks.forEach((work) => {
-                        const spacing =
-                            Number.parseFloat(
-                                getComputedStyle(work).marginBottom
-                            ) || 0;
-
-                        work.style.gridRowEnd =
-                            `span ${Math.ceil(
-                                work.scrollHeight + spacing
-                            )}`;
-                    });
-
-                    requestAnimationFrame(() => {
-                        if (currentRun !== layoutRun) return;
-
-                        alignNearlyLevelDescriptions(
-                            visibleWorks
-                        );
-
-                        visibleWorks.forEach((work) => {
-                            const spacing =
-                                Number.parseFloat(
-                                    getComputedStyle(work).marginBottom
-                                ) || 0;
-
-                            work.style.gridRowEnd =
-                                `span ${Math.ceil(
-                                    work.scrollHeight + spacing
-                                )}`;
-                        });
-
-                        revealGrid();
-                    });
-                });
-            } catch (error) {
-                revealGrid();
-
-                console.error(
-                    "Works archive layout failed",
-                    error
-                );
-            }
-        });
+        await nextFrame();
     }
 
     function syncLanguageSwitch() {
@@ -269,14 +328,10 @@
             );
 
             target.hash = location.hash;
-
             languageSwitch.href =
                 `${target.pathname}${target.search}${target.hash}`;
         } catch {
-            /*
-             * A language-link error must not prevent
-             * the archive filters from working.
-             */
+            // Language-link failure must not disable filtering.
         }
     }
 
@@ -289,24 +344,16 @@
 
             history.replaceState(null, "", url);
         } catch {
-            /*
-             * Filtering still works when History API
-             * access is unavailable.
-             */
+            // Filtering still works without the History API.
         }
     }
 
-    function applyFilter(filter, updateUrl = true) {
-        const selected = validFilters.has(filter)
-            ? filter
-            : "all";
-
+    function updateVisibleContent(selected) {
         orderWorks(selected);
 
         works.forEach((work) => {
             const matchesMedium =
                 work.dataset.medium === selected;
-
             const matchesSeries =
                 selected.startsWith("series-")
                 && work.dataset.series
@@ -321,9 +368,7 @@
         buttons.forEach((button) => {
             button.setAttribute(
                 "aria-pressed",
-                String(
-                    button.dataset.filter === selected
-                )
+                String(button.dataset.filter === selected)
             );
         });
 
@@ -335,26 +380,82 @@
                 }`;
         });
 
-        if (archivePage) {
-            archivePage.classList.toggle(
-                "has-series-introduction",
-                seriesIntroductions.some(
-                    (introduction) => !introduction.hidden
-                )
-            );
-        }
-
-        if (updateUrl) {
-            updateAddress(selected);
-        }
-
-        syncLanguageSwitch();
-        layoutWorks();
+        archivePage.classList.toggle(
+            "has-series-introduction",
+            seriesIntroductions.some(
+                (introduction) => !introduction.hidden
+            )
+        );
     }
 
-    function applyLocationHash() {
-        const hash = location.hash.slice(1);
+    async function applyFilter(
+        filter,
+        updateUrl = true,
+        force = false
+    ) {
+        const selected = validFilters.has(filter)
+            ? filter
+            : "all";
 
+        if (
+            !force
+            && selected === activeFilter
+            && grid.classList.contains("is-layout-ready")
+        ) {
+            return;
+        }
+
+        activeFilter = selected;
+        const currentOperation = ++operationId;
+        const startedAt = performance.now();
+
+        setLoading(true);
+        grid.classList.remove("is-layout-ready");
+
+        updateVisibleContent(selected);
+
+        if (updateUrl) updateAddress(selected);
+        syncLanguageSwitch();
+
+        const currentWorks = visibleWorks();
+
+        try {
+            await waitForAssets(
+                currentWorks,
+                !document.documentElement.classList.contains(
+                    "archive-ready"
+                )
+            );
+
+            if (currentOperation !== operationId) return;
+
+            await layoutWorks(currentWorks);
+
+            if (currentOperation !== operationId) return;
+
+            const elapsed = performance.now() - startedAt;
+            if (elapsed < minimumLoadingTime) {
+                await delay(minimumLoadingTime - elapsed);
+            }
+
+            if (currentOperation !== operationId) return;
+
+            grid.classList.add("is-layout-ready");
+            document.documentElement.classList.add("archive-ready");
+            document.documentElement.classList.remove(
+                "archive-reveal-fallback"
+            );
+            setLoading(false);
+        } catch (error) {
+            console.error("Works archive layout failed", error);
+            grid.classList.add("is-layout-ready");
+            document.documentElement.classList.add("archive-ready");
+            setLoading(false);
+        }
+    }
+
+    async function applyLocationHash() {
+        const hash = location.hash.slice(1);
         const linkedWork = hash
             ? document.getElementById(hash)
             : null;
@@ -363,105 +464,71 @@
             linkedWork
             && linkedWork.classList.contains("work-item")
         ) {
-            applyFilter(
+            await applyFilter(
                 linkedWork.dataset.medium || "all",
-                false
+                false,
+                true
             );
 
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    linkedWork.scrollIntoView({
-                        block: "start"
-                    });
-                });
-            });
-
+            linkedWork.scrollIntoView({ block: "start" });
             return;
         }
 
-        applyFilter(
+        await applyFilter(
             validFilters.has(hash) ? hash : "all",
-            false
+            false,
+            true
         );
     }
 
-    /*
-     * Attach each filter directly so a layout,
-     * URL or language-switch error cannot disable
-     * all the filter buttons.
-     */
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
-            applyFilter(
-                button.dataset.filter || "all"
-            );
+            applyFilter(button.dataset.filter || "all");
         });
     });
 
-    /*
-     * Prioritise the first visible row.
-     */
-    Array.from(
-        grid.querySelectorAll(
-            ".work-item img:not([data-lightbox-only])"
-        )
-    )
-        .slice(0, 4)
-        .forEach((image, index) => {
-            image.removeAttribute("loading");
-            image.loading = "eager";
-
-            if (index === 0) {
-                image.setAttribute(
-                    "fetchpriority",
-                    "high"
-                );
-            }
-        });
-
-    grid.classList.add("is-measuring");
-    grid.setAttribute("aria-busy", "true");
     filters.hidden = false;
+    grid.classList.add("is-measuring");
+    setLoading(true);
 
-    window.addEventListener(
-        "hashchange",
-        applyLocationHash
-    );
-
-    window.addEventListener(
-        "resize",
-        layoutWorks
-    );
-
-    grid.querySelectorAll("img").forEach((image) => {
-        if (!image.complete) {
+    /*
+     * Images outside the initial reveal set remain lazy-loaded. Their
+     * intrinsic width and height attributes reserve their space, so no
+     * masonry recalculation is needed when they finish loading.
+     */
+    grid.querySelectorAll(
+        "img:not([data-lightbox-only])"
+    ).forEach((image) => {
+        if (image.complete) markImageReady(image);
+        else {
             image.addEventListener(
                 "load",
-                () => {
-                    if (
-                        grid.classList.contains(
-                            "is-layout-ready"
-                        )
-                    ) {
-                        layoutWorks();
-                    }
-                },
+                () => markImageReady(image),
+                { once: true }
+            );
+            image.addEventListener(
+                "error",
+                () => markImageReady(image),
                 { once: true }
             );
         }
     });
 
+    window.addEventListener("hashchange", applyLocationHash);
+
+    window.addEventListener("resize", () => {
+        window.clearTimeout(resizeTimer);
+
+        resizeTimer = window.setTimeout(() => {
+            cancelAnimationFrame(resizeFrame);
+
+            resizeFrame = requestAnimationFrame(() => {
+                const currentWorks = visibleWorks();
+                alignNearlyLevelDescriptions(currentWorks);
+                setMasonrySpans(currentWorks);
+            });
+        }, 120);
+    });
+
     applyLocationHash();
-
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready
-            .then(layoutWorks)
-            .catch(() => undefined);
-    }
-
-    window.addEventListener(
-        "load",
-        layoutWorks,
-        { once: true }
-    );
 })();

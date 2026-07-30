@@ -18,14 +18,22 @@
     <meta name="twitter:card" content="summary">
     <script>
         document.documentElement.classList.replace("no-js", "has-js");
+
+        /*
+         * Emergency fallback only: if the archive script cannot run,
+         * reveal the static grid rather than leaving the page blank.
+         */
         window.setTimeout(() => {
-            document.documentElement.classList.add("archive-reveal-fallback");
-        }, 2500);
+            if (!document.documentElement.classList.contains("archive-ready")) {
+                document.documentElement.classList.add("archive-reveal-fallback");
+                document.querySelector(".archive-page")?.classList.remove("is-loading");
+            }
+        }, 8000);
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css?v=20260730a">
+    <link rel="stylesheet" href="/css/styles.css?v=20260730b">
 </head>
 <body class="flush-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -46,7 +54,7 @@
         </nav>
     </header>
 
-    <main id="main-content" class="archive-page" data-lightbox-gallery>
+    <main id="main-content" class="archive-page is-loading" data-lightbox-gallery>
         <h1 class="visually-hidden">Works</h1>
 
         <div class="archive-toolbar">
@@ -71,6 +79,11 @@
             <a class="archive-portfolio-link" href="/portfolio/">Portfolio</a>
         </div>
         <noscript><p class="archive-noscript">All works are shown. <a href="/deposit/">Read about Deposit</a>. Enable JavaScript to filter by medium or related works.</p></noscript>
+
+        <div class="archive-loading-indicator" role="status" aria-live="polite" aria-hidden="false">
+            <span class="archive-loading-indicator__spinner" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading works</span>
+        </div>
 
         <section class="series-introduction series-introduction--deposit" data-series-introduction="deposit" hidden aria-labelledby="series-deposit-title">
             <h2 class="series-introduction__title" id="series-deposit-title">DEPOSIT</h2>
@@ -721,7 +734,7 @@
     <footer class="site-footer">
         <p>&copy; 2026 Victor Guerin. All rights reserved.</p>
     </footer>
-    <script src="/js/archive.js?v=20260730a" defer></script>
+    <script src="/js/archive.js?v=20260730b" defer></script>
     <script src="/js/series-essay.js?v=20260729b" defer></script>
     <script src="/js/lightbox.js?v=20260729f" defer></script>
     <script src="/js/image-protection.js?v=20260729a" defer></script>

@@ -454,14 +454,63 @@ main {
     margin-bottom: var(--space-7);
 }
 
-.has-js .archive-page #work-grid:not(.is-layout-ready) {
-    min-height: 100svh;
-    visibility: hidden;
+/*
+ * The works menu remains visible while the current result set is prepared.
+ * The grid stays in the document flow so image dimensions can be measured
+ * and lazy loading can continue, but it is not painted until the masonry
+ * spans are stable.
+ */
+.has-js .archive-page #work-grid {
+    transition: opacity 120ms ease;
+}
+
+.has-js .archive-page #work-grid:not(.is-layout-ready),
+.has-js .archive-page.is-loading #work-grid,
+.has-js .archive-page.is-loading .series-introduction:not([hidden]) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.archive-loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 950;
+    display: none;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.has-js .archive-page.is-loading .archive-loading-indicator {
+    display: grid;
+}
+
+.archive-loading-indicator__spinner {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 1px solid rgba(22, 22, 22, 0.2);
+    border-top-color: var(--color-ink);
+    border-radius: 50%;
+    animation: archive-spinner 700ms linear infinite;
+}
+
+@keyframes archive-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.archive-reveal-fallback .archive-loading-indicator {
+    display: none !important;
 }
 
 .archive-reveal-fallback .archive-page #work-grid:not(.is-layout-ready) {
-    min-height: 0;
-    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 #exhibitions .grid-container {
