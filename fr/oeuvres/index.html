@@ -18,14 +18,23 @@
     <meta name="twitter:card" content="summary">
     <script>
         document.documentElement.classList.replace("no-js", "has-js");
+
+        /*
+         * Secours uniquement : si le script de l’archive ne peut pas
+         * s’exécuter, afficher la grille statique plutôt que laisser
+         * la page vide.
+         */
         window.setTimeout(() => {
-            document.documentElement.classList.add("archive-reveal-fallback");
-        }, 2500);
+            if (!document.documentElement.classList.contains("archive-ready")) {
+                document.documentElement.classList.add("archive-reveal-fallback");
+                document.querySelector(".archive-page")?.classList.remove("is-loading");
+            }
+        }, 8000);
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/styles.css?v=20260729t">
+    <link rel="stylesheet" href="/css/styles.css?v=20260731a">
 </head>
 <body class="flush-page">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
@@ -46,11 +55,11 @@
         </nav>
     </header>
 
-    <main id="main-content" class="archive-page" data-lightbox-gallery>
+    <main id="main-content" class="archive-page is-loading" data-lightbox-gallery>
         <h1 class="visually-hidden">Œuvres</h1>
 
         <div class="archive-toolbar">
-            <div class="archive-filters" aria-label="Filtrer les œuvres">
+            <div class="archive-filters" aria-label="Filtrer les œuvres" hidden>
                 <div class="archive-filter-set" role="group" aria-label="Médium">
                     <button type="button" aria-controls="work-grid" data-filter="all" aria-pressed="true">Sélection</button>
                     <button type="button" aria-controls="work-grid" data-filter="sculpture" aria-pressed="false">Sculpture</button>
@@ -71,6 +80,12 @@
             <a class="archive-portfolio-link" href="/fr/portfolio/">Portfolio</a>
         </div>
         <noscript><p class="archive-noscript">Toutes les œuvres sont affichées. <a href="/fr/deposit/">Lire la présentation de Deposit</a>. Activez JavaScript pour filtrer par médium ou œuvres associées.</p></noscript>
+
+        <div class="archive-loading-indicator" role="status" aria-live="polite" aria-hidden="false">
+            <span class="archive-loading-indicator__spinner" aria-hidden="true"></span>
+            <span class="visually-hidden">Chargement des œuvres</span>
+        </div>
+
 
         <section class="series-introduction series-introduction--deposit" data-series-introduction="deposit" hidden aria-labelledby="series-deposit-title">
             <h2 class="series-introduction__title" id="series-deposit-title">DEPOSIT</h2>
@@ -721,7 +736,7 @@
     <footer class="site-footer">
         <p>&copy; 2026 Victor Guerin. Tous droits réservés.</p>
     </footer>
-    <script src="/js/archive.js?v=20260729g" defer></script>
+    <script src="/js/archive.js?v=20260731a" defer></script>
     <script src="/js/series-essay.js?v=20260729b" defer></script>
     <script src="/js/lightbox.js?v=20260729f" defer></script>
     <script src="/js/image-protection.js?v=20260729a" defer></script>

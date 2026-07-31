@@ -43,6 +43,8 @@
     let operationId = 0;
     let resizeFrame = 0;
     let resizeTimer = 0;
+    let repairFrame = 0;
+    let repairFollowUpFrame = 0;
 
     function nextFrame() {
         return new Promise((resolve) => requestAnimationFrame(resolve));
@@ -285,22 +287,79 @@
         alignGroup(group);
     }
 
-    function setMasonrySpans(currentWorks) {
-        currentWorks.forEach((work) => {
-            const spacing =
-                Number.parseFloat(
-                    getComputedStyle(work).marginBottom
-                ) || 0;
+    function setWorkSpan(work) {
+        if (!work || work.hidden) return;
 
-            /*
-             * Do not reset gridRowEnd to "auto". That was the source
-             * of the visible up-and-down jump between animation frames.
-             * scrollHeight reports the intrinsic card height while the
-             * existing span remains in place.
-             */
-            work.style.gridRowEnd =
-                `span ${Math.ceil(work.scrollHeight + spacing)}`;
+        /*
+         * A one-column archive does not need masonry. Standard document
+         * flow is simpler and cannot overlap when an image loads late.
+         */
+        if (columnCount() < 2) {
+            work.style.removeProperty("grid-row-end");
+            return;
+        }
+
+        const spacing =
+            Number.parseFloat(
+                getComputedStyle(work).marginBottom
+            ) || 0;
+
+        /*
+         * Two safety pixels absorb fractional rounding between the
+         * image, caption and one-pixel implicit grid rows.
+         */
+        const requiredHeight =
+            Math.ceil(work.scrollHeight + spacing) + 2;
+
+        work.style.gridRowEnd = `span ${requiredHeight}`;
+    }
+
+    function setMasonrySpans(currentWorks) {
+        currentWorks.forEach(setWorkSpan);
+    }
+
+    function scheduleMasonryRepair(alignDescriptions = true) {
+        if (
+            archivePage.classList.contains("is-loading")
+            || !grid.classList.contains("is-layout-ready")
+        ) {
+            return;
+        }
+
+        cancelAnimationFrame(repairFrame);
+        cancelAnimationFrame(repairFollowUpFrame);
+
+        repairFrame = requestAnimationFrame(() => {
+            const currentWorks = visibleWorks();
+            setMasonrySpans(currentWorks);
+
+            repairFollowUpFrame = requestAnimationFrame(() => {
+                if (alignDescriptions) {
+                    alignNearlyLevelDescriptions(currentWorks);
+                }
+
+                setMasonrySpans(currentWorks);
+            });
         });
+    }
+
+    function repairChangedWork(work) {
+        if (
+            !work
+            || work.hidden
+            || archivePage.classList.contains("is-loading")
+            || !grid.classList.contains("is-layout-ready")
+        ) {
+            return;
+        }
+
+        /*
+         * ResizeObserver and image load callbacks run before painting.
+         * Updating the changed card immediately prevents its old span
+         * from being painted over the card below it.
+         */
+        setWorkSpan(work);
+        scheduleMasonryRepair();
     }
 
     async function layoutWorks(currentWorks) {
@@ -492,27 +551,66 @@
     setLoading(true);
 
     /*
-     * Images outside the initial reveal set remain lazy-loaded. Their
-     * intrinsic width and height attributes reserve their space, so no
-     * masonry recalculation is needed when they finish loading.
+     * Responsive derivatives, decoding and webfont changes can alter a
+     * card after the initial reveal. Repair its masonry span whenever
+     * the image or caption changes size.
      */
-    grid.querySelectorAll(
-        "img:not([data-lightbox-only])"
-    ).forEach((image) => {
-        if (image.complete) markImageReady(image);
-        else {
-            image.addEventListener(
-                "load",
-                () => markImageReady(image),
-                { once: true }
-            );
-            image.addEventListener(
-                "error",
-                () => markImageReady(image),
-                { once: true }
-            );
+    const contentResizeObserver =
+        typeof ResizeObserver === "function"
+            ? new ResizeObserver((entries) => {
+                const affectedWorks = new Set();
+
+                entries.forEach((entry) => {
+                    const work = entry.target.closest(".work-item");
+                    if (work) affectedWorks.add(work);
+                });
+
+                affectedWorks.forEach(repairChangedWork);
+            })
+            : null;
+
+    works.forEach((work) => {
+        const image = work.querySelector(
+            "img:not([data-lightbox-only])"
+        );
+        const description = work.querySelector(
+            ".artwork-description"
+        );
+
+        if (image) {
+            const finishImage = () => {
+                markImageReady(image);
+                repairChangedWork(work);
+            };
+
+            if (image.complete) {
+                markImageReady(image);
+            } else {
+                image.addEventListener(
+                    "load",
+                    finishImage,
+                    { once: true }
+                );
+                image.addEventListener(
+                    "error",
+                    finishImage,
+                    { once: true }
+                );
+            }
+
+            contentResizeObserver?.observe(image);
+        }
+
+        if (description) {
+            contentResizeObserver?.observe(description);
         }
     });
+
+    if (document.fonts?.ready) {
+        Promise.resolve(document.fonts.ready)
+            .then(() => scheduleMasonryRepair())
+            .catch(() => undefined);
+    }
 
     window.addEventListener("hashchange", applyLocationHash);
 
@@ -524,10 +622,11 @@
 
             resizeFrame = requestAnimationFrame(() => {
                 const currentWorks = visibleWorks();
+                setMasonrySpans(currentWorks);
                 alignNearlyLevelDescriptions(currentWorks);
                 setMasonrySpans(currentWorks);
             });
-        }, 120);
+        }, 80);
     });
 
     applyLocationHash();

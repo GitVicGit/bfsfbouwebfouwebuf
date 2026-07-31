@@ -2135,6 +2135,22 @@ li {
         gap-block: var(--space-7);
     }
 
+    /*
+     * A one-column works archive uses normal document flow. Masonry
+     * spans are unnecessary here and can only create overlap if a lazy
+     * image changes height while the visitor is scrolling.
+     */
+    .archive-page .grid-container.is-masonry {
+        grid-auto-rows: auto;
+        row-gap: var(--space-7);
+    }
+
+    .archive-page .grid-container.is-masonry .work-item,
+    .archive-page .grid-container.is-measuring .work-item {
+        grid-row-end: auto !important;
+        margin-bottom: 0;
+    }
+
     .home-film__content {
         padding: var(--space-4);
     }
