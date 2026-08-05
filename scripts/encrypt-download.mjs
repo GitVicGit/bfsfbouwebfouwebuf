@@ -38,6 +38,7 @@ const encryptionKey = await webcrypto.subtle.importKey(
 );
 const iv = webcrypto.getRandomValues(new Uint8Array(12));
 const source = await readFile(inputPath);
+const magic = inputPath.toLowerCase().endsWith(".zip") ? "VGZIP001" : "VGPDF001";
 const encrypted = await webcrypto.subtle.encrypt(
     { name: "AES-GCM", iv },
     encryptionKey,
@@ -51,11 +52,12 @@ await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(
     outputPath,
     Buffer.concat([
-        Buffer.from("VGPDF001", "ascii"),
+        Buffer.from(magic, "ascii"),
         Buffer.from(iv),
         Buffer.from(encrypted)
     ])
 );
 
 console.log(`Encrypted ${inputPath} -> ${outputPath}`);
+console.log(`Protected format: ${magic}`);
 console.log(`Key verifier: ${verifier}`);

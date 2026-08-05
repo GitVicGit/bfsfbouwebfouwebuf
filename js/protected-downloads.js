@@ -24,12 +24,16 @@
             verifier: "afd4beeaf233e8ab4a70a4d85b982e32fe9005b29f63cfd59e1d19bd55a56782",
             documents: {
                 "loud-speaker-press-en": {
-                    source: "/documents/downloads/loud-speaker-press-en.vgpdf",
-                    filename: "Victor Guerin - Loud Speaker Press Release EN.pdf"
+                    source: "/documents/downloads/loud-speaker-press-en.vgzip",
+                    filename: "Victor Guerin | Loud Speaker.zip",
+                    mimeType: "application/zip",
+                    magic: "VGZIP001"
                 },
                 "loud-speaker-press-fr": {
-                    source: "/documents/downloads/loud-speaker-press-fr.vgpdf",
-                    filename: "Victor Guerin - Loud Speaker Press Release FR.pdf"
+                    source: "/documents/downloads/loud-speaker-press-fr.vgzip",
+                    filename: "Victor Guerin | Loud Speaker FR.zip",
+                    mimeType: "application/zip",
+                    magic: "VGZIP001"
                 }
             }
         }
@@ -111,7 +115,7 @@
 
             const payload = new Uint8Array(await response.arrayBuffer());
             const magic = decoder.decode(payload.slice(0, 8));
-            if (magic !== "VGPDF001" || payload.length <= 36) {
+            if (magic !== (documentRecord.magic || "VGPDF001") || payload.length <= 36) {
                 throw new Error("Invalid protected file");
             }
 
@@ -123,7 +127,7 @@
                 encrypted
             );
             const url = URL.createObjectURL(
-                new Blob([decrypted], { type: "application/pdf" })
+                new Blob([decrypted], { type: documentRecord.mimeType || "application/pdf" })
             );
             const link = document.createElement("a");
             link.href = url;
