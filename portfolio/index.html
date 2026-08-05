@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="tdm-reservation" content="1">
     <meta name="robots" content="index, follow, max-image-preview:none, noai, noimageai">
-    <title>Portfolio | Victor Guerin</title>
-    <meta name="description" content="Request a download code for Victor Guerin’s English and French portfolios and Dossier Millenium.">
+    <title>Documents | Victor Guerin</title>
+    <meta name="description" content="Request download codes for Victor Guerin’s portfolios, Dossier Millenium and Loud Speaker press dossiers.">
     <link rel="canonical" href="https://victorguerin.com/portfolio/">
     <link rel="alternate" hreflang="en" href="https://victorguerin.com/portfolio/">
     <link rel="alternate" hreflang="fr" href="https://victorguerin.com/fr/portfolio/">
     <link rel="alternate" hreflang="x-default" href="https://victorguerin.com/portfolio/">
-    <meta property="og:title" content="Portfolio | Victor Guerin">
-    <meta property="og:description" content="Request a download code for Victor Guerin’s English and French portfolios and Dossier Millenium.">
+    <meta property="og:title" content="Documents | Victor Guerin">
+    <meta property="og:description" content="Request download codes for Victor Guerin’s portfolios, Dossier Millenium and Loud Speaker press dossiers.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://victorguerin.com/portfolio/">
     <meta name="twitter:card" content="summary">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css?v=20260729r">
+    <link rel="stylesheet" href="../css/styles.css?v=20260805a">
 </head>
 <body class="portfolio-document-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -41,7 +41,7 @@
     <main id="main-content" class="portfolio-page portfolio-download-page">
         <header class="portfolio-intro">
             <div>
-                <h1 class="visually-hidden">Portfolio</h1>
+                <h1 class="visually-hidden">Documents</h1>
                 <p>The following documents are available to download. To request a download code, please <a href="/contact/">contact me</a>.</p>
             </div>
         </header>
@@ -50,6 +50,7 @@
             class="portfolio-download-form"
             method="post"
             data-protected-download-form
+            data-download-group="portfolio"
             data-invalid-message="The download code is incorrect."
             data-preparing-message="Preparing your download…"
             data-success-message="Your download has started."
@@ -101,10 +102,58 @@
             <p id="download-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
             <noscript><p>This protected download requires JavaScript.</p></noscript>
         </form>
+
+        <section class="portfolio-protected-section" aria-labelledby="loud-speaker-press-title">
+            <h2 id="loud-speaker-press-title" class="portfolio-protected-title">Dossier Presse Loud Speaker</h2>
+            <p class="metadata-muted">This dossier uses a separate download code.</p>
+
+            <form
+                class="portfolio-download-form"
+                method="post"
+                data-protected-download-form
+                data-download-group="press"
+                data-invalid-message="The download code is incorrect."
+                data-preparing-message="Preparing your download…"
+                data-success-message="Your download has started."
+                data-error-message="The document could not be downloaded. Please try again."
+                data-unsupported-message="Protected downloads are not supported by this browser."
+            >
+                <div class="portfolio-code-field">
+                    <label for="press-download-code">Press dossier download code</label>
+                    <input
+                        id="press-download-code"
+                        name="press-download-code"
+                        type="password"
+                        required
+                        autocomplete="off"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        aria-describedby="press-download-code-help press-download-status"
+                        data-download-code
+                    >
+                    <p id="press-download-code-help" class="metadata-muted">Enter the separate code before choosing an edition.</p>
+                </div>
+
+                <div class="portfolio-download-options">
+                    <article class="portfolio-document">
+                        <div><h3>English edition</h3></div>
+                        <button class="portfolio-download-button" type="submit" data-download-id="loud-speaker-press-en">Download</button>
+                    </article>
+
+                    <article class="portfolio-document">
+                        <div><h3>French edition</h3></div>
+                        <button class="portfolio-download-button" type="submit" data-download-id="loud-speaker-press-fr">Download</button>
+                    </article>
+                </div>
+
+                <p id="press-download-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+                <noscript><p>This protected download requires JavaScript.</p></noscript>
+            </form>
+        </section>
     </main>
 
     <footer class="site-footer"><p>&copy; 2026 Victor Guerin. All rights reserved.</p></footer>
-    <script src="/js/protected-downloads.js?v=20260729a" defer></script>
+    <script src="/js/protected-downloads.js?v=20260805a" defer></script>
     <script src="/js/image-protection.js?v=20260729a" defer></script>
 </body>
 </html>

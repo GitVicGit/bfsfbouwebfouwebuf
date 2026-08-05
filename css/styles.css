@@ -828,6 +828,29 @@ img[data-lightbox-only][hidden] {
     padding-bottom: var(--space-9);
 }
 
+.portfolio-download-page > .portfolio-download-form {
+    padding-bottom: var(--space-8);
+}
+
+.portfolio-protected-section {
+    width: 100%;
+    padding-bottom: var(--space-9);
+}
+
+.portfolio-protected-title {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-base);
+    font-weight: 700;
+}
+
+.portfolio-protected-section > p {
+    margin: 0 0 var(--space-5);
+}
+
+.portfolio-protected-section .portfolio-download-form {
+    padding-bottom: 0;
+}
+
 .portfolio-code-field {
     display: grid;
     width: min(100%, 22rem);
@@ -866,12 +889,14 @@ img[data-lightbox-only][hidden] {
 }
 
 .portfolio-document h2,
+.portfolio-document h3,
 .portfolio-document p {
     margin: 0;
     font-size: var(--text-base);
 }
 
-.portfolio-document h2 {
+.portfolio-document h2,
+.portfolio-document h3 {
     font-weight: 700;
 }
 
