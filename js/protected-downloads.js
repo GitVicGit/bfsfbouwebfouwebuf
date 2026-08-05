@@ -7,15 +7,15 @@
             verifier: "c473c68fa551713e953dfebf66e5137c62263912dc7ea24a7d7dc09477a9b358",
             documents: {
                 "portfolio-en": {
-                    source: "/portfolio/downloads/portfolio-en.vgpdf",
+                    source: "/documents/downloads/portfolio-en.vgpdf",
                     filename: "V Guerin - Portfolio EN.pdf"
                 },
                 "portfolio-fr": {
-                    source: "/portfolio/downloads/portfolio-fr.vgpdf",
+                    source: "/documents/downloads/portfolio-fr.vgpdf",
                     filename: "V Guerin - Portfolio FR.pdf"
                 },
                 "millenium-fr": {
-                    source: "/portfolio/downloads/millenium-fr.vgpdf",
+                    source: "/documents/downloads/millenium-fr.vgpdf",
                     filename: "V Guerin - 2027 MILLENIUM FR.pdf"
                 }
             }
@@ -24,11 +24,11 @@
             verifier: "afd4beeaf233e8ab4a70a4d85b982e32fe9005b29f63cfd59e1d19bd55a56782",
             documents: {
                 "loud-speaker-press-en": {
-                    source: "/portfolio/downloads/loud-speaker-press-en.vgpdf",
+                    source: "/documents/downloads/loud-speaker-press-en.vgpdf",
                     filename: "Victor Guerin - Loud Speaker Press Release EN.pdf"
                 },
                 "loud-speaker-press-fr": {
-                    source: "/portfolio/downloads/loud-speaker-press-fr.vgpdf",
+                    source: "/documents/downloads/loud-speaker-press-fr.vgpdf",
                     filename: "Victor Guerin - Loud Speaker Press Release FR.pdf"
                 }
             }

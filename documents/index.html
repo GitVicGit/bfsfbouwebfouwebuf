@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css?v=20260805b">
+    <link rel="stylesheet" href="../css/styles.css?v=20260805c">
 </head>
 <body class="portfolio-document-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -46,112 +46,78 @@
             </div>
         </header>
 
-        <form
-            class="portfolio-download-form"
-            method="post"
-            data-protected-download-form
-            data-download-group="portfolio"
-            data-invalid-message="The download code is incorrect."
-            data-preparing-message="Preparing your download…"
-            data-success-message="Your download has started."
-            data-error-message="The document could not be downloaded. Please try again."
-            data-unsupported-message="Protected downloads are not supported by this browser."
-        >
-            <div class="portfolio-code-field">
-                <label for="download-code">Download code</label>
-                <input
-                    id="download-code"
-                    name="download-code"
-                    type="password"
-                    required
-                    autocomplete="off"
-                    autocapitalize="none"
-                    spellcheck="false"
-                    aria-describedby="download-code-help download-status"
-                    data-download-code
-                >
-                <p id="download-code-help" class="metadata-muted">Enter the code before choosing a document.</p>
-            </div>
+        <div class="portfolio-download-groups">
+            <section class="portfolio-download-group" aria-labelledby="loud-speaker-documents-title">
+                <h2 id="loud-speaker-documents-title">Loud Speaker Press Release</h2>
+                <div class="portfolio-download-list">
+                    <form class="portfolio-document" method="post" data-protected-download-form data-download-group="press" data-invalid-message="The download code is incorrect." data-preparing-message="Preparing your download…" data-success-message="Your download has started." data-error-message="The document could not be downloaded. Please try again." data-unsupported-message="Protected downloads are not supported by this browser.">
+                        <p class="portfolio-document-edition">English edition</p>
+                        <div class="portfolio-document-actions">
+                            <label class="visually-hidden" for="loud-speaker-en-code">Download code for the English Loud Speaker press release</label>
+                            <input id="loud-speaker-en-code" name="download-code" type="password" required autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter code" aria-describedby="loud-speaker-en-status" data-download-code>
+                            <button class="portfolio-download-button" type="submit" data-download-id="loud-speaker-press-en">Download</button>
+                        </div>
+                        <p id="loud-speaker-en-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+                    </form>
 
-            <div class="portfolio-download-options">
-                <article class="portfolio-document">
-                    <div>
-                        <h2>Portfolio</h2>
-                        <p class="metadata-muted">English edition</p>
-                    </div>
-                    <button class="portfolio-download-button" type="submit" data-download-id="portfolio-en">Download</button>
-                </article>
+                    <form class="portfolio-document" method="post" data-protected-download-form data-download-group="press" data-invalid-message="The download code is incorrect." data-preparing-message="Preparing your download…" data-success-message="Your download has started." data-error-message="The document could not be downloaded. Please try again." data-unsupported-message="Protected downloads are not supported by this browser.">
+                        <p class="portfolio-document-edition">French edition</p>
+                        <div class="portfolio-document-actions">
+                            <label class="visually-hidden" for="loud-speaker-fr-code">Download code for the French Loud Speaker press release</label>
+                            <input id="loud-speaker-fr-code" name="download-code" type="password" required autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter code" aria-describedby="loud-speaker-fr-status" data-download-code>
+                            <button class="portfolio-download-button" type="submit" data-download-id="loud-speaker-press-fr">Download</button>
+                        </div>
+                        <p id="loud-speaker-fr-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+                    </form>
+                </div>
+            </section>
 
-                <article class="portfolio-document">
-                    <div>
-                        <h2>Portfolio</h2>
-                        <p class="metadata-muted">French edition</p>
-                    </div>
-                    <button class="portfolio-download-button" type="submit" data-download-id="portfolio-fr">Download</button>
-                </article>
+            <section class="portfolio-download-group" aria-labelledby="portfolio-documents-title">
+                <h2 id="portfolio-documents-title">Portfolio</h2>
+                <div class="portfolio-download-list">
+                    <form class="portfolio-document" method="post" data-protected-download-form data-download-group="portfolio" data-invalid-message="The download code is incorrect." data-preparing-message="Preparing your download…" data-success-message="Your download has started." data-error-message="The document could not be downloaded. Please try again." data-unsupported-message="Protected downloads are not supported by this browser.">
+                        <p class="portfolio-document-edition">English edition</p>
+                        <div class="portfolio-document-actions">
+                            <label class="visually-hidden" for="portfolio-en-code">Download code for the English portfolio</label>
+                            <input id="portfolio-en-code" name="download-code" type="password" required autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter code" aria-describedby="portfolio-en-status" data-download-code>
+                            <button class="portfolio-download-button" type="submit" data-download-id="portfolio-en">Download</button>
+                        </div>
+                        <p id="portfolio-en-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+                    </form>
 
-                <article class="portfolio-document">
-                    <div>
-                        <h2>Dossier Millenium</h2>
-                        <p class="metadata-muted">French edition</p>
-                    </div>
-                    <button class="portfolio-download-button" type="submit" data-download-id="millenium-fr">Download</button>
-                </article>
-            </div>
+                    <form class="portfolio-document" method="post" data-protected-download-form data-download-group="portfolio" data-invalid-message="The download code is incorrect." data-preparing-message="Preparing your download…" data-success-message="Your download has started." data-error-message="The document could not be downloaded. Please try again." data-unsupported-message="Protected downloads are not supported by this browser.">
+                        <p class="portfolio-document-edition">French edition</p>
+                        <div class="portfolio-document-actions">
+                            <label class="visually-hidden" for="portfolio-fr-code">Download code for the French portfolio</label>
+                            <input id="portfolio-fr-code" name="download-code" type="password" required autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter code" aria-describedby="portfolio-fr-status" data-download-code>
+                            <button class="portfolio-download-button" type="submit" data-download-id="portfolio-fr">Download</button>
+                        </div>
+                        <p id="portfolio-fr-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+                    </form>
+                </div>
+            </section>
 
-            <p id="download-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+            <section class="portfolio-download-group" aria-labelledby="millenium-document-title">
+                <h2 id="millenium-document-title">Dossier Millenium</h2>
+                <div class="portfolio-download-list">
+                    <form class="portfolio-document" method="post" data-protected-download-form data-download-group="portfolio" data-invalid-message="The download code is incorrect." data-preparing-message="Preparing your download…" data-success-message="Your download has started." data-error-message="The document could not be downloaded. Please try again." data-unsupported-message="Protected downloads are not supported by this browser.">
+                        <p class="portfolio-document-edition">French edition</p>
+                        <div class="portfolio-document-actions">
+                            <label class="visually-hidden" for="millenium-fr-code">Download code for Dossier Millenium</label>
+                            <input id="millenium-fr-code" name="download-code" type="password" required autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter code" aria-describedby="millenium-fr-status" data-download-code>
+                            <button class="portfolio-download-button" type="submit" data-download-id="millenium-fr">Download</button>
+                        </div>
+                        <p id="millenium-fr-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+                    </form>
+                </div>
+            </section>
+
             <noscript><p>This protected download requires JavaScript.</p></noscript>
-        </form>
-
-        <div class="portfolio-protected-section">
-            <form
-                class="portfolio-download-form"
-                method="post"
-                aria-label="Loud Speaker press dossier downloads"
-                data-protected-download-form
-                data-download-group="press"
-                data-invalid-message="The download code is incorrect."
-                data-preparing-message="Preparing your download…"
-                data-success-message="Your download has started."
-                data-error-message="The document could not be downloaded. Please try again."
-                data-unsupported-message="Protected downloads are not supported by this browser."
-            >
-                <div class="portfolio-code-field">
-                    <label for="press-download-code">Press dossier download code</label>
-                    <input
-                        id="press-download-code"
-                        name="press-download-code"
-                        type="password"
-                        required
-                        autocomplete="off"
-                        autocapitalize="none"
-                        spellcheck="false"
-                        aria-describedby="press-download-code-help press-download-status"
-                        data-download-code
-                    >
-                    <p id="press-download-code-help" class="metadata-muted">Enter the separate code before choosing an edition.</p>
-                </div>
-
-                <div class="portfolio-download-options">
-                    <article class="portfolio-document">
-                        <div><h3>English edition</h3></div>
-                        <button class="portfolio-download-button" type="submit" data-download-id="loud-speaker-press-en">Download</button>
-                    </article>
-
-                    <article class="portfolio-document">
-                        <div><h3>French edition</h3></div>
-                        <button class="portfolio-download-button" type="submit" data-download-id="loud-speaker-press-fr">Download</button>
-                    </article>
-                </div>
-
-                <p id="press-download-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
-                <noscript><p>This protected download requires JavaScript.</p></noscript>
-            </form>
         </div>
     </main>
 
     <footer class="site-footer"><p>&copy; 2026 Victor Guerin. All rights reserved.</p></footer>
-    <script src="/js/protected-downloads.js?v=20260805a" defer></script>
+    <script src="/js/protected-downloads.js?v=20260805b" defer></script>
     <script src="/js/image-protection.js?v=20260729a" defer></script>
 </body>
 </html>
