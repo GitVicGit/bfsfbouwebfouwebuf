@@ -829,7 +829,8 @@ img[data-lightbox-only][hidden] {
 }
 
 .portfolio-download-page > .portfolio-download-form {
-    padding-bottom: var(--space-8);
+    margin-top: var(--space-7);
+    padding-bottom: var(--space-4);
 }
 
 .portfolio-protected-section {
@@ -837,17 +838,8 @@ img[data-lightbox-only][hidden] {
     padding-bottom: var(--space-9);
 }
 
-.portfolio-protected-title {
-    margin: 0 0 var(--space-2);
-    font-size: var(--text-base);
-    font-weight: 700;
-}
-
-.portfolio-protected-section > p {
-    margin: 0 0 var(--space-5);
-}
-
 .portfolio-protected-section .portfolio-download-form {
+    margin-top: 0;
     padding-bottom: 0;
 }
 
