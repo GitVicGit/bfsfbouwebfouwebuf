@@ -14,6 +14,10 @@
                     source: "/documents/downloads/portfolio-fr.vgpdf",
                     filename: "V Guerin - Portfolio FR.pdf"
                 },
+                "millenium-en": {
+                    source: "/documents/downloads/millenium-en.vgpdf",
+                    filename: "V Guerin - 2027 MILLENIUM EN.pdf"
+                },
                 "millenium-fr": {
                     source: "/documents/downloads/millenium-fr.vgpdf",
                     filename: "V Guerin - 2027 MILLENIUM FR.pdf"

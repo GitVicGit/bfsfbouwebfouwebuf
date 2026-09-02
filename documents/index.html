@@ -101,6 +101,15 @@
                 <h2 id="millenium-document-title">Dossier Millenium</h2>
                 <div class="portfolio-download-list">
                     <form class="portfolio-document" method="post" data-protected-download-form data-download-group="portfolio" data-invalid-message="The download code is incorrect." data-preparing-message="Preparing your download…" data-success-message="Your download has started." data-error-message="The document could not be downloaded. Please try again." data-unsupported-message="Protected downloads are not supported by this browser.">
+                        <p class="portfolio-document-edition">English edition</p>
+                        <div class="portfolio-document-actions">
+                            <label class="visually-hidden" for="millenium-en-code">Download code for the English Dossier Millenium</label>
+                            <input id="millenium-en-code" name="download-code" type="password" required autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter code" aria-describedby="millenium-en-status" data-download-code>
+                            <button class="portfolio-download-button" type="submit" data-download-id="millenium-en">Download</button>
+                        </div>
+                        <p id="millenium-en-status" class="portfolio-download-status" role="status" aria-live="polite" data-download-status></p>
+                    </form>
+                    <form class="portfolio-document" method="post" data-protected-download-form data-download-group="portfolio" data-invalid-message="The download code is incorrect." data-preparing-message="Preparing your download…" data-success-message="Your download has started." data-error-message="The document could not be downloaded. Please try again." data-unsupported-message="Protected downloads are not supported by this browser.">
                         <p class="portfolio-document-edition">French edition</p>
                         <div class="portfolio-document-actions">
                             <label class="visually-hidden" for="millenium-fr-code">Download code for Dossier Millenium</label>
@@ -117,7 +126,7 @@
     </main>
 
     <footer class="site-footer"><p>&copy; 2026 Victor Guerin. All rights reserved.</p></footer>
-    <script src="/js/protected-downloads.js?v=20260805c" defer></script>
+    <script src="/js/protected-downloads.js?v=20260902a" defer></script>
     <script src="/js/image-protection.js?v=20260729a" defer></script>
 </body>
 </html>
