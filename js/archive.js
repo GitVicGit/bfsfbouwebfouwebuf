@@ -97,7 +97,9 @@
         selectionTitle:
             work
                 .querySelector(".artwork-description strong")
-                ?.textContent.trim() || ""
+                ?.textContent.trim() || "",
+        selectionRemainderOrder:
+            (index * 17) % works.length
     }));
 
     function orderWorks(selected) {
@@ -114,6 +116,11 @@
 
                     if (leftOrder !== rightOrder) {
                         return leftOrder - rightOrder;
+                    }
+
+                    if (!Number.isFinite(leftOrder)) {
+                        return left.selectionRemainderOrder
+                            - right.selectionRemainderOrder;
                     }
                 }
 
