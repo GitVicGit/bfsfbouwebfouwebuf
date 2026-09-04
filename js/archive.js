@@ -36,6 +36,26 @@
         ["Topographie d’une Méditation II", 50]
     ]);
 
+    const selectionOrder = new Map([
+        ["Loud Speaker", 10],
+        ["Deposit WR", 20],
+        ["Cracks of Potential", 30],
+        ["Acanthus Ascendant", 40],
+        ["Acanthus Ascendant (Ascension d’Acanthe)", 40],
+        ["Liminal", 50],
+        ["Neumünster's Scholar's Rock", 60],
+        ["Pierre de lettré de Neumünster", 60],
+        ["Deposit RP", 70],
+        ["Foamscape", 80],
+        ["Tri-Hex", 90],
+        ["Echoes of Extraction", 100],
+        ["Genesis of Steel I", 110],
+        ["Genèse de l’acier I", 110],
+        ["Nature’s Chromatic Symphony", 120],
+        ["Symphonie Chromatique de la Nature", 120],
+        ["Scottish Fantasy", 130]
+    ]);
+
     const minimumLoadingTime = 180;
     const maximumAssetWait = 3500;
 
@@ -73,13 +93,30 @@
         title:
             work
                 .querySelector("img:not([data-lightbox-only])")
-                ?.alt.trim() || ""
+                ?.alt.trim() || "",
+        selectionTitle:
+            work
+                .querySelector(".artwork-description strong")
+                ?.textContent.trim() || ""
     }));
 
     function orderWorks(selected) {
         workRecords
             .slice()
             .sort((left, right) => {
+                if (selected === "all") {
+                    const leftOrder =
+                        selectionOrder.get(left.selectionTitle)
+                        ?? Number.POSITIVE_INFINITY;
+                    const rightOrder =
+                        selectionOrder.get(right.selectionTitle)
+                        ?? Number.POSITIVE_INFINITY;
+
+                    if (leftOrder !== rightOrder) {
+                        return leftOrder - rightOrder;
+                    }
+                }
+
                 const yearDifference = right.year - left.year;
                 if (yearDifference) return yearDifference;
 
