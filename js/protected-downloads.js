@@ -7,11 +7,11 @@
             verifier: "c473c68fa551713e953dfebf66e5137c62263912dc7ea24a7d7dc09477a9b358",
             documents: {
                 "portfolio-en": {
-                    source: "/documents/downloads/portfolio-en.vgpdf",
+                    source: "/documents/downloads/portfolio-en.vgpdf?v=20260908",
                     filename: "V Guerin - Portfolio EN.pdf"
                 },
                 "portfolio-fr": {
-                    source: "/documents/downloads/portfolio-fr.vgpdf",
+                    source: "/documents/downloads/portfolio-fr.vgpdf?v=20260908",
                     filename: "V Guerin - Portfolio FR.pdf"
                 },
                 "millenium-en": {
