@@ -19,6 +19,7 @@
 - Inspect routes, shared assets, deployment configuration, and available commands before changing the implementation.
 - Do not remove or overwrite unrelated user changes or untracked files.
 - At the end of every task, run every build, validation, lint, and test command available in the repository. This repository currently has no package manifest or task runner, so also run relevant static checks such as `git diff --check`, local route and asset resolution, HTML landmark and heading checks, JSON-LD parsing, and inline JavaScript syntax validation.
+- Before publishing, run `python3 scripts/check_date_copy.py` and review every reported undated "Upcoming" / "À venir" entry. Mark dated future-facing CV entries with a semantic `<time datetime="YYYY-MM-DD">` start date so the check can flag them after they begin.
 - Before proposing a commit or pull request, provide a concise diff summary and list every changed file.
 
 # Review guidelines
