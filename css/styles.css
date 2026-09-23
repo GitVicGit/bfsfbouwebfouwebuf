@@ -1117,6 +1117,12 @@ li {
     margin: 0 auto var(--space-6);
 }
 
+.video-foamscape {
+    width: min(100%, 64rem);
+    aspect-ratio: 1280 / 1138;
+    margin: 0;
+}
+
 /* Artwork-first project pages */
 .project-page {
     width: 100%;
@@ -1789,13 +1795,13 @@ li {
     line-height: 1.75;
 }
 
-.foamscape-video {
+.project-moving-image.foamscape-video {
     min-height: 0;
-    padding: var(--space-6) 0;
+    padding: 0;
 }
 
-.foamscape-video .video-vertical {
-    width: min(42.75svh, 35rem, calc(100vw - (2 * var(--page-gutter))));
+.foamscape-video .video-foamscape {
+    width: 100%;
 }
 
 .foamscape-description {
@@ -2263,10 +2269,6 @@ li {
 
     .project-moving-image .video-vertical {
         width: min(88vw, 30rem);
-    }
-
-    .foamscape-video .video-vertical {
-        width: min(42.75svh, 88vw, 30rem);
     }
 
     .archive-toolbar {
