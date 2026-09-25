@@ -1,22 +1,33 @@
 (() => {
     "use strict";
 
-    const iframe = document.querySelector(".home-film__media iframe");
+    const video = document.querySelector(".home-film__video");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (!iframe || !window.Vimeo || typeof window.Vimeo.Player !== "function") {
+    if (!video) {
         return;
     }
 
-    const player = new window.Vimeo.Player(iframe);
-    const disableCaptions = () => {
-        player.disableTextTrack().catch(() => {});
+    const startVideo = () => {
+        if (reducedMotion.matches) {
+            video.pause();
+            return;
+        }
+
+        video.muted = true;
+
+        if (video.currentTime < 5) {
+            video.currentTime = 5;
+        }
+
+        video.play().catch(() => {});
     };
 
-    disableCaptions();
-    player.on("play", disableCaptions);
-    player.on("texttrackchange", (track) => {
-        if (track && track.language) {
-            disableCaptions();
-        }
-    });
+    if (video.readyState >= 1) {
+        startVideo();
+    } else {
+        video.addEventListener("loadedmetadata", startVideo, { once: true });
+    }
+
+    reducedMotion.addEventListener?.("change", startVideo);
 })();

@@ -307,21 +307,16 @@ main {
     background: #111;
 }
 
-.home-film__media img {
+.home-film__media img,
+.home-film__media video {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.home-film__media iframe {
+.home-film__media video {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: max(100vw, 177.78vh);
-    height: max(56.25vw, 100vh);
-    border: 0;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
+    inset: 0;
 }
 
 .home-film__scrim {
@@ -2354,7 +2349,7 @@ li {
         animation-iteration-count: 1 !important;
     }
 
-    .home-film__media iframe {
+    .home-film__media video {
         display: none;
     }
 }
