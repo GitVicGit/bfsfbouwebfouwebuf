@@ -443,6 +443,21 @@
         currentWorks.forEach(setWorkSpan);
     }
 
+    function setMasonryReady(currentWorks) {
+        const needsSpans = columnCount() > 1;
+        const spansAreReady = currentWorks.every((work) => (
+            work.hidden
+            || !needsSpans
+            || Boolean(work.style.gridRowEnd)
+        ));
+
+        if (spansAreReady) {
+            grid.dataset.masonryReady = "true";
+        } else {
+            delete grid.dataset.masonryReady;
+        }
+    }
+
     function scheduleMasonryRepair(alignDescriptions = true) {
         if (
             archivePage.classList.contains("is-loading")
@@ -458,6 +473,7 @@
             const currentWorks = visibleWorks();
             positionWorksAcrossColumns(currentWorks);
             setMasonrySpans(currentWorks);
+            setMasonryReady(currentWorks);
 
             repairFollowUpFrame = requestAnimationFrame(() => {
                 if (alignDescriptions) {
@@ -465,6 +481,7 @@
                 }
 
                 setMasonrySpans(currentWorks);
+                setMasonryReady(currentWorks);
             });
         });
     }
@@ -489,17 +506,20 @@
     }
 
     async function layoutWorks(currentWorks) {
+        delete grid.dataset.masonryReady;
         await nextFrame();
 
         positionWorksAcrossColumns(currentWorks);
         setMasonrySpans(currentWorks);
         grid.classList.remove("is-measuring");
         grid.classList.add("is-masonry");
+        setMasonryReady(currentWorks);
 
         await nextFrame();
 
         alignNearlyLevelDescriptions(currentWorks);
         setMasonrySpans(currentWorks);
+        setMasonryReady(currentWorks);
 
         await nextFrame();
     }
@@ -733,6 +753,8 @@
         if (description) {
             contentResizeObserver?.observe(description);
         }
+
+        contentResizeObserver?.observe(work);
     });
 
     if (document.fonts?.ready) {
@@ -751,10 +773,12 @@
 
             resizeFrame = requestAnimationFrame(() => {
                 const currentWorks = visibleWorks();
+                delete grid.dataset.masonryReady;
                 positionWorksAcrossColumns(currentWorks);
                 setMasonrySpans(currentWorks);
                 alignNearlyLevelDescriptions(currentWorks);
                 setMasonrySpans(currentWorks);
+                setMasonryReady(currentWorks);
             });
         }, 80);
     });

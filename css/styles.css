@@ -437,13 +437,13 @@ main {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.archive-page .grid-container.is-masonry {
+.archive-page .grid-container.is-masonry[data-masonry-ready="true"] {
     grid-auto-rows: 1px;
     row-gap: 0;
     align-items: start;
 }
 
-.archive-page .grid-container.is-masonry .work-item,
+.archive-page .grid-container.is-masonry[data-masonry-ready="true"] .work-item,
 .archive-page .grid-container.is-measuring .work-item {
     align-self: start;
     margin-bottom: var(--space-7);
@@ -2196,12 +2196,12 @@ li {
      * spans are unnecessary here and can only create overlap if a lazy
      * image changes height while the visitor is scrolling.
      */
-    .archive-page .grid-container.is-masonry {
+    .archive-page .grid-container.is-masonry[data-masonry-ready="true"] {
         grid-auto-rows: auto;
         row-gap: var(--space-7);
     }
 
-    .archive-page .grid-container.is-masonry .work-item,
+    .archive-page .grid-container.is-masonry[data-masonry-ready="true"] .work-item,
     .archive-page .grid-container.is-measuring .work-item {
         grid-row-end: auto !important;
         margin-bottom: 0;
