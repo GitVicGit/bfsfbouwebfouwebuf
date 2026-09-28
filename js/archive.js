@@ -86,29 +86,6 @@
         return Number.parseInt(year, 10) || 0;
     }
 
-    function setImageFormat(work) {
-        if (work.dataset.imageFormat) return;
-
-        const image = work.querySelector(
-            "img:not([data-lightbox-only])"
-        );
-        const width = Number.parseFloat(image?.getAttribute("width"));
-        const height = Number.parseFloat(image?.getAttribute("height"));
-
-        if (!width || !height) return;
-
-        const ratio = width / height;
-
-        work.dataset.imageFormat =
-            ratio > 1.1
-                ? "landscape"
-                : ratio < 0.9
-                    ? "portrait"
-                    : "square";
-    }
-
-    works.forEach(setImageFormat);
-
     const workRecords = works.map((work, index) => ({
         work,
         index,
@@ -169,65 +146,7 @@
     }
 
     function visibleWorks() {
-        return Array.from(
-            grid.querySelectorAll(".work-item:not([hidden])")
-        );
-    }
-
-    function positionWorksAcrossColumns(currentWorks) {
-        currentWorks.forEach((work) => {
-            work.style.removeProperty("grid-column-start");
-            delete work.dataset.gridAlignment;
-        });
-
-        if (columnCount() !== 3) return;
-
-        function placeWork(work, start, span) {
-            work.style.setProperty(
-                "grid-column-start",
-                String(start)
-            );
-
-            work.dataset.gridAlignment =
-                start === 1
-                    ? "left"
-                    : start + span - 1 === 3
-                        ? "right"
-                        : "center";
-        }
-
-        let occupiedColumns = 0;
-        let currentRow = [];
-
-        currentWorks.forEach((work) => {
-            const span =
-                activeFilter === "all"
-                && work.classList.contains("work-item--featured")
-                    ? 2
-                    : 1;
-
-            if (span === 2 && occupiedColumns === 2) {
-                if (currentRow[1]) {
-                    placeWork(currentRow[1], 3, 1);
-                }
-                occupiedColumns = 0;
-                currentRow = [];
-            }
-
-            const start = occupiedColumns + 1;
-            placeWork(work, start, span);
-            currentRow.push(work);
-            occupiedColumns += span;
-
-            if (occupiedColumns === 3) {
-                occupiedColumns = 0;
-                currentRow = [];
-            }
-        });
-
-        if (occupiedColumns === 2 && currentRow.length === 2) {
-            placeWork(currentRow[1], 3, 1);
-        }
+        return works.filter((work) => !work.hidden);
     }
 
     function visiblePrimaryImages(currentWorks) {
@@ -443,21 +362,6 @@
         currentWorks.forEach(setWorkSpan);
     }
 
-    function setMasonryReady(currentWorks) {
-        const needsSpans = columnCount() > 1;
-        const spansAreReady = currentWorks.every((work) => (
-            work.hidden
-            || !needsSpans
-            || Boolean(work.style.gridRowEnd)
-        ));
-
-        if (spansAreReady) {
-            grid.dataset.masonryReady = "true";
-        } else {
-            delete grid.dataset.masonryReady;
-        }
-    }
-
     function scheduleMasonryRepair(alignDescriptions = true) {
         if (
             archivePage.classList.contains("is-loading")
@@ -471,9 +375,7 @@
 
         repairFrame = requestAnimationFrame(() => {
             const currentWorks = visibleWorks();
-            positionWorksAcrossColumns(currentWorks);
             setMasonrySpans(currentWorks);
-            setMasonryReady(currentWorks);
 
             repairFollowUpFrame = requestAnimationFrame(() => {
                 if (alignDescriptions) {
@@ -481,7 +383,6 @@
                 }
 
                 setMasonrySpans(currentWorks);
-                setMasonryReady(currentWorks);
             });
         });
     }
@@ -506,20 +407,16 @@
     }
 
     async function layoutWorks(currentWorks) {
-        delete grid.dataset.masonryReady;
         await nextFrame();
 
-        positionWorksAcrossColumns(currentWorks);
         setMasonrySpans(currentWorks);
         grid.classList.remove("is-measuring");
         grid.classList.add("is-masonry");
-        setMasonryReady(currentWorks);
 
         await nextFrame();
 
         alignNearlyLevelDescriptions(currentWorks);
         setMasonrySpans(currentWorks);
-        setMasonryReady(currentWorks);
 
         await nextFrame();
     }
@@ -556,8 +453,6 @@
 
     function updateVisibleContent(selected) {
         orderWorks(selected);
-
-        archivePage.dataset.activeFilter = selected;
 
         works.forEach((work) => {
             const matchesMedium =
@@ -753,8 +648,6 @@
         if (description) {
             contentResizeObserver?.observe(description);
         }
-
-        contentResizeObserver?.observe(work);
     });
 
     if (document.fonts?.ready) {
@@ -773,12 +666,9 @@
 
             resizeFrame = requestAnimationFrame(() => {
                 const currentWorks = visibleWorks();
-                delete grid.dataset.masonryReady;
-                positionWorksAcrossColumns(currentWorks);
                 setMasonrySpans(currentWorks);
                 alignNearlyLevelDescriptions(currentWorks);
                 setMasonrySpans(currentWorks);
-                setMasonryReady(currentWorks);
             });
         }, 80);
     });

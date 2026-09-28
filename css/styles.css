@@ -434,68 +434,19 @@ main {
 
 /* Works and exhibitions */
 .archive-page .grid-container {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.archive-page .grid-container.is-masonry[data-masonry-ready="true"] {
+.archive-page .grid-container.is-masonry {
     grid-auto-rows: 1px;
     row-gap: 0;
     align-items: start;
 }
 
-.archive-page .grid-container.is-masonry[data-masonry-ready="true"] .work-item,
+.archive-page .grid-container.is-masonry .work-item,
 .archive-page .grid-container.is-measuring .work-item {
     align-self: start;
     margin-bottom: var(--space-7);
-}
-
-/*
- * Preserve each artwork's full aspect ratio while giving common portrait,
- * square and landscape formats approximately the same visible image area.
- * The featured rhythm only applies once the archive has three columns;
- * tablet and mobile layouts remain straightforward and compact.
- */
-@media (min-width: 40.0625rem) {
-    .archive-page .work-item[data-image-format="portrait"] > img:not([data-lightbox-only]),
-    .archive-page .work-item[data-image-format="portrait"] > .lightbox-trigger,
-    .archive-page .work-item[data-image-format="portrait"] > .artwork-description,
-    .archive-page .work-item--project[data-image-format="portrait"] > a {
-        width: 67%;
-    }
-
-    .archive-page .work-item[data-image-format="square"] > img:not([data-lightbox-only]),
-    .archive-page .work-item[data-image-format="square"] > .lightbox-trigger,
-    .archive-page .work-item[data-image-format="square"] > .artwork-description,
-    .archive-page .work-item--project[data-image-format="square"] > a {
-        width: 82%;
-    }
-
-    .archive-page .work-item--project[data-image-format] > a > img,
-    .archive-page .work-item--project[data-image-format] > a > .artwork-description {
-        width: 100%;
-    }
-}
-
-@media (min-width: 64.0625rem) {
-    .archive-page[data-active-filter="all"] .work-item--featured {
-        grid-column-end: span 2;
-    }
-
-    .archive-page .work-item[data-grid-alignment="center"] > img:not([data-lightbox-only]),
-    .archive-page .work-item[data-grid-alignment="center"] > .lightbox-trigger,
-    .archive-page .work-item[data-grid-alignment="center"] > .artwork-description,
-    .archive-page .work-item--project[data-grid-alignment="center"] > a {
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .archive-page .work-item[data-grid-alignment="right"] > img:not([data-lightbox-only]),
-    .archive-page .work-item[data-grid-alignment="right"] > .lightbox-trigger,
-    .archive-page .work-item[data-grid-alignment="right"] > .artwork-description,
-    .archive-page .work-item--project[data-grid-alignment="right"] > a {
-        margin-right: 0;
-        margin-left: auto;
-    }
 }
 
 /*
@@ -2196,12 +2147,12 @@ li {
      * spans are unnecessary here and can only create overlap if a lazy
      * image changes height while the visitor is scrolling.
      */
-    .archive-page .grid-container.is-masonry[data-masonry-ready="true"] {
+    .archive-page .grid-container.is-masonry {
         grid-auto-rows: auto;
         row-gap: var(--space-7);
     }
 
-    .archive-page .grid-container.is-masonry[data-masonry-ready="true"] .work-item,
+    .archive-page .grid-container.is-masonry .work-item,
     .archive-page .grid-container.is-measuring .work-item {
         grid-row-end: auto !important;
         margin-bottom: 0;
