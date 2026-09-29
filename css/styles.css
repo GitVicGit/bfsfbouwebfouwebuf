@@ -5,7 +5,7 @@
 
 :root {
     /* Colour */
-    --color-paper: #f4f3ef;
+    --color-paper: #fff;
     --color-ink: #161616;
     --color-muted: #5f5e59;
     --color-rule: rgba(22, 22, 22, 0.22);
@@ -183,6 +183,13 @@ input:focus-visible {
 
 .flush-page .site-header {
     border-bottom: 0;
+}
+
+@media (min-width: 44.0625rem) {
+    .flush-page .site-header {
+        min-height: 4rem;
+        padding: var(--space-4) 0 var(--space-2);
+    }
 }
 
 .site-header .logo,
@@ -434,19 +441,281 @@ main {
 
 /* Works and exhibitions */
 .archive-page .grid-container {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    --archive-work-column-gap: clamp(2rem, 3vw, 3rem);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(3.5rem, 6vw, 7rem) var(--archive-work-column-gap);
+    align-items: start;
+    grid-auto-flow: row;
 }
 
-.archive-page .grid-container.is-masonry {
-    grid-auto-rows: 1px;
-    row-gap: 0;
+.archive-page[data-active-filter="series-antidote"] #work-grid,
+.archive-page[data-active-filter="series-ephemeral-structures"] #work-grid,
+.archive-page[data-active-filter="series-vase"] #work-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.archive-page[data-active-filter="series-ephemeral-structures"] #work-grid {
+    justify-content: flex-start;
+}
+
+.archive-page[data-active-filter="series-antidote"]
+    #work-grid .work-item,
+.archive-page[data-active-filter="series-ephemeral-structures"]
+    #work-grid .work-item,
+.archive-page[data-active-filter="series-vase"]
+    #work-grid .work-item {
+    flex: 0 0 calc(
+        (100% - var(--archive-work-column-gap)
+        - var(--archive-work-column-gap)
+        - var(--archive-work-column-gap)) / 4
+    );
+}
+
+.archive-page[data-active-filter="series-ephemeral-structures"]
+    #work-grid .work-item[data-layout-span="6"] {
+    flex-basis: calc(
+        (100% - var(--archive-work-column-gap)) / 2
+    );
+}
+
+.archive-page .work-item {
+    align-self: start;
+    grid-column: span 4;
+    min-width: 0;
+    padding-top: var(--work-row-offset, 0px);
+}
+
+.archive-page .work-item[data-layout-span="12"] {
+    grid-column: span 12;
+}
+
+.archive-page .work-item[data-layout-span="8"] {
+    grid-column: span 8;
+}
+
+.archive-page .work-item[data-layout-span="6"] {
+    grid-column: span 6;
+}
+
+.archive-page .work-item[data-layout-span="4"] {
+    grid-column: span 4;
+}
+
+.archive-page .work-item[data-layout-span="3"] {
+    grid-column: span 3;
+}
+
+.sculpture-series-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sculpture-series-column-gap);
     align-items: start;
 }
 
-.archive-page .grid-container.is-masonry .work-item,
-.archive-page .grid-container.is-measuring .work-item {
-    align-self: start;
-    margin-bottom: var(--space-7);
+.sculpture-series-grid[hidden] {
+    display: none;
+}
+
+.sculpture-series-card {
+    position: relative;
+    display: block;
+    flex: 0 0 calc(
+        (100% - var(--sculpture-series-column-gap)
+        - var(--sculpture-series-column-gap)
+        - var(--sculpture-series-column-gap)) / 4
+    );
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+}
+
+.sculpture-series-card[data-series="antidote"],
+.sculpture-series-card[data-series="ephemeral-structures"],
+.sculpture-series-card[data-series="vase"] {
+    flex-basis: calc(
+        (100% - var(--sculpture-series-column-gap)
+        - var(--sculpture-series-column-gap)
+        - var(--sculpture-series-column-gap)) / 6
+    );
+}
+
+.sculpture-series-card__stage {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+}
+
+.sculpture-series-card__stage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.sculpture-series-card[data-series="antidote"]
+    .sculpture-series-card__stage,
+.sculpture-series-card[data-series="ephemeral-structures"]
+    .sculpture-series-card__stage,
+.sculpture-series-card[data-series="vase"]
+    .sculpture-series-card__stage {
+    aspect-ratio: 2 / 3;
+}
+
+.sculpture-series-card[data-series="antidote"]
+    .sculpture-series-card__stage img,
+.sculpture-series-card[data-series="ephemeral-structures"]
+    .sculpture-series-card__stage img,
+.sculpture-series-card[data-series="vase"]
+    .sculpture-series-card__stage img {
+    object-fit: contain;
+}
+
+.sculpture-series-card[data-series="antidote"]
+    .sculpture-series-card__stage {
+    background: rgb(236, 236, 236);
+}
+
+.sculpture-series-card[data-series="antidote"]
+    .sculpture-series-card__stage img {
+    transform: scale(0.72);
+}
+
+.sculpture-series-card__title {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.75rem;
+    color: #fff;
+    background: rgba(43, 43, 43, 0.36);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    line-height: 1.4;
+    transition: background-color 140ms ease;
+}
+
+.sculpture-series-card__title::after {
+    content: none;
+}
+
+.sculpture-series-card:hover {
+    color: inherit;
+}
+
+.sculpture-series-card:hover .sculpture-series-card__title,
+.sculpture-series-card:focus-visible .sculpture-series-card__title {
+    background: rgba(43, 43, 43, 0.5);
+}
+
+.has-js .archive-page .sculpture-series-grid {
+    transition: opacity 120ms ease;
+}
+
+.has-js .archive-page.is-loading
+    .sculpture-series-grid:not([hidden]) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (min-width: 64.0625rem) {
+    .archive-page .work-item[data-layout-span]
+        img:not([data-lightbox-only]) {
+        width: auto;
+        max-width: 100%;
+        max-height: 64svh;
+        margin-inline: auto;
+        object-fit: contain;
+    }
+
+    .archive-page .work-item[data-layout-position="pair-left"] {
+        grid-column: 2 / span 5;
+    }
+
+    .archive-page .work-item[data-layout-position="pair-right"] {
+        grid-column: 7 / span 5;
+    }
+
+    .archive-page .work-item[data-layout-position="pair-left"]
+        img:not([data-lightbox-only]) {
+        margin-right: 0;
+    }
+
+    .archive-page .work-item[data-layout-position="pair-right"]
+        img:not([data-lightbox-only]) {
+        margin-left: 0;
+    }
+
+    .archive-page .work-item[data-layout-pair="equal-height"]
+        img:not([data-lightbox-only]) {
+        width: auto;
+        height: var(--paired-image-height, auto);
+        margin-inline: auto;
+    }
+
+    .archive-page .work-item[data-layout-pair="equal-height"]
+        [data-lightbox-only] {
+        height: auto;
+    }
+
+    .archive-page .work-item[data-layout-feature="verdant"]
+        img:not([data-lightbox-only]) {
+        max-height: 68svh;
+    }
+
+    .archive-page .work-item[data-layout-pair="wide-gap"]
+        img:not([data-lightbox-only]) {
+        max-height: 60svh;
+    }
+
+    .archive-page
+        .work-item[data-layout-pair="wide-gap"][data-layout-position="pair-left"] {
+        grid-column: 2 / span 5;
+    }
+
+    .archive-page
+        .work-item[data-layout-pair="wide-gap"][data-layout-position="pair-right"] {
+        grid-column: 7 / span 5;
+    }
+
+    .archive-page
+        .work-item[data-layout-pair="wide-gap"][data-layout-position="pair-left"]
+        img:not([data-lightbox-only]) {
+        margin-right: 0;
+        margin-left: auto;
+    }
+
+    .archive-page
+        .work-item[data-layout-pair="wide-gap"][data-layout-position="pair-right"]
+        img:not([data-lightbox-only]) {
+        margin-right: auto;
+        margin-left: 0;
+    }
+
+    .archive-page
+        .work-item[data-layout-pair="equal-height"][data-layout-position="pair-left"] {
+        grid-column: 1 / span 6;
+    }
+
+    .archive-page
+        .work-item[data-layout-pair="equal-height"][data-layout-position="pair-right"] {
+        grid-column: 7 / span 6;
+    }
+}
+
+.archive-page[data-active-filter="series-deposit"]
+    .work-item img:not([data-lightbox-only]) {
+    width: 100%;
+    aspect-ratio: 1;
+    max-height: none;
+    margin-inline: 0;
+    object-fit: contain;
 }
 
 /*
@@ -541,7 +810,7 @@ img[data-lightbox-only][hidden] {
 }
 
 .artwork-description {
-    padding-top: var(--description-align-offset, 0);
+    margin-inline-start: var(--description-inline-offset, 0px);
     font-size: var(--text-sm);
     line-height: 1.4;
     text-align: left;
@@ -553,9 +822,15 @@ img[data-lightbox-only][hidden] {
 
 /* Filterable works archive */
 .archive-page {
+    --sculpture-series-column-gap: clamp(1.5rem, 2.5vw, 2.75rem);
     width: 100%;
     max-width: var(--content-max);
+    min-height: calc(100svh - 4rem);
     margin-inline: auto;
+}
+
+.archive-page[data-active-filter="sculpture"] .archive-toolbar {
+    margin-bottom: var(--sculpture-series-column-gap);
 }
 
 .archive-toolbar {
@@ -564,7 +839,7 @@ img[data-lightbox-only][hidden] {
     gap: var(--space-5);
     align-items: center;
     margin: 0 0 var(--space-6);
-    padding: var(--space-3) 0;
+    padding: 0 0 var(--space-3);
     border-top: 1px solid var(--color-rule);
     border-bottom: 1px solid var(--color-rule);
 }
@@ -584,11 +859,13 @@ img[data-lightbox-only][hidden] {
 
 .archive-filters {
     display: grid;
-    gap: var(--space-1);
+    gap: 0;
 }
 
-.archive-filters[hidden] {
-    display: none;
+.has-js .archive-filters[hidden] {
+    display: grid;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .no-js .archive-filters {
@@ -602,6 +879,10 @@ img[data-lightbox-only][hidden] {
     align-items: center;
 }
 
+.archive-filter-set > :first-child {
+    padding-left: 0;
+}
+
 .archive-filter-label {
     display: inline-flex;
     align-items: center;
@@ -611,16 +892,6 @@ img[data-lightbox-only][hidden] {
     font-size: var(--text-sm);
 }
 
-.archive-filter-spacer {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2rem;
-    padding: var(--space-1) var(--space-3);
-    border: 1px solid transparent;
-    font-size: var(--text-sm);
-    visibility: hidden;
-}
-
 .archive-filters button,
 .archive-filter-option {
     display: inline-flex;
@@ -628,7 +899,7 @@ img[data-lightbox-only][hidden] {
     min-height: 2rem;
     padding: var(--space-1) var(--space-3);
     border: 1px solid transparent;
-    border-radius: 2rem;
+    border-radius: 0;
     background: transparent;
     color: var(--color-muted);
     font: inherit;
@@ -643,7 +914,27 @@ img[data-lightbox-only][hidden] {
 
 .archive-filters button[aria-pressed="true"],
 .archive-filter-option[aria-current="page"] {
-    border-color: var(--color-ink);
+    border-color: transparent;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25rem;
+}
+
+.archive-filter-option[aria-current="location"] {
+    color: var(--color-ink);
+}
+
+.archive-page[data-active-filter="sculpture"]
+    .archive-filter-set--collections button,
+.archive-page[data-active-filter="sculpture"]
+    .archive-filter-set--collections .archive-filter-option {
+    color: var(--color-ink);
+}
+
+.archive-page[data-active-filter^="series-"]
+    .archive-filter-set:first-child
+    [data-filter="sculpture"] {
     color: var(--color-ink);
 }
 
@@ -1793,10 +2084,19 @@ li {
 .project-moving-image.foamscape-video {
     min-height: 0;
     padding: 0;
+    background: transparent;
 }
 
 .foamscape-video .video-foamscape {
     width: 100%;
+    aspect-ratio: 9 / 8;
+    margin-inline: auto;
+}
+
+@media (min-width: 64.0625rem) {
+    .foamscape-video .video-foamscape {
+        width: min(100%, 64rem, calc(112.5svh - 6.75rem));
+    }
 }
 
 .foamscape-description {
@@ -1907,6 +2207,46 @@ li {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .archive-page .work-item,
+    .archive-page .work-item[data-layout-span] {
+        grid-column: span 1;
+    }
+
+    .archive-page .work-item[data-layout-span="12"] {
+        grid-column: 1 / -1;
+    }
+
+    .archive-page[data-active-filter="series-antidote"]
+        #work-grid .work-item,
+    .archive-page[data-active-filter="series-ephemeral-structures"]
+        #work-grid .work-item,
+    .archive-page[data-active-filter="series-vase"]
+        #work-grid .work-item {
+        flex-basis: calc(
+            (100% - var(--archive-work-column-gap)) / 2
+        );
+    }
+
+    .archive-page[data-active-filter="sculpture"] {
+        --sculpture-series-column-gap: clamp(1.5rem, 3vw, 2.25rem);
+    }
+
+    .sculpture-series-card {
+        flex-basis: calc(
+            (100% - var(--sculpture-series-column-gap)
+            - var(--sculpture-series-column-gap)) / 3
+        );
+    }
+
+    .sculpture-series-card[data-series="antidote"],
+    .sculpture-series-card[data-series="ephemeral-structures"],
+    .sculpture-series-card[data-series="vase"] {
+        flex-basis: calc(
+            (100% - var(--sculpture-series-column-gap)
+            - var(--sculpture-series-column-gap)) / 4.5
+        );
+    }
+
     .project-intro {
         grid-template-columns: 1fr;
         gap: var(--space-6);
@@ -1939,10 +2279,6 @@ li {
         margin-left: auto !important;
     }
 
-    .archive-page .grid-container {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .artwork-lightbox--landscape .artwork-lightbox__stage,
     .artwork-lightbox--portrait-stacked .artwork-lightbox__stage {
         padding: 4rem var(--space-6) var(--space-6);
@@ -1970,6 +2306,28 @@ li {
 
     .series-essay__expanded {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    .archive-page[data-active-filter="sculpture"] {
+        --sculpture-series-column-gap: var(--space-4);
+    }
+
+    .sculpture-series-grid {
+        gap: var(--space-4);
+    }
+
+    .sculpture-series-card {
+        flex-basis: calc(
+            (100% - var(--sculpture-series-column-gap)) / 2
+        );
+    }
+
+    .sculpture-series-card[data-series="antidote"],
+    .sculpture-series-card[data-series="ephemeral-structures"],
+    .sculpture-series-card[data-series="vase"] {
+        flex-basis: calc(
+            (100% - var(--sculpture-series-column-gap)) / 3
+        );
     }
 
     .series-essay__collapse {
@@ -2037,6 +2395,29 @@ li {
 }
 
 @media (max-width: 34rem) {
+    .archive-page .grid-container,
+    #exhibitions .grid-container {
+        grid-template-columns: 1fr;
+        gap-block: var(--space-7);
+    }
+
+    .archive-page .work-item,
+    .archive-page .work-item[data-layout-span],
+    .archive-page .work-item[data-layout-span="12"] {
+        grid-column: span 1;
+    }
+
+    .archive-page[data-active-filter="series-antidote"]
+        #work-grid .work-item,
+    .archive-page[data-active-filter="series-ephemeral-structures"]
+        #work-grid .work-item,
+    .archive-page[data-active-filter="series-ephemeral-structures"]
+        #work-grid .work-item[data-layout-span],
+    .archive-page[data-active-filter="series-vase"]
+        #work-grid .work-item {
+        flex-basis: 100%;
+    }
+
     html[lang="fr"] .artwork-lightbox__series-navigation {
         grid-template-columns: repeat(2, max-content);
         gap: 0 var(--space-4);
@@ -2134,28 +2515,6 @@ li {
 
     .section-title {
         margin-top: var(--space-6);
-    }
-
-    .archive-page .grid-container,
-    #exhibitions .grid-container {
-        grid-template-columns: 1fr;
-        gap-block: var(--space-7);
-    }
-
-    /*
-     * A one-column works archive uses normal document flow. Masonry
-     * spans are unnecessary here and can only create overlap if a lazy
-     * image changes height while the visitor is scrolling.
-     */
-    .archive-page .grid-container.is-masonry {
-        grid-auto-rows: auto;
-        row-gap: var(--space-7);
-    }
-
-    .archive-page .grid-container.is-masonry .work-item,
-    .archive-page .grid-container.is-measuring .work-item {
-        grid-row-end: auto !important;
-        margin-bottom: 0;
     }
 
     .home-film__content {
@@ -2269,10 +2628,6 @@ li {
     .archive-toolbar {
         align-items: flex-start;
         gap: var(--space-2);
-    }
-
-    .archive-page .grid-container {
-        grid-template-columns: 1fr;
     }
 
     .deposit-grid {
