@@ -5,7 +5,9 @@
 
     if (!grid || !filters || !archivePage) return;
 
-    const buttons = Array.from(filters.querySelectorAll("button[data-filter]"));
+    const buttons = Array.from(
+        filters.querySelectorAll("button[data-filter]")
+    );
     const works = Array.from(grid.querySelectorAll(".work-item"));
     const seriesIntroductions = Array.from(
         document.querySelectorAll("[data-series-introduction]")
@@ -14,15 +16,21 @@
     const loadingIndicator = document.querySelector(
         ".archive-loading-indicator"
     );
+    const sculptureSeriesGrid = document.querySelector(
+        "#sculpture-series-grid"
+    );
+    const isFrench = document.documentElement.lang === "fr";
 
-    const validFilters = new Set([
-        "all",
-        ...buttons
+    const validFilters = new Set(
+        buttons
             .map((button) => button.dataset.filter)
             .filter(Boolean)
-    ]);
+    );
+    const defaultFilter = buttons.find(
+        (button) => button.dataset.filter === "sculpture"
+    )?.dataset.filter || buttons[0]?.dataset.filter || "sculpture";
 
-    const paintingOrder2025 = new Map([
+    const paintingOrder = new Map([
         ["Genesis of Steel III", 10],
         ["Genesis of Steel I", 20],
         ["Genesis of Steel II", 30],
@@ -33,38 +41,176 @@
         ["Genèse de l’acier I", 20],
         ["Genèse de l’acier II", 30],
         ["Topographie d’une Méditation I", 40],
-        ["Topographie d’une Méditation II", 50]
+        ["Topographie d’une Méditation II", 50],
+        ["Nature’s Chromatic Symphony", 10],
+        ["Symphonie Chromatique de la Nature", 10],
+        ["Power of the Relics", 20],
+        ["Pouvoir des Reliques", 20],
+        ["Learn with me because I won't last for ever", 30],
+        ["Apprends avec moi car je ne durerai pas éternellement", 30],
+        ["Symphonie", 40]
     ]);
 
-    const selectionOrder = new Map([
-        ["Loud Speaker", 10],
-        ["Deposit WR", 20],
-        ["Cracks of Potential", 30],
+    const depositOrder = new Map([
+        ["Deposit GR", 10],
+        ["Deposit RP", 20],
+        ["Deposit GG", 30],
+        ["Deposit BG", 40],
+        ["Deposit RG", 50],
+        ["Deposit WR", 60],
+        ["Deposit BY", 70],
+        ["Deposit BR", 80],
+        ["Deposit BB", 90],
+        ["Deposit WG", 100]
+    ]);
+
+    const ephemeralOrder = new Map([
+        ["Tours et Détours", 10],
+        ["Scottish Fantasy", 20],
+        ["Euryale", 30],
+        ["L’Envers des Tours", 40],
+        ["La Grande Bocca", 50],
+        ["Tours Détourés", 60],
+        ["Impasse", 70]
+    ]);
+
+    const echoesOrder = new Map([
+        ["Echoes of Extraction", 10],
+        ["Spinal Bloom", 20],
+        ["Spinal Bloom (Éclosion d’Échine)", 20],
+        ["Fragile Beauty", 30],
         ["Acanthus Ascendant", 40],
         ["Acanthus Ascendant (Ascension d’Acanthe)", 40],
-        ["Liminal", 50],
-        ["Neumünster's Scholar's Rock", 60],
-        ["Pierre de lettré de Neumünster", 60],
-        ["Deposit RP", 70],
-        ["Foamscape", 80],
-        ["Tri-Hex", 90],
-        ["Echoes of Extraction", 100],
-        ["Genesis of Steel I", 110],
-        ["Genèse de l’acier I", 110],
-        ["Nature’s Chromatic Symphony", 120],
-        ["Symphonie Chromatique de la Nature", 120],
-        ["Scottish Fantasy", 130]
+        ["Été Indien", 50],
+        ["Fractal Forest", 60]
     ]);
 
-    const minimumLoadingTime = 180;
+    const cracksOrder = new Map([
+        ["Cracks of Potential", 10],
+        ["Fossil whispers", 20],
+        ["Murmures fossiles", 20],
+        ["Rien ne se perd (Nothing is lost)", 30],
+        ["Rien ne se perd", 30],
+        ["Liminal", 40],
+        ["Présences latentes (Lingering Presences)", 50],
+        ["Présences latentes", 50],
+        ["Neumünster's Scholar's Rock", 60],
+        ["Pierre de lettré de Neumünster", 60],
+        ["Rien ne se crée (Nothing is created)", 70],
+        ["Rien ne se crée", 70]
+    ]);
+
+    const filterOrders = new Map([
+        ["painting", paintingOrder],
+        ["series-deposit", depositOrder],
+        ["series-cracks-of-potential", cracksOrder],
+        ["series-echoes-of-extraction", echoesOrder],
+        ["series-ephemeral-structures", ephemeralOrder]
+    ]);
+
+    const filterLayoutSpans = new Map([
+        [
+            "painting",
+            new Map([
+                ["Topography of a Meditation I", 6],
+                ["Topography of a Meditation II", 6],
+                ["Topographie d’une Méditation I", 6],
+                ["Topographie d’une Méditation II", 6],
+                ["Verdant Vistas I to IV", 12],
+                ["Été Indien", 6],
+                ["Fractal Forest", 6],
+                ["Nature’s Chromatic Symphony", 6],
+                ["Symphonie Chromatique de la Nature", 6],
+                ["Power of the Relics", 6],
+                ["Pouvoir des Reliques", 6],
+                ["Learn with me because I won't last for ever", 6],
+                ["Apprends avec moi car je ne durerai pas éternellement", 6],
+                ["Symphonie", 6]
+            ])
+        ],
+        [
+            "series-echoes-of-extraction",
+            new Map([
+                ["Echoes of Extraction", 12],
+                ["Été Indien", 6],
+                ["Fractal Forest", 6]
+            ])
+        ],
+        [
+            "series-cracks-of-potential",
+            new Map([
+                ["Cracks of Potential", 8],
+                ["Liminal", 8],
+                ["Présences latentes (Lingering Presences)", 8],
+                ["Présences latentes", 8]
+            ])
+        ],
+        [
+            "series-ephemeral-structures",
+            new Map([
+                ["Scottish Fantasy", 3],
+                ["Euryale", 3],
+                ["Tours et Détours", 3],
+                ["L’Envers des Tours", 6],
+                ["La Grande Bocca", 6],
+                ["Tours Détourés", 3],
+                ["Impasse", 3]
+            ])
+        ]
+    ]);
+
+    const sculptureChapters = [
+        {
+            series: "deposit",
+            title: "Deposit",
+            href: "#series-deposit",
+            representative: "Deposit RG"
+        },
+        {
+            series: "loudspeaker",
+            title: "Loud Speaker",
+            href: isFrench ? "/fr/loudspeaker/" : "/loudspeaker/",
+            representative: "Loud Speaker"
+        },
+        {
+            series: "cracks-of-potential",
+            title: "Cracks of Potential",
+            href: "#series-cracks-of-potential",
+            representative: "Cracks of Potential"
+        },
+        {
+            series: "echoes-of-extraction",
+            title: "Echoes of Extraction",
+            href: "#series-echoes-of-extraction",
+            representative: "Echoes of Extraction"
+        },
+        {
+            series: "antidote",
+            title: "Antidote",
+            href: "#series-antidote",
+            representative: "Tri-Hex"
+        },
+        {
+            series: "ephemeral-structures",
+            title: "Ephemeral Structures",
+            href: "#series-ephemeral-structures",
+            representative: "L’Envers des Tours"
+        },
+        {
+            series: "vase",
+            title: "Vase",
+            href: "#series-vase",
+            representative: "Triton"
+        },
+    ];
+
+    const minimumLoadingTime = 120;
     const maximumAssetWait = 3500;
 
     let activeFilter = null;
     let operationId = 0;
     let resizeFrame = 0;
     let resizeTimer = 0;
-    let repairFrame = 0;
-    let repairFollowUpFrame = 0;
 
     function nextFrame() {
         return new Promise((resolve) => requestAnimationFrame(resolve));
@@ -73,6 +219,71 @@
     function delay(milliseconds) {
         return new Promise((resolve) => {
             window.setTimeout(resolve, milliseconds);
+        });
+    }
+
+    function imageRecord(image) {
+        return {
+            src: image.getAttribute("src") || "",
+            srcset: image.getAttribute("srcset") || "",
+            sizes: image.getAttribute("sizes") || "",
+            width: image.getAttribute("width") || "",
+            height: image.getAttribute("height") || ""
+        };
+    }
+
+    function chapterImageRecord(title) {
+        const work = works.find((item) =>
+            item.querySelector(".artwork-description strong")
+                ?.textContent.trim() === title
+        );
+        const image = work?.querySelector(
+            "img:not([data-lightbox-only])"
+        );
+
+        return image ? imageRecord(image) : null;
+    }
+
+    function setChapterImage(image, record) {
+        image.src = record.src;
+
+        ["srcset", "sizes", "width", "height"].forEach((attribute) => {
+            const value = record[attribute];
+            if (value) {
+                image.setAttribute(attribute, value);
+            } else {
+                image.removeAttribute(attribute);
+            }
+        });
+    }
+
+    function buildSculptureSeriesGrid() {
+        if (!sculptureSeriesGrid) return;
+
+        sculptureChapters.forEach((chapter) => {
+            const representative = chapterImageRecord(
+                chapter.representative
+            );
+            const link = document.createElement("a");
+            const stage = document.createElement("span");
+            const image = document.createElement("img");
+            const title = document.createElement("span");
+
+            link.className = "sculpture-series-card";
+            link.href = chapter.href;
+            link.dataset.series = chapter.series;
+            stage.className = "sculpture-series-card__stage";
+            title.className = "sculpture-series-card__title";
+            title.textContent = chapter.title;
+            image.alt = "";
+            image.loading = "lazy";
+            image.decoding = "async";
+
+            if (representative) setChapterImage(image, representative);
+
+            stage.append(image);
+            link.append(stage, title);
+            sculptureSeriesGrid.append(link);
         });
     }
 
@@ -97,41 +308,37 @@
         selectionTitle:
             work
                 .querySelector(".artwork-description strong")
-                ?.textContent.trim() || "",
-        selectionRemainderOrder:
-            (index * 17) % works.length
+                ?.textContent.trim() || ""
     }));
 
     function orderWorks(selected) {
         workRecords
             .slice()
             .sort((left, right) => {
-                if (selected === "all") {
+                const selectedOrder = filterOrders.get(selected);
+
+                if (
+                    selected === "series-ephemeral-structures"
+                    && selectedOrder
+                ) {
                     const leftOrder =
-                        selectionOrder.get(left.selectionTitle)
-                        ?? Number.POSITIVE_INFINITY;
+                        selectedOrder.get(left.selectionTitle) || 1000;
                     const rightOrder =
-                        selectionOrder.get(right.selectionTitle)
-                        ?? Number.POSITIVE_INFINITY;
+                        selectedOrder.get(right.selectionTitle) || 1000;
 
                     if (leftOrder !== rightOrder) {
                         return leftOrder - rightOrder;
-                    }
-
-                    if (!Number.isFinite(leftOrder)) {
-                        return left.selectionRemainderOrder
-                            - right.selectionRemainderOrder;
                     }
                 }
 
                 const yearDifference = right.year - left.year;
                 if (yearDifference) return yearDifference;
 
-                if (selected === "painting" && left.year === 2025) {
+                if (selectedOrder) {
                     const leftOrder =
-                        paintingOrder2025.get(left.title) || 1000;
+                        selectedOrder.get(left.selectionTitle) || 1000;
                     const rightOrder =
-                        paintingOrder2025.get(right.title) || 1000;
+                        selectedOrder.get(right.selectionTitle) || 1000;
 
                     if (leftOrder !== rightOrder) {
                         return leftOrder - rightOrder;
@@ -146,15 +353,15 @@
     }
 
     function visibleWorks() {
-        return works.filter((work) => !work.hidden);
+        return Array.from(
+            grid.querySelectorAll(".work-item:not([hidden])")
+        );
     }
 
     function visiblePrimaryImages(currentWorks) {
         return currentWorks
             .map((work) =>
-                work.querySelector(
-                    "img:not([data-lightbox-only])"
-                )
+                work.querySelector("img:not([data-lightbox-only])")
             )
             .filter(Boolean);
     }
@@ -165,17 +372,8 @@
     }
 
     function imagesNeededBeforeReveal(images) {
-        /*
-         * Small series load completely. Larger archive views wait for
-         * two rows only. Every image already has width and height
-         * attributes, so later lazy loads cannot alter card geometry.
-         */
         if (images.length <= 12) return images;
-
-        return images.slice(
-            0,
-            Math.min(images.length, columnCount() * 2)
-        );
+        return images.slice(0, 6);
     }
 
     function markImageReady(image) {
@@ -189,11 +387,7 @@
                     await image.decode();
                 }
             } catch {
-                /*
-                 * A failed image must not leave the archive loading
-                 * indefinitely. Its declared dimensions still reserve
-                 * the correct layout space.
-                 */
+                // Declared dimensions preserve the layout on failure.
             }
 
             markImageReady(image);
@@ -254,6 +448,10 @@
         archivePage.classList.toggle("is-loading", isLoading);
         archivePage.setAttribute("aria-busy", String(isLoading));
         grid.setAttribute("aria-busy", String(isLoading));
+        sculptureSeriesGrid?.setAttribute(
+            "aria-busy",
+            String(isLoading)
+        );
 
         if (loadingIndicator) {
             loadingIndicator.setAttribute(
@@ -263,161 +461,237 @@
         }
     }
 
-    function alignNearlyLevelDescriptions(currentWorks) {
-        const descriptions = currentWorks
-            .map((work) =>
-                work.querySelector(".artwork-description")
-            )
-            .filter(Boolean);
+    function imageSizes(span) {
+        const desktopSize = {
+            12: "calc(100vw - 3rem)",
+            8: "calc(66.667vw - 3rem)",
+            6: "calc(50vw - 3rem)",
+            4: "calc(33.333vw - 3rem)",
+            3: "calc(25vw - 3rem)"
+        }[span] || "calc(33.333vw - 3rem)";
 
-        descriptions.forEach((description) => {
-            description.style.removeProperty(
-                "--description-align-offset"
+        const tabletSize = span === 12
+            ? "calc(100vw - 3rem)"
+            : "calc(50vw - 3rem)";
+
+        return [
+            "(max-width: 34rem) calc(100vw - 1.5rem)",
+            `(max-width: 64rem) ${tabletSize}`,
+            desktopSize
+        ].join(", ");
+    }
+
+    function applyEditorialLayout(selected) {
+        works.forEach((work) => {
+            delete work.dataset.layoutSpan;
+            delete work.dataset.layoutPosition;
+            delete work.dataset.layoutPair;
+            delete work.dataset.layoutFeature;
+            work.style.removeProperty("grid-row-end");
+            work.style.removeProperty("grid-column-start");
+            work.style.removeProperty("--work-row-offset");
+
+            const image = work.querySelector(
+                "img:not([data-lightbox-only])"
             );
+            if (image) image.sizes = imageSizes(4);
         });
 
-        if (columnCount() < 2 || !descriptions.length) return;
+        const layoutSpans = filterLayoutSpans.get(selected);
+        if (!layoutSpans) return;
 
-        const lineHeight =
-            Number.parseFloat(
-                getComputedStyle(descriptions[0]).lineHeight
-            ) || 0;
-        const maximumCorrection = lineHeight * 0.75;
+        const currentWorks = visibleWorks();
 
-        const sorted = descriptions
-            .map((description) => ({
-                description,
-                top: description.getBoundingClientRect().top
-            }))
-            .sort((left, right) => left.top - right.top);
+        currentWorks.forEach((work) => {
+            const title = work
+                .querySelector(".artwork-description strong")
+                ?.textContent.trim() || "";
+            const span = layoutSpans.get(title) || 4;
+            work.dataset.layoutSpan = String(span);
 
-        function alignGroup(items) {
-            if (items.length < 2) return;
+            if (title === "Verdant Vistas I to IV") {
+                work.dataset.layoutFeature = "verdant";
+            }
 
-            const targetTop = Math.max(
-                ...items.map((item) => item.top)
+            const image = work.querySelector(
+                "img:not([data-lightbox-only])"
             );
+            if (image) image.sizes = imageSizes(span);
+        });
 
-            items.forEach(({ description, top }) => {
-                const correction = targetTop - top;
+        for (let index = 0; index < currentWorks.length - 1; index += 1) {
+            const left = currentWorks[index];
+            const right = currentWorks[index + 1];
+
+            if (
+                left.dataset.layoutSpan === "6"
+                && right.dataset.layoutSpan === "6"
+                && !left.dataset.layoutPosition
+                && !right.dataset.layoutPosition
+            ) {
+                left.dataset.layoutPosition = "pair-left";
+                right.dataset.layoutPosition = "pair-right";
+
+                const pairTitles = [left, right].map((work) =>
+                    work.querySelector(".artwork-description strong")
+                        ?.textContent.trim() || ""
+                );
+                if (
+                    pairTitles[0] === "Été Indien"
+                    && pairTitles[1] === "Fractal Forest"
+                ) {
+                    left.dataset.layoutPair = "equal-height";
+                    right.dataset.layoutPair = "equal-height";
+                }
 
                 if (
-                    correction > 1
-                    && correction <= maximumCorrection
+                    (
+                        pairTitles[0] === "Nature’s Chromatic Symphony"
+                        || pairTitles[0] === "Symphonie Chromatique de la Nature"
+                    )
+                    && (
+                        pairTitles[1] === "Power of the Relics"
+                        || pairTitles[1] === "Pouvoir des Reliques"
+                    )
                 ) {
-                    description.style.setProperty(
-                        "--description-align-offset",
-                        `${correction}px`
+                    left.dataset.layoutPair = "wide-gap";
+                    right.dataset.layoutPair = "wide-gap";
+                }
+
+                index += 1;
+            }
+        }
+
+    }
+
+    function alignRowTitles(currentWorks) {
+        currentWorks.forEach((work) => {
+            work.style.removeProperty("--work-row-offset");
+            work.style.removeProperty("--paired-image-height");
+            work.style.removeProperty("--description-inline-offset");
+        });
+
+        const columns = columnCount();
+
+        if (columns > 2) {
+            const pairedWorks = currentWorks.filter(
+                (work) => work.dataset.layoutPair === "equal-height"
+            );
+            const pairedHeights = pairedWorks.map((work) =>
+                work.querySelector("img:not([data-lightbox-only])")
+                    ?.getBoundingClientRect().height || 0
+            ).filter((height) => height > 0);
+
+            if (pairedHeights.length > 1) {
+                const pairedHeight = Math.min(...pairedHeights);
+                pairedWorks.forEach((work) => {
+                    work.style.setProperty(
+                        "--paired-image-height",
+                        `${pairedHeight}px`
+                    );
+                });
+            }
+        }
+
+        currentWorks.forEach((work) => {
+            const image = work.querySelector(
+                "img:not([data-lightbox-only])"
+            );
+            const description = work.querySelector(".artwork-description");
+            if (!image || !description) return;
+
+            const offset = image.getBoundingClientRect().left
+                - work.getBoundingClientRect().left;
+            if (offset > 1) {
+                work.style.setProperty(
+                    "--description-inline-offset",
+                    `${offset}px`
+                );
+            }
+        });
+
+        if (columns < 2 || !currentWorks.length) return;
+
+        const measuredWorks = currentWorks
+            .map((work) => {
+                const description = work.querySelector(
+                    ".artwork-description"
+                );
+                if (!description) return null;
+
+                return {
+                    work,
+                    rowTop: work.getBoundingClientRect().top,
+                    titleTop: description.getBoundingClientRect().top
+                };
+            })
+            .filter(Boolean);
+
+        function alignRow(row) {
+            if (row.length < 2) return;
+
+            const targetTitleTop = Math.max(
+                ...row.map((item) => item.titleTop)
+            );
+
+            row.forEach(({ work, titleTop }) => {
+                const offset = targetTitleTop - titleTop;
+                if (offset > 1) {
+                    work.style.setProperty(
+                        "--work-row-offset",
+                        `${offset}px`
                     );
                 }
             });
         }
 
-        let group = [];
+        /*
+         * At the intermediate breakpoint every ordinary work occupies one
+         * of two equal tracks. Pairing by document order is more reliable
+         * than comparing row coordinates while lazy images are settling.
+         */
+        if (columns === 2) {
+            let pairedRow = [];
 
-        sorted.forEach((item) => {
-            if (
-                !group.length
-                || item.top - group[0].top <= maximumCorrection
-            ) {
-                group.push(item);
+            measuredWorks.forEach((item) => {
+                if (item.work.dataset.layoutSpan === "12") {
+                    alignRow(pairedRow);
+                    pairedRow = [];
+                    return;
+                }
+
+                pairedRow.push(item);
+
+                if (pairedRow.length === 2) {
+                    alignRow(pairedRow);
+                    pairedRow = [];
+                }
+            });
+
+            alignRow(pairedRow);
+            return;
+        }
+
+        measuredWorks.sort((left, right) => left.rowTop - right.rowTop);
+
+        let row = [];
+
+        measuredWorks.forEach((item) => {
+            if (!row.length || Math.abs(item.rowTop - row[0].rowTop) <= 2) {
+                row.push(item);
                 return;
             }
 
-            alignGroup(group);
-            group = [item];
+            alignRow(row);
+            row = [item];
         });
 
-        alignGroup(group);
-    }
-
-    function setWorkSpan(work) {
-        if (!work || work.hidden) return;
-
-        /*
-         * A one-column archive does not need masonry. Standard document
-         * flow is simpler and cannot overlap when an image loads late.
-         */
-        if (columnCount() < 2) {
-            work.style.removeProperty("grid-row-end");
-            return;
-        }
-
-        const spacing =
-            Number.parseFloat(
-                getComputedStyle(work).marginBottom
-            ) || 0;
-
-        /*
-         * Two safety pixels absorb fractional rounding between the
-         * image, caption and one-pixel implicit grid rows.
-         */
-        const requiredHeight =
-            Math.ceil(work.scrollHeight + spacing) + 2;
-
-        work.style.gridRowEnd = `span ${requiredHeight}`;
-    }
-
-    function setMasonrySpans(currentWorks) {
-        currentWorks.forEach(setWorkSpan);
-    }
-
-    function scheduleMasonryRepair(alignDescriptions = true) {
-        if (
-            archivePage.classList.contains("is-loading")
-            || !grid.classList.contains("is-layout-ready")
-        ) {
-            return;
-        }
-
-        cancelAnimationFrame(repairFrame);
-        cancelAnimationFrame(repairFollowUpFrame);
-
-        repairFrame = requestAnimationFrame(() => {
-            const currentWorks = visibleWorks();
-            setMasonrySpans(currentWorks);
-
-            repairFollowUpFrame = requestAnimationFrame(() => {
-                if (alignDescriptions) {
-                    alignNearlyLevelDescriptions(currentWorks);
-                }
-
-                setMasonrySpans(currentWorks);
-            });
-        });
-    }
-
-    function repairChangedWork(work) {
-        if (
-            !work
-            || work.hidden
-            || archivePage.classList.contains("is-loading")
-            || !grid.classList.contains("is-layout-ready")
-        ) {
-            return;
-        }
-
-        /*
-         * ResizeObserver and image load callbacks run before painting.
-         * Updating the changed card immediately prevents its old span
-         * from being painted over the card below it.
-         */
-        setWorkSpan(work);
-        scheduleMasonryRepair();
+        alignRow(row);
     }
 
     async function layoutWorks(currentWorks) {
         await nextFrame();
-
-        setMasonrySpans(currentWorks);
-        grid.classList.remove("is-measuring");
-        grid.classList.add("is-masonry");
-
-        await nextFrame();
-
-        alignNearlyLevelDescriptions(currentWorks);
-        setMasonrySpans(currentWorks);
-
+        alignRowTitles(currentWorks);
         await nextFrame();
     }
 
@@ -440,11 +714,9 @@
 
     function updateAddress(selected) {
         try {
-            const url =
-                selected === "all"
-                    ? location.pathname
-                    : `#${selected}`;
-
+            const url = selected === defaultFilter
+                ? location.pathname
+                : `#${selected}`;
             history.replaceState(null, "", url);
         } catch {
             // Filtering still works without the History API.
@@ -453,20 +725,29 @@
 
     function updateVisibleContent(selected) {
         orderWorks(selected);
+        archivePage.dataset.activeFilter = selected;
+
+        const showSculptureSeries = selected === "sculpture";
+        grid.hidden = showSculptureSeries;
+        if (sculptureSeriesGrid) {
+            sculptureSeriesGrid.hidden = !showSculptureSeries;
+        }
 
         works.forEach((work) => {
-            const matchesMedium =
-                work.dataset.medium === selected;
+            const title = work
+                .querySelector(".artwork-description strong")
+                ?.textContent.trim() || "";
+            const matchesMedium = work.dataset.medium === selected;
             const matchesSeries =
                 selected.startsWith("series-")
                 && work.dataset.series
                     === selected.slice("series-".length);
 
-            work.hidden =
-                selected !== "all"
-                && !matchesMedium
-                && !matchesSeries;
+            work.hidden = showSculptureSeries
+                || (!matchesMedium && !matchesSeries);
         });
+
+        applyEditorialLayout(selected);
 
         buttons.forEach((button) => {
             button.setAttribute(
@@ -489,16 +770,11 @@
                 (introduction) => !introduction.hidden
             )
         );
+
     }
 
-    async function applyFilter(
-        filter,
-        updateUrl = true,
-        force = false
-    ) {
-        const selected = validFilters.has(filter)
-            ? filter
-            : "all";
+    async function applyFilter(filter, updateUrl = true, force = false) {
+        const selected = validFilters.has(filter) ? filter : defaultFilter;
 
         if (
             !force
@@ -514,7 +790,6 @@
 
         setLoading(true);
         grid.classList.remove("is-layout-ready");
-
         updateVisibleContent(selected);
 
         if (updateUrl) updateAddress(selected);
@@ -531,9 +806,7 @@
             );
 
             if (currentOperation !== operationId) return;
-
             await layoutWorks(currentWorks);
-
             if (currentOperation !== operationId) return;
 
             const elapsed = performance.now() - startedAt;
@@ -559,26 +832,20 @@
 
     async function applyLocationHash() {
         const hash = location.hash.slice(1);
-        const linkedWork = hash
-            ? document.getElementById(hash)
-            : null;
+        const linkedWork = hash ? document.getElementById(hash) : null;
 
-        if (
-            linkedWork
-            && linkedWork.classList.contains("work-item")
-        ) {
+        if (linkedWork && linkedWork.classList.contains("work-item")) {
             await applyFilter(
-                linkedWork.dataset.medium || "all",
+                linkedWork.dataset.medium || defaultFilter,
                 false,
                 true
             );
-
             linkedWork.scrollIntoView({ block: "start" });
             return;
         }
 
         await applyFilter(
-            validFilters.has(hash) ? hash : "all",
+            validFilters.has(hash) ? hash : defaultFilter,
             false,
             true
         );
@@ -586,92 +853,52 @@
 
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
-            applyFilter(button.dataset.filter || "all");
+            applyFilter(button.dataset.filter || defaultFilter);
         });
     });
 
     filters.hidden = false;
-    grid.classList.add("is-measuring");
+    grid.classList.remove("is-masonry", "is-measuring");
     setLoading(true);
-
-    /*
-     * Responsive derivatives, decoding and webfont changes can alter a
-     * card after the initial reveal. Repair its masonry span whenever
-     * the image or caption changes size.
-     */
-    const contentResizeObserver =
-        typeof ResizeObserver === "function"
-            ? new ResizeObserver((entries) => {
-                const affectedWorks = new Set();
-
-                entries.forEach((entry) => {
-                    const work = entry.target.closest(".work-item");
-                    if (work) affectedWorks.add(work);
-                });
-
-                affectedWorks.forEach(repairChangedWork);
-            })
-            : null;
 
     works.forEach((work) => {
         const image = work.querySelector(
             "img:not([data-lightbox-only])"
         );
-        const description = work.querySelector(
-            ".artwork-description"
-        );
+        if (!image) return;
 
-        if (image) {
-            const finishImage = () => {
-                markImageReady(image);
-                repairChangedWork(work);
-            };
-
-            if (image.complete) {
-                markImageReady(image);
-            } else {
-                image.addEventListener(
-                    "load",
-                    finishImage,
-                    { once: true }
-                );
-                image.addEventListener(
-                    "error",
-                    finishImage,
-                    { once: true }
-                );
-            }
-
-            contentResizeObserver?.observe(image);
+        if (image.complete) {
+            markImageReady(image);
+            return;
         }
 
-        if (description) {
-            contentResizeObserver?.observe(description);
-        }
+        const finishImage = () => markImageReady(image);
+        image.addEventListener("load", finishImage, { once: true });
+        image.addEventListener("error", finishImage, { once: true });
     });
 
     if (document.fonts?.ready) {
         Promise.resolve(document.fonts.ready)
-            .then(() => scheduleMasonryRepair())
+            .then(() => {
+                alignRowTitles(visibleWorks());
+            })
             .catch(() => undefined);
     }
 
     window.addEventListener("hashchange", applyLocationHash);
 
     window.addEventListener("resize", () => {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(() => {
+            alignRowTitles(visibleWorks());
+        });
+
         window.clearTimeout(resizeTimer);
-
         resizeTimer = window.setTimeout(() => {
-            cancelAnimationFrame(resizeFrame);
-
-            resizeFrame = requestAnimationFrame(() => {
-                const currentWorks = visibleWorks();
-                setMasonrySpans(currentWorks);
-                alignNearlyLevelDescriptions(currentWorks);
-                setMasonrySpans(currentWorks);
-            });
-        }, 80);
+            alignRowTitles(visibleWorks());
+        }, 220);
     });
 
+    buildSculptureSeriesGrid();
     applyLocationHash();
 })();
