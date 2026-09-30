@@ -480,6 +480,57 @@ main {
     );
 }
 
+@media (min-width: 64.0625rem) {
+    .archive-page[data-active-filter="series-ephemeral-structures"]
+        #work-grid .work-item[data-layout-position="ephemeral-first"] {
+        margin-left: calc(
+            (100% + var(--archive-work-column-gap)) / 8
+        );
+    }
+
+    .archive-page[data-active-filter="series-cracks-of-potential"]
+        #work-grid .work-item[data-layout-position="cracks-main"] {
+        grid-column: 1 / span 8;
+        grid-row: 1;
+    }
+
+    .archive-page[data-active-filter="series-cracks-of-potential"]
+        #work-grid .work-item[data-layout-position="cracks-liminal"] {
+        grid-column: 5 / span 8;
+        grid-row: 2;
+    }
+
+    .archive-page[data-active-filter="series-cracks-of-potential"]
+        #work-grid .work-item[data-layout-position="cracks-presences"] {
+        grid-column: 1 / span 8;
+        grid-row: 3;
+    }
+
+    .archive-page[data-active-filter="series-cracks-of-potential"]
+        #work-grid .work-item[data-layout-position="cracks-fossil"] {
+        grid-column: 9 / span 4;
+        grid-row: 3;
+    }
+
+    .archive-page[data-active-filter="series-cracks-of-potential"]
+        #work-grid .work-item[data-layout-position="cracks-lost"] {
+        grid-column: 1 / span 4;
+        grid-row: 4;
+    }
+
+    .archive-page[data-active-filter="series-cracks-of-potential"]
+        #work-grid .work-item[data-layout-position="cracks-scholar"] {
+        grid-column: 5 / span 4;
+        grid-row: 4;
+    }
+
+    .archive-page[data-active-filter="series-cracks-of-potential"]
+        #work-grid .work-item[data-layout-position="cracks-created"] {
+        grid-column: 9 / span 4;
+        grid-row: 4;
+    }
+}
+
 .archive-page .work-item {
     align-self: start;
     grid-column: span 4;
