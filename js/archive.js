@@ -87,17 +87,32 @@
 
     const cracksOrder = new Map([
         ["Cracks of Potential", 10],
-        ["Fossil whispers", 20],
-        ["Murmures fossiles", 20],
-        ["Rien ne se perd (Nothing is lost)", 30],
-        ["Rien ne se perd", 30],
-        ["Liminal", 40],
-        ["Présences latentes (Lingering Presences)", 50],
-        ["Présences latentes", 50],
+        ["Liminal", 20],
+        ["Présences latentes (Lingering Presences)", 30],
+        ["Présences latentes", 30],
+        ["Fossil whispers", 40],
+        ["Murmures fossiles", 40],
+        ["Rien ne se perd (Nothing is lost)", 50],
+        ["Rien ne se perd", 50],
         ["Neumünster's Scholar's Rock", 60],
         ["Pierre de lettré de Neumünster", 60],
         ["Rien ne se crée (Nothing is created)", 70],
         ["Rien ne se crée", 70]
+    ]);
+
+    const cracksLayoutPositions = new Map([
+        ["Cracks of Potential", "cracks-main"],
+        ["Liminal", "cracks-liminal"],
+        ["Présences latentes (Lingering Presences)", "cracks-presences"],
+        ["Présences latentes", "cracks-presences"],
+        ["Fossil whispers", "cracks-fossil"],
+        ["Murmures fossiles", "cracks-fossil"],
+        ["Rien ne se perd (Nothing is lost)", "cracks-lost"],
+        ["Rien ne se perd", "cracks-lost"],
+        ["Neumünster's Scholar's Rock", "cracks-scholar"],
+        ["Pierre de lettré de Neumünster", "cracks-scholar"],
+        ["Rien ne se crée (Nothing is created)", "cracks-created"],
+        ["Rien ne se crée", "cracks-created"]
     ]);
 
     const filterOrders = new Map([
@@ -508,6 +523,18 @@
                 ?.textContent.trim() || "";
             const span = layoutSpans.get(title) || 4;
             work.dataset.layoutSpan = String(span);
+
+            if (selected === "series-cracks-of-potential") {
+                work.dataset.layoutPosition =
+                    cracksLayoutPositions.get(title) || "";
+            }
+
+            if (
+                selected === "series-ephemeral-structures"
+                && title === "Tours et Détours"
+            ) {
+                work.dataset.layoutPosition = "ephemeral-first";
+            }
 
             if (title === "Verdant Vistas I to IV") {
                 work.dataset.layoutFeature = "verdant";
