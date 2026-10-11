@@ -4,22 +4,22 @@
 
     const downloadGroups = {
         portfolio: {
-            verifier: "c473c68fa551713e953dfebf66e5137c62263912dc7ea24a7d7dc09477a9b358",
+            verifier: "6bb11540bad389529178ab5930d1197722b948ffd0598c640f6cfbbfa4cd52b3",
             documents: {
                 "portfolio-en": {
-                    source: "/documents/downloads/portfolio-en.vgpdf?v=20261005",
+                    source: "/documents/downloads/portfolio-en.vgpdf?v=20261011",
                     filename: "V Guerin - Portfolio EN.pdf"
                 },
                 "portfolio-fr": {
-                    source: "/documents/downloads/portfolio-fr.vgpdf?v=20261005",
+                    source: "/documents/downloads/portfolio-fr.vgpdf?v=20261011",
                     filename: "V Guerin - Portfolio FR.pdf"
                 },
                 "millenium-en": {
-                    source: "/documents/downloads/millenium-en.vgpdf",
+                    source: "/documents/downloads/millenium-en.vgpdf?v=20261011",
                     filename: "V Guerin - 2027 MILLENIUM EN.pdf"
                 },
                 "millenium-fr": {
-                    source: "/documents/downloads/millenium-fr.vgpdf",
+                    source: "/documents/downloads/millenium-fr.vgpdf?v=20261011",
                     filename: "V Guerin - 2027 MILLENIUM FR.pdf"
                 }
             }
